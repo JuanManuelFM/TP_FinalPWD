@@ -1,0 +1,169 @@
+body{
+    
+    margin: 0;
+    padding: 0;
+
+    background:url('imagenes/fondo.jpg');
+}
+
+.fondoLogo{
+    border: 1px solid black;
+    
+    height: 80px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 1.5em 0px 1.5em;
+    margin: 0px 0px 0px 0px;
+
+    background-image: url('imagenes/logo\ fondo1.jpg');
+
+}
+/* logo */
+
+#pnglogo{
+    align-items: center;
+    position: absolute;
+    border: 1px solid;
+    height: 172px;
+    
+    margin-top: -9px;
+    padding: 0px;
+
+    background-color: lavender;
+
+    transition: 0.2s;
+
+    
+}
+
+#pnglogo p{
+    align-items: center;
+    word-break: break-all;
+    margin: 16px 10px 16px 10px;
+}
+
+#pnglogo:hover{
+    position: absolute;
+    display: block;
+
+    margin-top: 85px;
+
+    transition: 0.5s;
+}
+
+#pnglogo img{
+    position: relative;
+    top: 5px;
+    left: 10px;
+
+    
+    
+    
+    height: 100px;
+    
+}
+
+/* prueba */
+
+#prueba{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    border: 1px solid;
+
+}
+
+#prueba:hover{
+    transition: 1s;
+    margin: 0px 0px 0px 100px;
+}
+
+/* texto del menu */
+
+.navegacion a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: lavender;
+
+    text-decoration: none;
+
+    margin: 7px;
+}
+
+.navegacion a:hover{
+    text-decoration: underline;
+    
+}
+
+#pnglogo p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    color: lavender;
+
+    text-decoration: none;
+}
+
+
+
+/*presentacion */
+
+.presentacion{
+    position: relative;
+    margin-top: 100px;
+    margin-left: 250px;
+
+    border: lavender 2px solid;
+
+    background-color: hsla(240, 10%, 36%, 0.959);
+
+    height: 300px;
+    width: 800px;
+    display: inline-flexbox;
+}
+
+#logop{
+
+
+    height: 400px;
+    width: 400px;
+    background-image: url("imagenes/inicio/presentacionlogo.png");
+    background-size: contain;
+    
+    background-repeat: no-repeat;
+
+    position: relative;
+    margin-top: 15px;
+    margin-left: 0px;
+
+    display: inline-flex;
+}
+
+.presentacion #parrafo{
+    
+    display: inline-flex;
+
+    width: 200px;
+    height: 250px;
+
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 125px;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: lavenderblush;
+}
+
+
+
+.presentacion p{
+    display: inline-block;
+}
+.presentacion p span{
+
+    font-weight: bolder;
+    color: rgb(60 182 71);
+    font-size: 2em;
+    
+}

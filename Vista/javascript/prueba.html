@@ -1,0 +1,134 @@
+<html>
+	<head>
+		<script>
+			function agregarArticulo()
+				{
+					var textarea="1";
+					if(textarea.length>0)
+						{
+							
+									var li=document.createElement('li');
+									li.innerHTML="<button onclick='eliminar(this)' id='botonaso'> Borrar Art&iacute;culo </button><span id='numero'>2</span> ";
+									var text=document.createTextNode(textarea);
+									li.appendChild(text);
+									document.getElementById("lista").appendChild(li);
+ 
+								
+						}
+					return false;
+				}
+ 
+			function find_li(contenido)
+				{
+					var el = document.getElementById("lista").getElementsByTagName("li");
+					for (var i=0; i<el.length; i++)
+					{
+						if(el[i].innerHTML==contenido)
+							return false;
+					}
+					return true;
+				}
+ 
+			function eliminar(elemento)
+				{
+					elemento.parentNode.remove();
+				}
+		</script>
+	</head>
+ 
+	<body>
+		<div>
+ 
+			<div>
+				<h1>Lista de compras</h1>
+			</div>
+ 
+			<div>
+				<ul id="lista">
+					
+				</ul>
+
+
+				<textarea id="articulo" placeholder="Ingrese el producto"></textarea>
+				<button onclick="agregarArticulo()" 	id="agregar">Agregar !</button>
+			</div>
+
+			<p>total <span>0</span></p>
+
+			<ul id="listaprueba">
+				<li><input type="number" name="" class="ultima" value="2" onchange="printear()" onkeyup="printear()"></li>
+				<li><input type="number" name="" class="ultima" value="1" onchange="printear()" onkeyup="printear()"></li>
+			</ul>
+ 
+		</div>
+
+		
+ 
+	</body>
+	<script>
+		const total= document.querySelector("p span");
+
+		const li1= document.getElementsByClassName("ultima");
+
+		
+
+		const boton= document.getElementById("ede");
+
+
+
+
+		
+		function printear() {
+			let lista= document.getElementById("listaprueba");
+			let nuevo= 0;
+			let array= lista.children
+			
+
+			for (let i= 0; i < array.length; i++) {
+				console.log(array[i].children[0].value);
+
+				nuevo += parseInt(array[i].children[0].value);
+			}
+
+			total.textContent= nuevo;
+		}
+		
+		
+		console.log(li1[0].value);
+
+		console.log(parseInt(li1[0].textContent));
+
+
+
+		
+		const numero= document.getElementById('numero')
+		total.textContent= parseInt(li1[0].value) + parseInt(li1[1].value);
+		
+
+		
+
+		//funcion
+		function actualizarTotal() {
+			console.log("ADADDDDADA")
+			let lista= document.getElementById("listaprueba");
+
+			console.log(lista.length);
+
+			let array= 0;
+			
+			for (let i = 0; i < lista.length; i++) {
+				const element = lista[i];
+
+				console.log(element.value);
+
+
+				array += parseInt(element.value);
+				
+			}
+
+			total.textContent= array;
+		}			
+		
+	</script>
+ 
+</html>
