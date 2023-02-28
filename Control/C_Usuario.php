@@ -45,7 +45,8 @@ class c_usuario
      * @return boolean
      */
 
-    private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param)
+    {
         $resp = false;
         if (isset($param['idUsuario']))
             $resp = true;
@@ -59,20 +60,18 @@ class c_usuario
     public function alta($param)
     {
         $resp = false;
-        $usuarioNombre['usNombre'] = $param['usNombre'];
-        if ($this->buscar($usuarioNombre) == null){
-            $param['idUsuario'] = null;
-            $param['usDeshabilitado'] = null;
-            $obj = $this->cargarObjeto($param);
-            if ($obj != null and $obj->insertar()) {
-                $this->altaRol($obj);
-                $resp = true;
-            }
+        $param['idUsuario'] = null;
+        $param['usDeshabilitado'] = null;
+        $obj = $this->cargarObjeto($param);
+        if ($obj != null and $obj->insertar()) {
+            $this->altaRol($obj);
+            $resp = true;
         }
         return $resp;
     }
 
-    public function altaRol($objUsuario){
+    public function altaRol($objUsuario)
+    {
         $idUsuario = $objUsuario->getIdUsuario();
         $usRol = new c_usuarioRol();
         //por defecto al crearse el usuario se le asigna el rol de USER (id:2)
@@ -99,7 +98,8 @@ class c_usuario
         return $resp;
     }
 
-    public function noBaja($param){
+    public function noBaja($param)
+    {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $obj = $this->cargarObjetoConClave($param);
@@ -115,11 +115,12 @@ class c_usuario
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)){
-            $obj= $this->cargarObjeto($param);
-            if($obj!=null && $obj->modificar()){
+        if ($this->seteadosCamposClaves($param)) {
+            $obj = $this->cargarObjeto($param);
+            if ($obj != null && $obj->modificar()) {
                 $resp = true;
             }
         }
@@ -131,45 +132,47 @@ class c_usuario
      * @param array $param
      * @return array
      */
-    public function buscar($param){
-        $where = " true "; 
-        if ($param<>NULL){
+    public function buscar($param)
+    {
+        $where = " true ";
+        if ($param <> NULL) {
             $where .= '';
-            if  (isset($param['idUsuario']))
-                $where.=" and idUsuario ='".$param['idUsuario']."'"; 
-            if  (isset($param['usNombre']))
-                    $where.=" and usNombre ='".$param['usNombre']."'";
-            if  (isset($param['usPass']))
-                    $where.=" and usPass ='".$param['usPass']."'";
-            if  (isset($param['usMail']))
-                    $where.=" and usMail ='".$param['usMail']."'";
-            if  (isset($param['usDeshabilitado']))
-                    $where.=" and usDeshabilitado ='".$param['usDeshabilitado']."'";
+            if (isset($param['idUsuario']))
+                $where .= " and idUsuario ='" . $param['idUsuario'] . "'";
+            if (isset($param['usNombre']))
+                $where .= " and usNombre ='" . $param['usNombre'] . "'";
+            if (isset($param['usPass']))
+                $where .= " and usPass ='" . $param['usPass'] . "'";
+            if (isset($param['usMail']))
+                $where .= " and usMail ='" . $param['usMail'] . "'";
+            if (isset($param['usDeshabilitado']))
+                $where .= " and usDeshabilitado ='" . $param['usDeshabilitado'] . "'";
         }
         $obj = new Usuario();
-        $arreglo =  $obj->listar($where);  
-        return $arreglo;
+        $arrayObjUser =  $obj->listar($where);
+        return $arrayObjUser;
     }
 
     // Busca un usuario
-    public function buscarViejo($param){
-        $where = " true "; 
-        if ($param<>NULL){
+    public function buscarViejo($param)
+    {
+        $where = " true ";
+        if ($param <> NULL) {
             $where .= '';
-            if  (isset($param['idUsuario']))
-                $where.=" and idUsuario ='".$param['idUsuario']."'"; 
-            if  (isset($param['usNombre']))
-                    $where.=" and usNombre ='".$param['usNombre']."'";
-            if  (isset($param['usPass']))
-                    $where.=" and usPass ='".$param['usPass']."'";
-            if  (isset($param['usMail']))
-                    $where.=" and usMail ='".$param['usMail']."'";
-            if  (isset($param['usDeshabilitado']))
-                    $where.=" and usDeshabilitado ='".$param['usDeshabilitado']."'";
+            if (isset($param['idUsuario']))
+                $where .= " and idUsuario ='" . $param['idUsuario'] . "'";
+            if (isset($param['usNombre']))
+                $where .= " and usNombre ='" . $param['usNombre'] . "'";
+            if (isset($param['usPass']))
+                $where .= " and usPass ='" . $param['usPass'] . "'";
+            if (isset($param['usMail']))
+                $where .= " and usMail ='" . $param['usMail'] . "'";
+            if (isset($param['usDeshabilitado']))
+                $where .= " and usDeshabilitado ='" . $param['usDeshabilitado'] . "'";
         }
         $obj = new Usuario();
-        $arreglo =  $obj->listarViejo($where);  
-        
+        $arreglo =  $obj->listarViejo($where);
+
         return $arreglo;
     }
 
@@ -198,13 +201,14 @@ class c_usuario
         return $resp;
     } */
 
-    public function listar ($arrayBusqueda){
+    public function listar($arrayBusqueda)
+    {
         $objUsuario = new Usuario();
         $resp = $objUsuario->listar($arrayBusqueda);
-        if(array_key_exists('array', $resp)){
-            $arrayUsuarios = $resp['array'];
-        }else{
-            $arrayUsuarios = [];
+        if ($resp != null) {
+            $arrayUsuarios = $resp;
+        } else {
+            $arrayUsuarios = null;
         }
         return $arrayUsuarios;
     }

@@ -2,8 +2,7 @@
 include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
     $objControlUsuario = new c_usuario();
-    $arrayBusqueda = [];
-    $arrayUsuarios = $objControlUsuario->listar($arrayBusqueda);
+    $arrayUsuarios = $objControlUsuario->listar('');
     /* echo '<pre>';
     var_dump($arrayUsuarios);
     echo '</pre>'; */

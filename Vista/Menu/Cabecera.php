@@ -3,18 +3,13 @@ include_once('../../configuracion.php');
 // require_once('preCabecera.php');
 $objSession= new c_session();
 $menuRoles = [];
-if ($objSession->activa()) {
-  $idRol = $objSession->getRol();
+$arrayObjUsuario = $objSession->activa();
+if ($arrayObjUsuario != null) {
+  $idRol = $objSession->getRol($arrayObjUsuario[0]);
   $objMenuRol = new c_menuRol();
   $objRol = new c_rol();
   $menuRoles = $objMenuRol->menuesByIdRol($idRol);
-  $objRoles = $objRol->obtenerObj($idRoles);
-
-  /* $objRol = new c_session();
-  $objUsRol = $objRol->getRoles();
-  $idRol = $objUsRol[1]->getIdRol(); */ //solo utilizar los idroles y metodo buscar de MenuRol
-  // $objMenuRol->buscar($idRol);
-  // $menuRoles = $objMenuRol->menuByIdRol($objSession->getVista());
+  $objRoles = $objRol->obtenerObj($idRol);
 }
 ?>
 <!DOCTYPE html>

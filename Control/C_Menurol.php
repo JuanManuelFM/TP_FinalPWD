@@ -141,27 +141,22 @@ class c_menuRol{
 
     // Elige menus para mostrar segun el rol
     public function menuesByIdRol($objRol){
-        //FALTA VER QUE HAY EN OBJROL
-        print_r($objRol);
-        $param['idRol'] = $objRol;
-        $objMenuRol = $this->buscar($param);
-        $objMenu = new c_Menu();
-        // Trae a todos los menues que tengan ese idPadre
-        $menues = $objMenu->buscar(["idPadre"=>$objMenuRol[0]->getObjMenu()->getIdMenu()]);
-        // $arrayMenuRoles= [];
-        // foreach ($objMenuRol as $menuRol){
-        //     if (is_array($menuRol)) {
-        //         foreach ($menuRol as $MR) {
-        //             array_push($arrayMenuRoles, $MR);
-        //         }
-        //     } else {
-        //         array_push($arrayMenuRoles, $menuRol);
-        //     }
-        // }
-        // $menus = [];
-        // foreach ($arrayMenuRoles as $obj) {
-        //     array_push($menus, $obj->getMenu());
-        // }
+        $param['idRol'] = $objRol[0];
+        $objMenuObjRol = $this->buscar($param);
+        $menuesRoles = [];
+        foreach ($objMenuObjRol as $objMenuRol) {
+            if (is_array($objMenuRol)) {
+                foreach ($objMenuRol as $objMR) {
+                    array_push($menuesRoles, $objMR);
+                }
+            } else {
+                array_push($menuesRoles, $objMenuRol);
+            }
+        }
+        $menues = [];
+        foreach ($menuesRoles as $objetos) {
+            array_push($menues, $objetos->getObjMenu());
+        }
         return $menues;
     }
 }

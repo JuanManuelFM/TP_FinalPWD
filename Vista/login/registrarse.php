@@ -30,7 +30,8 @@ include_once("../menu/cabecera.php");
             </div>
             <br>
             <div>
-                <label>Contraseña: </label><input type="password" name="usPass" id="usPass" class="form-control" required>
+                <label>Contraseña: </label><input type="password" id="usPassVisible" class="form-control" required>
+                <input type="password" name="usPass" id="usPass" class="form-control d-none">
                 <div class="invalid-feedback">
                     Ingrese una contraseña!
                 </div>
@@ -43,7 +44,7 @@ include_once("../menu/cabecera.php");
             </div>
             <br>
             <div>
-                <label>Repetir la Contraseña: </label><input type="password" name="usPassRep" id="usPassRep" class="form-control" required>
+                <label>Repetir la Contraseña: </label><input type="password" id="usPassRep" class="form-control" required>
                 <div class="invalid-feedback">
                     Ingrese una contraseña!
                 </div>

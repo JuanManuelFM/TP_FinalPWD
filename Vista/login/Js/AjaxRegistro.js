@@ -3,8 +3,8 @@ $(document).ready(function () {
         e.preventDefault();
         const forms = document.querySelectorAll('.needs-validation');
         if (forms[0].checkValidity()) {
-            if(document.getElementById('usPass').value == document.getElementById('usPassRep').value){
-            var password = document.getElementById("usPass").value;
+            if(document.getElementById('usPassVisible').value == document.getElementById('usPassRep').value){
+            var password = document.getElementById("usPassVisible").value;
             var passhash = hex_md5(password).toString();
             document.getElementById("usPass").value = passhash;
             $.ajax({

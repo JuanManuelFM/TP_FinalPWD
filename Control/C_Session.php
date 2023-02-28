@@ -1,49 +1,58 @@
 <?php
-class c_session{
+class c_session
+{
 
-    public function getIdUsuario(){
+    public function getIdUsuario()
+    {
         if (isset($_SESSION['idUsuario'])) {
             return $_SESSION['idUsuario'];
         }
         return null;
     }
 
-    public function setIdUsuario($idUsuario){
+    public function setIdUsuario($idUsuario)
+    {
         $_SESSION['idUsuario'] = $idUsuario;
     }
 
-    public function getUsNombre(){
-        if(array_key_exists('usNombre', $_SESSION)){
+    public function getUsNombre()
+    {
+        if (array_key_exists('usNombre', $_SESSION)) {
             $param = $_SESSION['usNombre'];
-        }
-        else{
+        } else {
             $param = null;
         }
         return $param;
     }
 
-    public function setUsNombre($usNombre){
+    public function setUsNombre($usNombre)
+    {
         $_SESSION['usNombre'] = $usNombre;
     }
 
-    public function getUsPass(){
+    public function getUsPass()
+    {
         return $_SESSION['usPass'];
     }
 
-    public function setUsPass($usPass){
+    public function setUsPass($usPass)
+    {
         $_SESSION['usPass'] = $usPass;
     }
 
-    public function getUsDeshabilitado(){
+    public function getUsDeshabilitado()
+    {
         return $_SESSION['usDeshabilitado'];
     }
 
-    public function setUsDeshabilitado($usDeshabilitado){
+    public function setUsDeshabilitado($usDeshabilitado)
+    {
         $_SESSION['usDeshabilitado'] = $usDeshabilitado;
     }
 
     /** CONSTRUCTOR **/
-    public function __construct(){
+    public function __construct()
+    {
         if (session_status() == 1) {
             session_start();
         }
@@ -81,31 +90,46 @@ class c_session{
         $_SESSION["vista"] = $objRol->obtenerObj($param)[0];
     } */
 
-    public function iniciar($nombreUsuario, $contraUsuario){
+    public function iniciar($nombreUsuario, $roles)
+    {
         $_SESSION["nombreUsuario"] = $nombreUsuario;
-        $_SESSION["contraUsuario"] = $contraUsuario;
+        $_SESSION["roles"] = $roles;
     }
 
-    public function validar(){
+    public function validar($param)
+    {
+        $objUsuario = new c_usuario();
+        $arrayUsuario = $objUsuario->buscar($param);
         $resp = false;
-        if($this->activa() && isset($_SESSION['idUsuario']))
-            $resp=true;
+        if ($arrayUsuario != null) {
+            if ($param["usPass"] == $arrayUsuario[0]->getUsPass()) {
+                $idRoles = $this->getRol($arrayUsuario[0]);
+                $this->iniciar($param["usNombre"], $idRoles);
+                $resp = true;
+            }
+        }
         return $resp;
     }
 
     /** ACTIVA **/
-    public function activa(){
-        $resp = isset($_SESSION['nombreUsuario'])? true : false;
+    public function activa()
+    {
+        $resp = null;
+        if(isset($_SESSION['nombreUsuario'])){
+            $objUsuario = new c_usuario();
+            $param['usNombre'] = $_SESSION['nombreUsuario'];
+            $resp = $objUsuario->buscar($param);
+        }
         return $resp;
     }
 
     /** GET USUARIO **/
-    public function getUsuario(){
+    public function getUsuario()
+    {
         $controlUsuario = new c_usuario();
-        if(array_key_exists('idUsuario', $_SESSION)){
+        if (array_key_exists('idUsuario', $_SESSION)) {
             $where = ['idUsuario' => $_SESSION['idUsuario']];
-        }
-        else{
+        } else {
             $where = [];
         }
         $listaUsuarios = $controlUsuario->buscar($where);
@@ -115,35 +139,18 @@ class c_session{
         return $usuarioLog;
     }
 
-
-    /** GET ROL **/
-    /* public function getRolActual(){
-        $rolActual = null;
-        if (isset($_SESSION['idRol'])) {
-            $rolActual = $_SESSION['idRol'];
+    public function getRol($objUsuarioRegistrado)
+    {
+        $objUsuarioRol = new C_UsuarioRol();
+        $param["idUsuario"] = $objUsuarioRegistrado->getIdUsuario();
+        $arrayObjRolesUsuario = $objUsuarioRol->buscar($param);
+        $arrayRol = [];
+        foreach ($arrayObjRolesUsuario as $rol) {
+            array_push($arrayRol, $rol->getObjRol());
         }
-        return $rolActual;
-    } */
-
-    public function getRol() {
-        // $list_rol = null;
-        if ($this->validar()) {
-            $obj = new c_usuarioRol();
-            $param['idUsuario'] = $this->getIdUsuario();
-            /* $param['idUsuario'] = $_SESSION['idUsuario']; */
-            // $param['idRol'] = $_SESSION['idRol'];
-            $arrayResultado = $obj->buscar($param);
-            $roles = [];
-                foreach($arrayResultado as $rol){
-                    array_push($roles, $rol->getRol());
-                }
-                $idRoles=[];
-                foreach($roles as $objRol){
-                    array_push($idRoles, $objRol->getIdRol());
-                }
-            /* if (count($resultado) > 0) {
-                $list_rol = $resultado;
-            } */
+        $idRoles = [];
+        foreach ($arrayRol as $objRol) {
+            array_push($idRoles, $objRol->getIdRol());
         }
         return $idRoles;
     }
@@ -156,20 +163,22 @@ class c_session{
         return $listaRoles;
     } */
 
-    public function tienePermisos(){
+    public function tienePermisos()
+    {
         $tienePermisos = false;
         $objUsuarioRol = new c_usuarioRol();
         if ($this->activa()) {
             $where = ['idUsuario' => $this->getIdUsuario(), 'idRol' => $this->getRolActual()];
             $resp = $objUsuarioRol->buscar($where);
-            if($resp != null && $this->getUsDeshabilitado() != null){
-                $tienePermisos= true;
+            if ($resp != null && $this->getUsDeshabilitado() != null) {
+                $tienePermisos = true;
             }
-        } 
+        }
         return $tienePermisos;
     }
 
-    function permisosMenu($data) {
+    function permisosMenu($data)
+    {
         $resp = false;
         if (isset($data['idMenu'])) {
             $objMenuRol = new c_menuRol();
@@ -229,9 +238,9 @@ class c_session{
     // }
 
     /** CERRAR **/
-    public function cerrar(){
+    public function cerrar()
+    {
         session_unset();
         session_destroy();
     }
 }
-?>

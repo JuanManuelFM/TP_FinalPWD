@@ -37,10 +37,6 @@ CREATE TABLE IF NOT EXISTS `compra` (
   KEY `fkcompra_1` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `compra` (`idCompra`, `idUsuario`) VALUES
-(1, '2022-11-19 18:51:56', 1),
-(2, '2022-11-22 19:51:56', 1),
-(3, '2022-11-25 18:03:56', 1);
 -- --------------------------------------------------------
 
 --
@@ -59,12 +55,6 @@ CREATE TABLE IF NOT EXISTS `compraestado` (
   KEY `fkcompraestado_1` (`idCompra`),
   KEY `fkcompraestado_2` (`idCompraEstadoTipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-INSERT INTO `compraestado`('idCompraEstado', `idCompra`, `idCompraEstadoTipo`, `ceFechaIni`, `ceFechaFin`) VALUES
-(1, 1, 1, '2021-11-19 02:54:15', '2021-11-19 09:54:18'),
-(2, 2, 2, '2021-11-20 02:54:15', '2021-11-20 11:54:18'),
-(3, 3, 4, '2021-11-21 02:54:15', '2021-11-21 15:54:18');
 
 -- --------------------------------------------------------
 
@@ -88,7 +78,7 @@ INSERT INTO `compraestadotipo` (`idCompraEstadoTipo`, `cetDescripcion`, `cetDeta
 (1, 'iniciada', 'cuando el usuario : cliente inicia la compra de uno o mas productos del carrito'),
 (2, 'aceptada', 'cuando el usuario administrador da ingreso a uno de las compras en estado = 1 '),
 (3, 'enviada', 'cuando el usuario administrador envia a uno de las compras en estado =2 '),
-(4, 'cancelada', 'un usuario administrador podra cancelar una compra en cualquier estado y un usuario cliente solo en estado=1 ')
+(4, 'cancelada', 'un usuario administrador podra cancelar una compra en cualquier estado y un usuario cliente solo en estado=1 ');
 
 -- --------------------------------------------------------
 
@@ -107,11 +97,6 @@ CREATE TABLE IF NOT EXISTS `compraitem` (
   KEY `fkcompraitem_1` (`idCompra`),
   KEY `fkcompraitem_2` (`idProducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `compraitem`(`idCompraItem`, `idProducto`, `idCompra`, `ciCantidad`) VALUES
-(1, 1, 1, 2),
-(2, 3, 2, 4),
-(3, 2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -189,7 +174,8 @@ CREATE TABLE IF NOT EXISTS `producto` (
   UNIQUE KEY `idproducto` (`idProducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO 'producto' (`pronombre`,`prodetalle`, `proCantStock`, `proPrecio`, `urlItem`) VALUES ('ESTACAS CAZAVAMPIROS', '35cm de pino tallado', 25, 500, 'https://i.pinimg.com/originals/3b/01/4a/3b014ad3e88e199cea4862a0efddca4b.jpg'),
+INSERT INTO `producto` (`pronombre`,`prodetalle`, `proCantStock`, `proPrecio`, `urlItem`) VALUES 
+('ESTACAS CAZAVAMPIROS', '35cm de pino tallado', 25, 500, 'https://i.pinimg.com/originals/3b/01/4a/3b014ad3e88e199cea4862a0efddca4b.jpg'),
 ('BALAS DE PLATA', 'bendecidas', 100, 50, 'https://comunaslitoral.com.ar/06-2016/resize_1465306129.jpg'),
 ('BALAS DE PLATA', 'bendecidas', 100, 50, 'https://comunaslitoral.com.ar/06-2016/resize_1465306129.jpg'),
 ('EXORCISMO', 'viene un tipo a tu casa y te saca los fantasmas ', 20, 250,'https://pbs.twimg.com/media/EY1UeCdWkAEsJKX.jpg');
@@ -235,11 +221,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   UNIQUE KEY `idusuario` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO 'usuario' ('idUsuario', 'usNombre', 'usPass', 'usMail', 'usDeshabilitado') VALUES
-('', 'francisco','81dc9bdb52d04dc20036dbd8313ed055','francisco@gmail.com', null),
-('', 'tino', 'fcea920f7412b5da7be0cf42b8c93759','tino@hotmail.com', null),
-('', 'petalos', 'e10adc3949ba59abbe56e057f20f883e','rosita@yahoo.com', null);
-
+INSERT INTO `usuario` (`usNombre`, `usPass`, `usMail`, `usDeshabilitado`) VALUES
+('admin','202cb962ac59075b964b07152d234b70','admin@admin.com', null),
+('cliente','202cb962ac59075b964b07152d234b70','cliente@cliente.com', null),
+('deposito','202cb962ac59075b964b07152d234b70','deposito@deposito.com', null);
 
 
 /* ALTER TABLE 'usuario' MODIFY 'usNombre' varchar(50) NOT NULL UNIQUE; */

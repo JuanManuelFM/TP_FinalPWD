@@ -173,56 +173,27 @@ class Usuario extends baseDatos{
         return $arregloUsuarios;
     }
 
-    public function listar($arrayBusqueda){
-        //seteo de respuesta
-        $respuesta['respuesta'] = false;
-        $respuesta['errorInfo'] = '';
-        $respuesta['codigoError'] = null;
-        $arregloUsuario = null;
-        $base = new baseDatos();
-        //seteo de busqueda
-        $stringBusqueda = $this->SB($arrayBusqueda);
-        $sql = "SELECT * FROM usuario";
-        if($stringBusqueda != ''){
-            $sql.= ' WHERE ';
-            $sql.= $stringBusqueda;
-        }
-        try {
-            if($base->Iniciar()){
-                if($base->Ejecutar($sql)){
-                    $arregloUsuario = array();
-                    while($row2 = $base->Registro()){
-                        $objUsuario = new Usuario();
-                        $objUsuario->setIdusuario($row2['idUsuario']);
-                        $objUsuario->setUsnombre($row2['usNombre']);
-                        $objUsuario->setUspass($row2['usPass']);
-                        $objUsuario->setUsmail($row2['usMail']);
-                        $objUsuario->setUsdeshabilitado($row2['usDeshabilitado']);
-                        array_push($arregloUsuario, $objUsuario);
-                    }
-                    $respuesta['respuesta'] = true;
-                }else{
-                   /*  Usuario::setMensajeStatic($base->getError()); */
-                    $respuesta['respuesta'] = false;
-                    $respuesta['errorInfo'] = 'Hubo un error con la consulta';
-                    $respuesta['codigoError'] = 1;
+    public static function listar($parametro = ""){
+        $arreglo = null;
+        $base = new BaseDatos();
+        $sql = "SELECT * FROM usuario ";
+        if ($parametro != "") {
+            $sql .= 'WHERE ' . $parametro;
+        } 
+        $res = $base->Ejecutar($sql);
+        if ($res > -1) {
+            if ($res > 0) {
+				$arreglo = array();
+                while ($row = $base->Registro()) {
+                    $obj = new Usuario();
+                    $obj->cargar($row['idUsuario'],$row['usNombre'], $row['usPass'], $row['usMail'], $row['usDeshabilitado']);
+                    array_push($arreglo, $obj);
                 }
-            }else{
-                /* Usuario::setMensajeStatic($base->getError()); */
-                $respuesta['respuesta'] = false;
-                $respuesta['errorInfo'] = 'Hubo un error con la conexión de la base de datos';
-                $respuesta['codigoError'] = 0;
             }
-        } catch (\Throwable $th) {
-            $respuesta['respuesta'] = false;
-            $respuesta['errorInfo'] = $th;
-            $respuesta['codigoError'] = 3;
+        } else {
+            $this->setMensajeFuncion("Usuario->listar: " . $base->getError());
         }
-        $base = null;
-        if($respuesta['respuesta']){
-            $respuesta['array'] = $arregloUsuario;
-        }
-        return $respuesta;
+        return $arreglo;
     }
 
     //ELIMINAR
