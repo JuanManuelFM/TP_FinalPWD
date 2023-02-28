@@ -134,6 +134,18 @@ class c_menu{
         return $arreglo;
     }
 
+    public function listar($arrayBusqueda)
+    {
+        $objMenu = new Menu();
+        $resp = $objMenu->listar($arrayBusqueda);
+        if ($resp != null) {
+            $arrayMenues = $resp;
+        } else {
+            $arrayMenues = null;
+        }
+        return $arrayMenues;
+    }
+
     // Deshabilita un menu 
     public function deshabilitar($param){
         $resp = false;

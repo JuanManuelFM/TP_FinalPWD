@@ -101,11 +101,11 @@ if ($arrayObjUsuario != null) {
             <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../menuDepo/listaProductos.php" style="font-family: 'Chivo', sans-serif;">Admin.productos</a>
           </li>
           <li class="nav-item">
-            <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../menuCliente/perfilCliente.php" style="font-family: 'Chivo', sans-serif;">Perfil</a>
-          </li>
+            <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../menuCliente/perfilCliente.php" style="font-family: 'Chivo', sans-serif;">Mi perfil</a>
+          </li>  
           <li class="nav-item">
             <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../menuAdmin/listaMenues.php" style="font-family: 'Chivo', sans-serif;">Admin.menues</a>
-          </li>                    
+          </li>                           
         </ul>
       </div>
     </div>
