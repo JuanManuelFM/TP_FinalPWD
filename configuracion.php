@@ -5,7 +5,7 @@ header ("Cache-Control: no-cache, must-revalidate ");
 // CONFIGURACION APP//
 /////////////////////////////
 
-$PROYECTO ='Universidad/TP_FinalPWD'; //Pone la ubicación de todo el proyecto desde htdocs del XAMP
+$PROYECTO ='PW/TP_FinalPWD'; //Pone la ubicación de todo el proyecto desde htdocs del XAMP
 //$PROYECTO ='PW/tp_final_pwd'; //a mi no me anduvo usa el otro jejejjejejejssjsjrsje
 
 
