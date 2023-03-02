@@ -126,7 +126,7 @@ INSERT INTO `menu` (`idMenu`, `meNombre`, `meDescripcion`, `idPadre`, `meDeshabi
 (3, 'Depósito', '#', NULL, NULL), */
 (1, 'Tienda', '../menuCliente/tienda.php', NULL, NULL),
 (2, 'Perfil', '../menuCliente/perfil.php', NULL, NULL),
-(3, 'Historial mis compras', '../menuCliente/historialCompras.php', 2, '0000-00-00 00:00:00'),
+(3, 'Historial mis compras', '../menuCliente/historialCompras.php', NULL, '0000-00-00 00:00:00'),
 (4, 'Lista usuarios', '../menuAdmin/listaUsuarios.php', NULL, NULL),
 (5, 'Lista menus', '../menuAdmin/listaMenues.php', NULL, NULL),
 (6, 'Lista productos', '../menuDepo/listaProductos.php', NULL, NULL),
