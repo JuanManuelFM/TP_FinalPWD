@@ -121,17 +121,17 @@ CREATE TABLE IF NOT EXISTS `menu` (
 --
 
 INSERT INTO `menu` (`idMenu`, `meNombre`, `meDescripcion`, `idPadre`, `meDeshabilitado`) VALUES
-(1, 'Administración', '#', NULL, NULL),
+/* (1, 'Administración', '#', NULL, NULL),
 (2, 'Cliente', '#', NULL, NULL),
-(3, 'Depósito', '#', NULL, NULL),
-(4, 'Tienda', '../menuCliente/tienda.php', 2, NULL),
-(5, 'Perfil', '../menuCliente/perfil.php', 2, NULL),
-(6, 'Historial mis compras', '../menuCliente/historialCompras.php', 2, '0000-00-00 00:00:00'),
-(7, 'Lista usuarios', '../menuAdmin/listaUsuarios.php', 1, NULL),
-(8, 'Lista menus', '../menuAdmin/listaMenues.php', 1, NULL),
-(9, 'Lista productos', '../menuDepo/listaProductos.php', 3, NULL),
-(10, 'Cargar producto', '../menuDepo/nuevoProducto.php', 3, NULL),
-(11, 'Historial compras', '../menuDepo/historialCompras.php', 3, NULL);
+(3, 'Depósito', '#', NULL, NULL), */
+(1, 'Tienda', '../menuCliente/tienda.php', NULL, NULL),
+(2, 'Perfil', '../menuCliente/perfil.php', NULL, NULL),
+(3, 'Historial mis compras', '../menuCliente/historialCompras.php', 2, '0000-00-00 00:00:00'),
+(4, 'Lista usuarios', '../menuAdmin/listaUsuarios.php', NULL, NULL),
+(5, 'Lista menus', '../menuAdmin/listaMenues.php', NULL, NULL),
+(6, 'Lista productos', '../menuDepo/listaProductos.php', NULL, NULL),
+(7, 'Cargar producto', '../menuDepo/nuevoProducto.php', NULL, NULL),
+(8, 'Estado compras', '../menuDepo/estadoCompras.php', NULL, NULL);
 
 
 -- --------------------------------------------------------
@@ -153,9 +153,14 @@ CREATE TABLE IF NOT EXISTS `menurol` (
 --
 
 INSERT INTO `menurol` (`idMenu`, `idRol`) VALUES
-(1, 1),
+(1, 2),
 (2, 2),
-(3, 3);
+(3, 2),
+(4, 1),
+(5, 1),
+(6, 3),
+(7, 3),
+(8, 3);
 -- --------------------------------------------------------
 
 --
