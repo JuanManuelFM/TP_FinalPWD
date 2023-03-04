@@ -126,7 +126,7 @@ INSERT INTO `menu` (`idMenu`, `meNombre`, `meDescripcion`, `idPadre`, `meDeshabi
 (3, 'Depósito', '#', NULL, NULL), */
 (1, 'Tienda', '../menuCliente/tienda.php', NULL, NULL),
 (2, 'Perfil', '../menuCliente/perfilCliente.php', NULL, NULL),
-(3, 'Historial mis compras', '../menuCliente/historialCompras.php', NULL, NULL),
+(3, 'Historial mis compras', '../menuCliente/historialCompras.php', NULL, '0000-00-00 00:00:00'),
 (4, 'Lista usuarios', '../menuAdmin/listaUsuarios.php', NULL, NULL),
 (5, 'Lista menus', '../menuAdmin/listaMenues.php', NULL, NULL),
 (6, 'Lista productos', '../menuDepo/listaProductos.php', NULL, NULL),
@@ -230,7 +230,8 @@ INSERT INTO `usuario` (`usNombre`, `usPass`, `usMail`, `usDeshabilitado`) VALUES
 ('admin','202cb962ac59075b964b07152d234b70','admin@admin.com', null),
 ('cliente','202cb962ac59075b964b07152d234b70','cliente@cliente.com', null),
 ('deposito','202cb962ac59075b964b07152d234b70','deposito@deposito.com', null),
-('superadmin','202cb962ac59075b964b07152d234b70','superadmin@superadmin.com', null);
+('superadmin','202cb962ac59075b964b07152d234b70','superadmin@superadmin.com', null),
+('admincliente','202cb962ac59075b964b07152d234b70','admincliente@admincliente.com', null);
 
 
 /* ALTER TABLE 'usuario' MODIFY 'usNombre' varchar(50) NOT NULL UNIQUE; */
@@ -255,8 +256,9 @@ INSERT INTO `usuariorol` (`idUsuario`, `idRol`) VALUES
 (3, 3),
 (4, 1),
 (4, 2),
-(4, 3);
-
+(4, 3),
+(5, 1),
+(5, 2);
 --
 -- Restricciones para tablas volcadas
 --
@@ -310,6 +312,5 @@ COMMIT;
 /* probando compra aceptada 
 INSERT INTO `compraestado`( `idCompra`, `idCompraEstadoTipo`, `ceFechaFin`) VALUES (2,2,'0000-00-00 00:00:00');
 */
-
 
 

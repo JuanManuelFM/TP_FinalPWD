@@ -1,6 +1,6 @@
 <?php
 include_once("../menu/cabecera.php");
-    $objMenu= new c_menu();
+    $objMenu= new C_menu();
     $arrayMenues = $objMenu->listar('');
     if ($arrayMenues != null) {
         $cantMenues = count($arrayMenues);

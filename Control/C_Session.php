@@ -94,6 +94,17 @@ class c_session
     {
         $_SESSION["nombreUsuario"] = $nombreUsuario;
         $_SESSION["roles"] = $roles;
+        $this->setVista($roles[0]);
+    }
+
+    public function setVista($objRol)
+    {
+        $_SESSION["vista"] = $objRol;
+    }
+
+    public function getVista()
+    {
+        return $_SESSION["vista"];
     }
 
     public function validar($param)
@@ -111,14 +122,23 @@ class c_session
         return $resp;
     }
 
-    /** ACTIVA **/
-    public function activa()
+    public function objUsuarioRegistrado()
     {
         $resp = null;
-        if(isset($_SESSION['nombreUsuario'])){
+        if (isset($_SESSION['nombreUsuario'])) {
             $objUsuario = new c_usuario();
             $param['usNombre'] = $_SESSION['nombreUsuario'];
             $resp = $objUsuario->buscar($param);
+        }
+        return $resp;
+    }
+
+    /** ACTIVA **/
+    public function activa()
+    {
+        $resp = false;
+        if (isset($_SESSION['nombreUsuario'])) {
+            $resp = true;
         }
         return $resp;
     }

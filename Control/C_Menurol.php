@@ -141,7 +141,7 @@ class c_menuRol{
 
     // Elige menus para mostrar segun el rol
     public function menuesByIdRol($objRol){
-        $param['idRol'] = $objRol[0];
+        $param['idRol'] = $objRol;
         $objMenuObjRol = $this->buscar($param);
         $menuesRoles = [];
         foreach ($objMenuObjRol as $objMenuRol) {

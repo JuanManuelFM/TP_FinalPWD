@@ -1,5 +1,6 @@
 <?php
-class MenuRol extends baseDatos{
+class MenuRol extends baseDatos
+{
     private $objMenu;
     private $objRol;
     private $mensajeFuncion;
@@ -17,41 +18,48 @@ class MenuRol extends baseDatos{
     }
 
     //Metodos de acceso
-    public function getObjRol(){
+    public function getObjRol()
+    {
         return $this->objRol;
     }
 
-    public function setObjRol($objRol){
+    public function setObjRol($objRol)
+    {
         $this->objRol = $objRol;
     }
 
-    public function getObjMenu(){
+    public function getObjMenu()
+    {
         return $this->objMenu;
     }
 
-    public function setObjMenu($objMenu){
+    public function setObjMenu($objMenu)
+    {
         $this->objMenu = $objMenu;
     }
 
-    public function getMensajeFuncion(){
+    public function getMensajeFuncion()
+    {
         return $this->mensajeFuncion;
     }
 
-    public function setMensajeFuncion($mensajeFuncion){
+    public function setMensajeFuncion($mensajeFuncion)
+    {
         $this->mensajeFuncion = $mensajeFuncion;
     }
 
     //Funciones BD
 
     //INSERTAR
-    public function insertar(){
+    public function insertar()
+    {
         $base = new baseDatos();
         $resp = false;
-        
+
         //Creo la consulta 
         $consulta = "INSERT INTO menurol (idMenu, idRol) VALUES (
-        '".$this->getObjMenu()->getIdMenu()."',
-        '".$this->getObjRol()->getIdRol()."')"; 
+        '" . $this->getObjMenu()->getIdMenu() . "',
+        '" . $this->getObjRol()->getIdRol() . "')";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -69,12 +77,12 @@ class MenuRol extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-        
+
         $consulta = "UPDATE menurol 
         SET 
-        idMenu = '".$this->getObjRol()->getIdRol()."',
-        idRol = ".$this->getObjMenu()->getIdMenu()."
-        WHERE idMenu = ".$this->getObjMenu()->getIdMenu();
+        idMenu = '" . $this->getObjRol()->getIdRol() . "',
+        idRol = " . $this->getObjMenu()->getIdMenu() . "
+        WHERE idMenu = " . $this->getObjMenu()->getIdMenu();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -96,7 +104,9 @@ class MenuRol extends baseDatos{
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 if ($meRol = $base->Registro()) {
-                    $this->setObjMenu($idMenu);
+                    $objMenu = new Menu();
+                    $objMenu->buscar($meRol['idMenu']);
+                    $this->setObjMenu($objMenu);
                     $objRol = new Rol();
                     $objRol->buscar($meRol['idRol']);
                     $this->setObjRol($objRol);
@@ -112,7 +122,8 @@ class MenuRol extends baseDatos{
     }
 
     //LISTAR
-    public function listar($condicion = ''){
+    public function listar($condicion = '')
+    {
         $arrayMR = null;
         $base = new baseDatos();
         $consultaMR =  "SELECT * from menurol";
@@ -138,11 +149,12 @@ class MenuRol extends baseDatos{
     }
 
     //ELIMINAR
-    public function eliminar(){
+    public function eliminar()
+    {
         $base = new baseDatos();
         $resp = false;
         if ($base->Iniciar()) {
-            $consulta = "DELETE FROM menurol WHERE idMenu= '". $this->getObjMenu()->getIdMenu()."' 
+            $consulta = "DELETE FROM menurol WHERE idMenu= '" . $this->getObjMenu()->getIdMenu() . "' 
             AND idRol= " . $this->getObjRol()->getIdRol();
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -157,8 +169,7 @@ class MenuRol extends baseDatos{
 
     public function __toString()
     {
-        return (
-            "ID menu: " . $this->getObjMenu()->getIdMenu() .
-            "\n ID Rol: " . $this->getObjRol()->getIdRol() . "\n" );
+        return ("ID menu: " . $this->getObjMenu()->getIdMenu() .
+            "\n ID Rol: " . $this->getObjRol()->getIdRol() . "\n");
     }
 }
