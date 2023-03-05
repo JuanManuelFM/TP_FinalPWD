@@ -39,12 +39,12 @@ $(document).ready(function () {
 function loginSuccess() {
     Swal.fire({
         icon: 'success',
-        title: 'La sesion se inicio correcptamente!',
+        title: 'La sesión se inició correctamente!',
         showConfirmButton: false,
         timer: 1500
     })
     setTimeout(function () {
-        location.reload();
+        window.location.href = "../paginaSegura/inicio.php";
     }, 1500);
 }
 

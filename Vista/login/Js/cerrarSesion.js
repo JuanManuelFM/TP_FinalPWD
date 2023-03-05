@@ -1,7 +1,7 @@
 function cerrarSesion() {
     $.ajax({
         type: "POST",
-        url: '../accion/cerrarSesion.php',
+        url: '../../accion/cerrarSesion.php',
         success: function (response) {
             var jsonData = JSON.parse(response);
             // user is logged in successfully in the back-end
@@ -15,7 +15,6 @@ function cerrarSesion() {
         }
     });
 }
-
 function sesionCerrada(){
     Swal.fire({
         icon: 'success',
@@ -23,9 +22,9 @@ function sesionCerrada(){
         showConfirmButton: false,
         timer: 1500
     })
-    setTimeout(function(){
-        location.reload();
-    },1500);
+    setTimeout(function () {
+        window.location.href = "../paginaSegura/inicio.php";
+    }, 1500);
 }
 
 function sesionNoCerrada(){
@@ -35,4 +34,7 @@ function sesionNoCerrada(){
         showConfirmButton: false,
         timer: 1500
     })
+    setTimeout(function () {
+        recargarPagina();
+    }, 1500);
 }

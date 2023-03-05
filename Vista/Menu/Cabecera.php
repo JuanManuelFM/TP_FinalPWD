@@ -42,14 +42,14 @@ if ($arrayObjUsuario != null) {
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
           <li class="nav-item">
-            <a class="px-2 mx-1 btn btn-danger  btn-outline-light" href="../paginaSegura/inicio.php" style="font-family: 'Chivo', sans-serif;">Inicio</a>
+            <a class="px-2 mx-1 btn btn-danger  btn-outline-light" href="../paginaSegura/inicio.php" style="font-family: 'Chivo', sans-serif;">INICIO</a>
           </li>
           <!-- aca va todo lo de cambio de menu -->
           <?php
           foreach ($menuRoles as $objMenu) {
             if ($objMenu->getMeDeshabilitado() == null) {
           ?>
-              <li><a href='<?php echo $objMenu->getMeDescripcion() ?>' role="button" class="px-2 mx-1 btn btn-lg btn-outline-light"><?php echo $objMenu->getMeNombre() ?></a></li>
+              <li><a href='<?php echo $objMenu->getMeDescripcion() ?>' role="button" class="px-2 mx-1 btn btn-danger btn-outline-light" style="font-family: 'Chivo', sans-serif;"><?php echo $objMenu->getMeNombre() ?></a></li>
           <?php
             }
           }
@@ -73,11 +73,11 @@ if ($arrayObjUsuario != null) {
                   }
                   ?>
                   </select>
-                  <button type='button' class='btn btn-lg btn-outline-light me-2' onclick="cerrarSesion()">SALIR</button>
+                  <button type='button' class='px-2 mx-1 btn btn-danger btn-outline-light' style="font-family: 'Chivo', sans-serif;" onclick="cerrarSesion()">SALIR</button>
                 <?php
               } else {
                 ?>
-                  <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../login/login.php" style="font-family: 'Chivo', sans-serif;">Ingresar</a>
+                  <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../login/login.php" style="font-family: 'Chivo', sans-serif;">INGRESAR</a>
             <?php
               }?>
             </div>

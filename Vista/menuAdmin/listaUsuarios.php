@@ -12,7 +12,7 @@ include_once("../../configuracion.php");
     $i = 0;
 ?>
 
-<div  class="container-fluid">
+<div  class="container-fluid height-full" style="background-color:brown;">
             <div class="container col-md-10">
                 <br>
                 <h2>Lista de todos los usuarios</h2>
