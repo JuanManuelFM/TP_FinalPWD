@@ -27,7 +27,7 @@ if ($arrayObjUsuario != null) {
   <link rel="stylesheet" href="../css/genera.css">
   <script src="../jQuery/jquery-3.6.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="../js/cerrarSesion.js"></script>
+  <script src="../login/js/cerrarSesion.js"></script>
   <script src="../js/cambiarVista.js"></script>
 </head>
 

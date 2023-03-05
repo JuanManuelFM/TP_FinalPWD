@@ -38,7 +38,7 @@ $(document).ready(function () {
 function registerSuccess() {
     Swal.fire({
         icon: 'success',
-        title: 'La cuenta se creo correctamente!',
+        title: 'La cuenta se creo correctamenteAAA!',
         showConfirmButton: false,
         timer: 1500
     })

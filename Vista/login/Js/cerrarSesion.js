@@ -1,7 +1,7 @@
 function cerrarSesion() {
     $.ajax({
         type: "POST",
-        url: '../../accion/cerrarSesion.php',
+        url: '../accion/cerrarSesion.php',
         success: function (response) {
             var jsonData = JSON.parse(response);
             // user is logged in successfully in the back-end

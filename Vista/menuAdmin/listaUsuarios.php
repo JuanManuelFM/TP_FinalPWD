@@ -12,7 +12,7 @@ include_once("../../configuracion.php");
     $i = 0;
 ?>
 
-<div  class="container-fluid height-full" style="background-color:brown;">
+<div class="container-fluid height-full" style="background-color:brown;">
             <div class="container col-md-10">
                 <br>
                 <h2>Lista de todos los usuarios</h2>
@@ -26,7 +26,8 @@ include_once("../../configuracion.php");
                             <th>Roles</th>
                             <th>Estado actual</th>
                             <th>Editar Usuario</th>
-                            <th>Deshabilitar/Habilitar</th>
+                            <th>Deshabilitar</th>
+                            <th>Habilitar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,20 +43,17 @@ include_once("../../configuracion.php");
                                     $usRol= $objUsuarioRol->buscar(['idUsuario' => $usuario->getIdUsuario()]);
                                     foreach ($usRol as $rol) {
                                         $sepRoles = $rol->getObjRol()->getRolDescripcion() . "-";
-                                            }
-                                            echo $sepRoles .
-                                            '</td>';
-                                        echo '<td>'. $usuario->getUsDeshabilitado().'</td>';
-                                        
-                                        echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>';
-                                        echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
-                                        
-                                        echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
-                                        echo '</tr>';
                                     }
-                                }else{
-                                    echo '<p class="lead"> Actualmente no hay personas registradas </p>';
+                                    echo $sepRoles . '</td>';
+                                    echo '<td>'. $usuario->getUsDeshabilitado().'</td>';
+                                    echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>';
+                                    echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
+                                    echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
+                                    echo '</tr>';
                                 }
+                            }else{
+                                echo '<p class="lead"> Actualmente no hay personas registradas </p>';
+                            }
                             ?>
                 </div>
             </div>
