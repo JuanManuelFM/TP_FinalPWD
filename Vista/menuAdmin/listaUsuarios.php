@@ -13,10 +13,10 @@ include_once("../../configuracion.php");
 ?>
 <style>
     body{
-        background-color: brown;
+        background-color: #E47070;
     }
 </style>
-<div class="container-fluid" style="margin-top: 80px;">
+<div class="container-fluid" style="margin-top: 30px;">
     <div class="container col-md-12">
         <h2>Lista de todos los usuarios</h2>
         <br>

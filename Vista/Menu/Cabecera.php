@@ -10,7 +10,8 @@ if ($arrayObjUsuario != null) {
     $objRol = new c_rol();
     $menuRoles = $objMenuRol->menuesByIdRol($objSession->getVista());
     $objRoles = $objRol->obtenerObj($idRoles);
-    print_r($objRoles);
+    /* print_r($objRoles); */
+    //ERROR AL ACTUALIZAR USUARIO SE ROMPE PÁGINAS
 }
 ?>
 

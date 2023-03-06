@@ -1,5 +1,5 @@
 <!-- <div class="container-fluid footer_container quitar_margin_padding" style="background-color: #4B515D;"> -->
-    <footer class="fixed-bottom d-flex flex-wrap justify-content-between align-items-center py-3" style="background-color: #4B515D;" id="footer" >
+    <footer class="position-relative d-flex flex-wrap justify-content-between align-items-center py-3" style="background-color: #4B515D;" id="footer" >
         <p class="col-md-4 mb-0 text-black-50" style="display: inline-block;" id="universidad"> Universidad del comahue</p>
         <ul class="nav justify-content-end flex-column col-3,5">
             <li class="nav-item" id="juan">
