@@ -23,6 +23,20 @@ class c_usuario
         return $obj;
     }
 
+    private function cargarObjetoModificarPass($param)
+    {
+        $obj = null;
+        if (array_key_exists('idUsuario', $param)) {
+            $obj = new Usuario();
+            $obj->cargar(
+                $param['idUsuario'],
+                null,
+                $param['usPass']
+            );
+        }
+        return $obj;
+    }
+
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
@@ -34,7 +48,7 @@ class c_usuario
         $obj = null;
         if (isset($param['idUsuario'])) {
             $obj = new Usuario();
-            $obj->cargar($param['idUsuario'], null, null, null, null);
+            $obj->cargar($param['idUsuario']);
         }
         return $obj;
     }
@@ -121,6 +135,18 @@ class c_usuario
         if ($this->seteadosCamposClaves($param)) {
             $obj = $this->cargarObjeto($param);
             if ($obj != null && $obj->modificar()) {
+                $resp = true;
+            }
+        }
+        return $resp;
+    }
+
+    public function modificacionPass($param)
+    {
+        $resp = false;
+        if ($this->seteadosCamposClaves($param)) {
+            $obj = $this->cargarObjetoModificarPass($param);
+            if ($obj != null && $obj->modificarPassword()) {
                 $resp = true;
             }
         }

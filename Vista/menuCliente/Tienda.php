@@ -4,73 +4,54 @@
     include_once "../menu/cabecera.php";
 
 
-    function crearTienda(){
+    /* function crearTienda(){
         $producto= new Producto();
         $arrayProductos= $producto->listar();
         foreach ($arrayProductos as $objProducto) {
             formato($objProducto);
         }
-    }
-
-    /**
+    } */
+?>
+    <!-- /**
      * imprime un 
      */
-    function formato($objProducto){
+   /*  function formato($objProducto){
         $idProducto= $objProducto->getIdProducto();
         $proNombre= $objProducto->getProNombre();
         $proDetalle= $objProducto->getProDetalle();
         $proCantStock= $objProducto->getProCantStock();
         $proPrecio= $objProducto->getProPrecio();
-        $urlItem= $objProducto->getUrlItem();
+        $urlItem= $objProducto->getUrlItem(); */ -->
 
-        echo "
-        <div class=\"col-12 col-sm-12 col-md-4 col-lg-3 container py-2\" >
-        <div class=\"caja_producto id container col-9 col-sm-12 col-md-12 py-2\">
-            <div class=\"img_productos\">
-                <img src=\"{$urlItem}\" class=\"img-thumbnail rounded col-8 col-md-11 col-sm-9 \"  style=\"width: auto;height: 260px\">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-3 container py-2" >
+        <div class="caja_producto container col-9 col-sm-12 col-md-12 py-2">
+            <div class="img_productos">
+                <img src="<?php $objProducto->getUrlItem()?>" class="img-thumbnail rounded col-8 col-md-11 col-sm-9"  style="width: auto;height: 260px">
             </div>
-            <div class=\"titulo_producto text-center\"><h6 style=\"display: inline-block;\">{$proNombre}-/$ {$proPrecio}</h6></div>
-            <form action=\"accion/accionAgregarAlCarrito.php\" method=\"post\" class=\"needs-validation Comprar\" novalidate>
-                <input type=\"text\" name=\"idProducto\" id=\"idProducto\" class=\"d-none\" value=\"{$idProducto}\">
+            <div class="titulo_producto text-center"><h6 style="display: inline-block;"><?php $objProducto->getProNombre() - $objProducto->getProPrecio()?></h6></div>
+            <form action="accion/accionAgregarAlCarrito.php" method="post" class="needs-validation Comprar" novalidate>
+                <input type="text" name="idProducto" id="idProducto" class="d-none" value="<?php $objProducto->getIdProducto()?>">
                 <div class='container-fluid'>
                    <div class='col-4 d-inline-block'>
-                    <input type=\"number\" value='1' name=\"ciCantidad\" id=\"cantidad_input\" min=\"1\" max=\"{$proCantStock}\" class=\"form-control col-sm-2\" placeholder=\"cant\" required cols=\"2\" width='60px'>
-                    
-                    <div class=\"invalid-feedback mb-1\">
+                    <input type="number" value='1' name="ciCantidad" id="cantidad_input" min="1" max="<?php $objProducto->getProCantStock() ?>" class="form-control col-sm-2" placeholder="cant" required cols="2" width='60px'>
+                    <div class="invalid-feedback mb-1">
                         sin stock
                     </div>
-                    <div class=\"valid-feedback mb-1\">
+                    <div class="valid-feedback mb-1">
                         bien!
                     </div>
                     </div>
-                    <input class=\"btn btn-success me-2\" type=\"submit\" name=\"boton_enviar\" value=\"comprar\" onclick='location.reload();'>
+                    <input class="btn btn-success me-2" type="submit" name="boton_enviar" value="comprar" onclick='location.reload();'>
                     </br>
-                    
-                    stock: {$proCantStock}
-                    
+                    stock: <?php echo $stock = $objProducto->getProCantStock() ?>
                 </div>
-                <div class=\"d-none\">{$idProducto}</div>
+                <div class="d-none"><?php echo $objProducto->getIdProducto()?></div>
             </form>
-            
             <hr>
-            <div class=\"desc_producto \">{$proDetalle}</div>
-
+            <div class="desc_producto"><?php echo $objProducto->getProDetalle()?></div>
         </div>
     </div>
-        ";
-    };
-
-    
-
-/* ESTO DEL SESSION LO HACE MANU */
-$idUsuario= 1;// esto es provisional
-
-$controlCompraItem= new c_compraItem();
-//hola
-
-?>
-
-<form action="./accion/comprar.php"></form>
+<form action="../accion/comprar.php"></form>
 
 <!-- <html>
     <head>

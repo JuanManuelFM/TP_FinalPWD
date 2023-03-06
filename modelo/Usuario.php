@@ -18,7 +18,7 @@ class Usuario extends baseDatos{
         $this->usDeshabilitado = "";
     }
 
-    public function cargar($idUsuario, $usNombre, $usPass, $usMail, $usDeshabilitado){
+    public function cargar($idUsuario = null, $usNombre = null, $usPass = null, $usMail = null, $usDeshabilitado = null){
         $this->setIdUsuario($idUsuario);
         $this->setUsNombre($usNombre);
         $this->setUsPass($usPass);
@@ -109,7 +109,24 @@ class Usuario extends baseDatos{
         }else{
             $param = $this->getUsDeshabilitado();
         }
-        $consulta = "UPDATE usuario SET usNombre= '".$this->getUsNombre()."', usPass= '".$this->getUsPass()."', usMail= '".$this->getUsMail()."', usDeshabilitado = ". $param ." WHERE idUsuario= ". $this->getIdUsuario();
+        $consulta = "UPDATE usuario SET usNombre= '".$this->getUsNombre()."', usMail= '".$this->getUsMail()."', usDeshabilitado = ". $param ." WHERE idUsuario= ". $this->getIdUsuario();
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($consulta)) {
+                $resp = true;
+            } else {
+                $this->setMensajeFuncion($base->getError());
+            }
+        } else {
+            $this->setMensajeFuncion($base->getError());
+        }
+        return $resp;
+    }
+
+    //MODIFICAR
+    public function modificarPassword(){
+        $base = new baseDatos();
+        $resp = false;
+        $consulta = "UPDATE usuario SET usPass= '".$this->getUsPass()." WHERE idUsuario= ".$this->getIdUsuario();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
