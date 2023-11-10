@@ -1,6 +1,7 @@
 <?php
 include_once('../../configuracion.php');
 // require_once('preCabecera.php');
+// include_once('../../Control/C_Session.php'); 
 $objSession = new c_session();
 $menuRoles = [];
 $arrayObjUsuario = $objSession->objUsuarioRegistrado();
