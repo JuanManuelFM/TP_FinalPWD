@@ -4,6 +4,7 @@ function redireccionarPaginaInicio() {
 function redireccionarInicioSesion() {
     location.href = 'login.php'
 }
+
 $(document).ready(function () {
     $('form').submit(function (e) {
         e.preventDefault();
@@ -14,7 +15,7 @@ $(document).ready(function () {
             document.getElementById("usPass").value = passhash;
             $.ajax({
                 type: "POST",
-                url: '../accion/verificarLogin.php',
+                url: 'accion/verificarLogin.php',
                 data: $(this).serialize(),
                 success: function (response) {
                     var jsonData = JSON.parse(response);

@@ -105,11 +105,11 @@ class Usuario extends baseDatos{
         $resp = false;
         //Hago consulta sql
         if($this->getUsDeshabilitado() == null){
-            $param = "Default";
+            $param = "DEFAULT";
         }else{
             $param = $this->getUsDeshabilitado();
         }
-        $consulta = "UPDATE usuario SET usNombre= '".$this->getUsNombre()."', usMail= '".$this->getUsMail()."', usDeshabilitado = ". $param ." WHERE idUsuario= ". $this->getIdUsuario();
+        $consulta = "UPDATE usuario SET usNombre= '".$this->getUsNombre()."', usMail= '".$this->getUsMail()."', usDeshabilitado = '" . NULL . "', usPass= '" . $this->getUsPass() . "' WHERE idUsuario= ". $this->getIdUsuario();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -123,7 +123,7 @@ class Usuario extends baseDatos{
     }
 
     //MODIFICAR
-    public function modificarPassword(){
+    /* public function modificarPassword(){
         $base = new baseDatos();
         $resp = false;
         $consulta = "UPDATE usuario SET usPass= '".$this->getUsPass()." WHERE idUsuario= ".$this->getIdUsuario();
@@ -137,7 +137,7 @@ class Usuario extends baseDatos{
             $this->setMensajeFuncion($base->getError());
         }
         return $resp;
-    }
+    } */
 
     //BUSCAR
     public function buscar($idUsuario)
@@ -203,7 +203,7 @@ class Usuario extends baseDatos{
 				$arreglo = array();
                 while ($row = $base->Registro()) {
                     $obj = new Usuario();
-                    $obj->cargar($row['idUsuario'],$row['usNombre'], $row['usPass'], $row['usMail'], $row['usDeshabilitado']);
+                    $obj->cargar($row['idUsuario'], $row['usNombre'], $row['usPass'], $row['usMail'], $row['usDeshabilitado']);
                     array_push($arreglo, $obj);
                 }
             }

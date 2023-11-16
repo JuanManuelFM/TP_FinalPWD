@@ -17,8 +17,8 @@ class c_session
 
     public function getUsNombre()
     {
-        if (array_key_exists('usNombre', $_SESSION)) {
-            $param = $_SESSION['usNombre'];
+        if (array_key_exists('nombreUsuario', $_SESSION)) {
+            $param = $_SESSION['nombreUsuario'];
         } else {
             $param = null;
         }
@@ -27,7 +27,7 @@ class c_session
 
     public function setUsNombre($usNombre)
     {
-        $_SESSION['usNombre'] = $usNombre;
+        $_SESSION['nombreUsuario'] = $usNombre;
     }
 
     public function getUsPass()
@@ -92,7 +92,8 @@ class c_session
 
     public function iniciar($nombreUsuario, $roles)
     {
-        $_SESSION["nombreUsuario"] = $nombreUsuario;
+        $_SESSION['idUsuario'] = $nombreUsuario->getIdUsuario();
+        $_SESSION["nombreUsuario"] = $nombreUsuario->getUsNombre();
         $_SESSION["roles"] = $roles;
         $this->setVista($roles[0]);
     }
@@ -115,7 +116,7 @@ class c_session
         if ($arrayUsuario != null) {
             if ($param["usPass"] == $arrayUsuario[0]->getUsPass()) {
                 $idRoles = $this->getRol($arrayUsuario[0]);
-                $this->iniciar($param["usNombre"], $idRoles);
+                $this->iniciar($arrayUsuario[0], $idRoles);
                 $resp = true;
             }
         }

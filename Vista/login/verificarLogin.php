@@ -8,7 +8,7 @@ if($objSession->validar($metodo)){
     <script>
         Swal.fire({
             icon: 'success',
-            title: 'La sesion se inicio correcptamente!',
+            title: 'La sesion se inicio correctamente!',
             showConfirmButton: false,
             timer: 1500
         })

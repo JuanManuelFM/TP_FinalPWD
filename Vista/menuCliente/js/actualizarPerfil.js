@@ -14,6 +14,7 @@ $(document).on('click', '#boton_cancelar', function() {
     document.getElementById('editarContraseña').classList.add('d-none');
 });
 
+
 $(document).ready(function () {
     $('#form-editar').submit(function (e) {
         e.preventDefault();
@@ -21,12 +22,13 @@ $(document).ready(function () {
         if (forms[0].checkValidity()) {
             $.ajax({
                 type: "POST",
-                url: 'Accion/accionActualizarPerfil.php',
+                url: 'accion/accionActualizarPerfil.php',
                 data: $(this).serialize(),
                 success: function (response) {
                     var jsonData = JSON.parse(response);
 
                     if (jsonData.success == "1") {
+                        window.location.reload();
                         success();
                     }
                     else if (jsonData.success == "0") {
@@ -45,16 +47,10 @@ $(document).ready(function () {
         e.preventDefault();
          const forms = document.querySelectorAll('.needs-validation');
         var passActual = document.getElementById('usPassVieja').value;
-            passActual = hex_md5(passActual).toString();
+            // passActual = hex_md5(passActual).toString();
         var passSesion = document.getElementById('usPassSesion').value;
-        if(passActual == passSesion){ 
-            if (verificarContraseñaIgual(document.getElementById('usPassNueva'), document.getElementById('usPassRep')) && forms[0].checkValidity()) {
-                var password = document.getElementById("usPassNueva").value;
-                var passhash = hex_md5(password).toString();
-                document.getElementById('usPassNueva').value = "";
-                document.getElementById('usPassRep').value = "";
-                document.getElementById('usPassVieja').value = "";
-                document.getElementById("usPass").value = passhash;
+        // if(passActual == passSesion){ 
+                // var passhash = hex_md5(password).toString();
             $.ajax({
                 type: "POST",
                 url: 'accion/accionActualizarPerfil.php',
@@ -68,18 +64,14 @@ $(document).ready(function () {
                         forms[1].reset();
                     }
                     else if (jsonData.success == "0") {
-                        contraFailure();
+                        contraFailure(jsonData.message);
                     } 
                 }
             });
-        } else {
-            location.reload();
-            forms[1].classList.add('was-validated');
-        }
-    }else{
-        failureContra();
-        forms[1].reset();
-    }
+    // }else{
+    //     failureContra();
+    //     forms[1].reset();
+    // }
     });
 });
 
@@ -118,10 +110,10 @@ function failureContra() {
     }, 1500);
 }
 
-function contraFailure(){
+function contraFailure(message){
     Swal.fire({
         icon: 'error',
-        title: 'No se ha podido modificar la contraseña!',
+        title: message,
         showConfirmButton: false,
         timer: 1500
     })
