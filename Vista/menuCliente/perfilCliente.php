@@ -21,11 +21,11 @@ if($objSession->getVista()!= null){
                         <th>Email</th>
                     </tr>
                 <?php
-                    echo '<tr>';
+                    /* echo '<tr>';
                     echo '<td>' . $usuario->getIdUsuario() . '</td>';
                     echo '<td>' . $usuario->getUsNombre() . '</td>';
                     echo '<td>' . $usuario->getUsMail() . '</td>';
-                    echo '</tr>';
+                    echo '</tr>'; */
                 ?>
                 </table>
                 <input class="btn btn-secondary mt-2 col-3" type="button" name="boton_editarDatos"  id="boton_editarDatos" value="EDITAR EMAIL">

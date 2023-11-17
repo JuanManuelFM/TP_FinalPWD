@@ -4,8 +4,8 @@ include_once("../../configuracion.php");
 
 
 /* ESTO DEL SESSION LO HACE MANU */
-$idUsuario= 1;// esto es provisional
-$controlCompraItem= new c_compraItem();
+$idUsuario = 1;// esto es provisional
+$controlCompraItem = new c_compraItem();
 ?>
 <html>
 <head>
@@ -42,7 +42,7 @@ $controlCompraItem= new c_compraItem();
     </tr>
 
     <div>
-<?php 
+<?php
   $controlCompraItem->crearCarrito($idUsuario);
 ?>
     </div>
