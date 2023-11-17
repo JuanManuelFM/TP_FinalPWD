@@ -1,83 +1,51 @@
 <?php
+
 include_once("../../../configuracion.php");
 
-
-
 $datos = data_submitted();
-$idUsuario= 1; //manu completa esto
+$idUsuario = 1; //manu completa esto
 
 $obj_producto = new C_Producto();
-$sesion= new c_session();
-$obj_compra= new c_compra();
-$objCompraEstado= new c_compraEstado();
-
-
+$sesion = new c_session();
+$obj_compra = new c_compra();
+$objCompraEstado = new c_compraEstado();
 
 /* buscar ultima compra de un usuario */
-$array_compraEstadoIniciada= $objCompraEstado->buscarCompraEstadoNull($idUsuario);
-
-
+$array_compraEstadoIniciada = $objCompraEstado->buscarCompraEstadoNull($idUsuario);
 if (count($array_compraEstadoIniciada) <> 0) {
     /* en caso e tener una compra iniciada significa que la compra se tiene que agregar a esa compra */
-    $objCompraEstado= $array_compraEstadoIniciada[0];
-    
-
-    $idCompraActual= $objCompraEstado->getObjCompra()->getIdCompra();
-
-    $objCompraItem= new c_compraItem();
-
+    $objCompraEstado = $array_compraEstadoIniciada[0];
+    $idCompraActual = $objCompraEstado->getObjCompra()->getIdCompra();
+    $objCompraItem = new c_compraItem();
     /* lo necesario para el alta */
-
-    $objProductoAux= new Producto;
+    $objProductoAux = new Producto();
     $objProductoAux->buscar(intval($datos["idProducto"]));
-    
-    
-
-    if ($obj_producto->hayStock($datos["idProducto"], $datos["ciCantidad"] )) {//valido si hay stock de ese producto
-        $objCompraItem->alta(['idcompraitem'=> null,
-        "idproducto"=> $objProductoAux,
-        "idcompra"=> $objCompraEstado->getObjCompra(),
-        "cicantidad"=> intval($datos["ciCantidad"])
+    if ($obj_producto->hayStock($datos["idProducto"], $datos["ciCantidad"])) {//valido si hay stock de ese producto
+        $objCompraItem->alta(['idcompraitem' => null,
+        "idproducto" => $objProductoAux,
+        "idcompra" => $objCompraEstado->getObjCompra(),
+        "cicantidad" => intval($datos["ciCantidad"])
         ]);
-
-
         $obj_producto->restarStock(intval($datos['idProducto']), $datos["ciCantidad"]);
-
-
-        echo json_encode(array('success'=>1));
-        
+        echo json_encode(array('success' => 1));
     } else {
-        echo json_encode(array('success'=>0));
+        echo json_encode(array('success' => 0));
     }
-    
-} else{//en caso de no encontrar ninguna compra estado iniciada creariamos una nueva compra
-    $obj_compra= new c_compra();
-    $obj_compra->crearNuevaCompra($idUsuario);
 
+} else {//en caso de no encontrar ninguna compra estado iniciada creariamos una nueva compra
+    $obj_compra = new c_compra();
+    $obj_compra->crearNuevaCompra($idUsuario);
     /* ahora una forma de buscar la ultima compra */
     //SELECT * FROM `compra` WHERE `idCompra` = (SELECT MAX(idCompra) FROM compra)
-
-    $ultimaCompraCreada= $obj_compra->buscarUltimaCompraCreada();
-
-
-    $idCompraCreada= $ultimaCompraCreada->getIdCompra();//obtengoo el id de la ultima compra creada
-
+    $ultimaCompraCreada = $obj_compra->buscarUltimaCompraCreada();
+    $idCompraCreada = $ultimaCompraCreada->getIdCompra();//obtengoo el id de la ultima compra creada
     /* ahora creada la compra le asigno el producto comprado */
-    $objCompraItemAux= new c_compraItem();
-
+    $objCompraItemAux = new c_compraItem();
     $objCompraItemAux->crearCompraItem($datos['idProducto'], $datos['ciCantidad'], $idCompraCreada);
-
-    
-
     /* me recontra olvide de agregar el nuevo compraEstado jajjasjasjasjajjassjaajsja*/
-
-    $objCompraEstado= new CompraEstado();
-
-    
-
+    $objCompraEstado = new CompraEstado();
     $objCompraEstado->insertar_Id_Ce($idCompraCreada, 1);
-
-    echo json_encode(array('success'=>1));
+    echo json_encode(array('success' => 1));
 }
 
 /*
@@ -96,12 +64,8 @@ if ($producto != null) {//en caso de no existir el producto
 
             if(is_array($productoitem) && $productoitem != null){
                 $productoitem= $productoitem[0];
-
                 $productoitem->setCiCantidad(intval($productoitem->getCiCantidad()) + intval($datos['ciCantidad']));
-
-
                 $productoitem= new CompraItem();
-
                 $param= [
                     'idCompraItem'=> $productoitem->getIdCompraItem(),
                     'idProducto'=> $compra_iniciada[0]->getIdCompra(),
@@ -114,75 +78,53 @@ if ($producto != null) {//en caso de no existir el producto
                 ])
             }
         }
-
-
-
     }
-
 }
 
 if($producto != null){
-	//aca se valida el stock de productos, no se donde mas se debe validar
-
-
-
-
-
-
-
+    //aca se valida el stock de productos, no se donde mas se debe validar
     //no es mio
-	if($producto[0]->getProcantstock() >= $datos['cantidad'] || $producto[0]->getProcantstock() <= $datos['cantidad']){
-		$obj_compra = new C_Compra();
-		$compra_borrador = $obj_compra->obtener_compra_borrador_de_usuario($sesion->getIdUser());
-	
-		if(is_array($compra_borrador) && $compra_borrador != null){
-			$obj_compra_item = new C_Compraitem();
-		
+    if($producto[0]->getProcantstock() >= $datos['cantidad'] || $producto[0]->getProcantstock() <= $datos['cantidad']){
+        $obj_compra = new C_Compra();
+        $compra_borrador = $obj_compra->obtener_compra_borrador_de_usuario($sesion->getIdUser());
+
+        if(is_array($compra_borrador) && $compra_borrador != null){
+            $obj_compra_item = new C_Compraitem();
+
             $productoitem = $obj_compra_item->buscar(['idproducto' => $datos['id_producto'],'idcompra' => $compra_borrador[0]->getIdcompra()]);
-            
-			if(is_array($productoitem) && $productoitem != null){
-				$productoitem = $productoitem[0];
-				$productoitem->setCicantidad($productoitem->getCicantidad()+$datos['cantidad']);
-				
-				$param = array(
-					'idcompraitem' => $productoitem->getIdcompraitem(),
-					'idproducto' =>  $datos['id_producto'],
-					'idcompra' => $compra_borrador[0]->getIdcompra(),
-					'cicantidad' =>$productoitem->getCicantidad()
-				);
-				$obj_compra_item->modificacion($param);
-			}else{
-				$obj_compra_item->alta(['idcompraitem'=>NULL, 'idproducto'=>$datos['id_producto'], 'idcompra'=>$compra_borrador[0]->getIdcompra(), 'cicantidad'=>$datos['cantidad']]);
-		    }
 
-		}else{
+            if(is_array($productoitem) && $productoitem != null){
+                $productoitem = $productoitem[0];
+                $productoitem->setCicantidad($productoitem->getCicantidad()+$datos['cantidad']);
+                $param = array(
+                    'idcompraitem' => $productoitem->getIdcompraitem(),
+                    'idproducto' =>  $datos['id_producto'],
+                    'idcompra' => $compra_borrador[0]->getIdcompra(),
+                    'cicantidad' =>$productoitem->getCicantidad()
+                );
+                $obj_compra_item->modificacion($param);
+            }else{
+                $obj_compra_item->alta(['idcompraitem'=>NULL, 'idproducto'=>$datos['id_producto'], 'idcompra'=>$compra_borrador[0]->getIdcompra(), 'cicantidad'=>$datos['cantidad']]);
+            }
 
-			$compra_borrado = new C_Compra();
+        }else{
+            $compra_borrado = new C_Compra();
             $compra_estado = new C_Compraestado();
-			$objCompraItem = new C_Compraitem();
-
+            $objCompraItem = new C_Compraitem();
             $param_compra = array(
                 'idcompra'  => NULL,
                 'cofecha'  => date('Y-m-d H:i:s'),
                 'idusuario'  => $sesion->getIdUser(),
             );
-
             $compra_borrado->alta($param_compra);
             $compra = $compra_borrado->buscar(['cofecha'=> $param_compra['cofecha'], 'idusuario'=>$param_compra['idusuario']]);
-     
             $compra_estado->alta(['idcompraestado'=>NULL, 'idcompra'=>$compra[0]->getIdcompra(), 'idcompraestadotipo'=>0, 'cefechaini'=>$param_compra['cofecha'], 'cefechafin'=>NULL]);
-
-			$objCompraItem->alta(['idcompraitem'=>NULL, 'idproducto'=>$datos['id_producto'], 'idcompra'=>$compra[0]->getIdcompra(), 'cicantidad'=>$datos['cantidad']]);
-		 
-		}
-	}
+            $objCompraItem->alta(['idcompraitem'=>NULL, 'idproducto'=>$datos['id_producto'], 'idcompra'=>$compra[0]->getIdcompra(), 'cicantidad'=>$datos['cantidad']]);
+        }
+    }
 }
-	
-
-
 
 /*
-
 function buscarComprasUsuario($idUsuario)
 {
     $objCompra = new C_Compra();
@@ -257,15 +199,3 @@ function crearCompra($idUsuario)
 }
 
 */
-
-
-
-
-
-
-
-?>
-
-<script>
-window.history.back();
-</script>

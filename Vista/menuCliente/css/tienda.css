@@ -25,14 +25,10 @@ button:active{
     transition: 300ms;
 }
 
-
-
-
 .caja_producto{
     height: 470px;
     align-content: center;
     text-align: center;
-
 }
 
 .id{
@@ -47,7 +43,6 @@ button:active{
 }
 
 .img_productos img{
-    
     max-width: 80%;
     max-height: 80%;
 }
@@ -61,7 +56,6 @@ body{
     background-image: url("img/fondo.jpg");
     background-size: auto;
     background-repeat: no-repeat;
-
 }
 
 /* HOLA COMO ESTAMOS */

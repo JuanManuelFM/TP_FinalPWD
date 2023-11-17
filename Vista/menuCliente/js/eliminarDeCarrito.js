@@ -1,5 +1,4 @@
-
-    $(document).on('submit','.Comprar', function (){
+$(document).on('submit', '.Comprar', function () {
     $('form').submit(function (e) {
         e.preventDefault();
         const forms = document.querySelectorAll('.need-validation');
@@ -10,7 +9,6 @@
                 data: $(this).serialize(),
                 success: function (response) {
                     var jsonData = JSON.parse(response);
-
                     // user is logged in successfully in the back-end
                     // let's redirect
                     if (jsonData.success == "1") {
@@ -18,7 +16,6 @@
                     }
                     else if (jsonData.success == "0") {
                         cargaFallida();
-                        
                     }
                 }
             });

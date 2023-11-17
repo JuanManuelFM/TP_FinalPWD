@@ -2,7 +2,6 @@
 include_once("../Menu/Cabecera.php");
 include_once("../../configuracion.php");
 
-
 /* ESTO DEL SESSION LO HACE MANU */
 $idUsuario = 1; // esto es provisional
 $controlCompraItem = new c_compraItem();
@@ -13,7 +12,6 @@ $controlCompraItem = new c_compraItem();
 			<img src="css/img/carrito.png" alt="carrito" width="60px" style="text-align: end;">
 		</button>
 	</div>
-
 
 	<table class="table table-hover table-bordered">
 		<thead class="">

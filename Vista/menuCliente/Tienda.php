@@ -1,6 +1,6 @@
 <?php
-include_once ("../../configuracion.php");
-include_once ("../menu/cabecera.php");
+include_once("../../configuracion.php");
+include_once("../menu/cabecera.php");
 if($objSession->getVista()!= null && $objSession->getVista() == 2){
 ?>
 <div class="col-12 col-sm-12 col-md-4 col-lg-3 container py-2">
@@ -42,7 +42,6 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
     <img src="css/img/carrito.png" alt="" srcset="" width="60px">
   </button>
 </div>
-
 <div class="container-fluid">
   <div class="row" id="tienda_productos">
     <?php crearTienda() ?>
@@ -57,7 +56,6 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
         <div class="container align-items-center " style="margin-top: 50px;">
           <table class="table table-hover table-bordered">
             <thead class="">
@@ -66,7 +64,6 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
                 <th colspan="3" scope="col">botones</td>
               </thead>
             </thead>
-
             <tbody>
               <tr class="table-primary">
                 <th scope="col">id_p</th>
@@ -76,7 +73,6 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
                 <th scope="col">cant</th>
                 <th scope="col">acciones_cli</th>
               </tr>
-
               <div>
                 <?php
                 $controlCompraItem->crearCarrito($idUsuario);
@@ -85,7 +81,6 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
             </tbody>
           </table>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
@@ -109,7 +104,6 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
             event.preventDefault()
             event.stopPropagation()
           }
-
           form.classList.add('was-validated')
         }, false)
       })

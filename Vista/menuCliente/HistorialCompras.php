@@ -5,7 +5,6 @@ include_once("../../configuracion.php");
 $idUsuarioAux = 1;
 
 /* aca van las mejores funciones creadas por el hombre */
-
 function buscarCompraItemsDeunaCompra($idCompra)
 {
   $idCompra = intval($idCompra);
@@ -13,7 +12,6 @@ function buscarCompraItemsDeunaCompra($idCompra)
   $arrayCompasItems = $objc_compraItem->buscar(["idcompra" => $idCompra]);
   return $arrayCompasItems;
 }
-
 
 function arrayComprasDeUnUsuario($idUsuario)
 {
@@ -58,9 +56,7 @@ function crearhistorialCompras($idUsuario)
 function crearCabecera($objCompra, $numero)
 {
   echo "
-  
 <div class=\"container align-items-center \" style=\"margin-top: 50px;\">
-
 <table class=\"table table-hover table-bordered\">
   <thead class=\"\">
     <thead class=\"table-dark\">
@@ -68,7 +64,6 @@ function crearCabecera($objCompra, $numero)
       <th colspan=\"3\" scope=\"col\"><button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#historial{$numero}\">HISTORIAL</button></td>
     </thead>
   </thead>
-  
   ";
 }
 
@@ -127,8 +122,8 @@ function crearModal($objCompra, $numero)
   echo $string;
 }
 ?>
-  <?php
-  crearhistorialCompras($idUsuarioAux);
-  ?>
+<?php
+crearhistorialCompras($idUsuarioAux);
+?>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">

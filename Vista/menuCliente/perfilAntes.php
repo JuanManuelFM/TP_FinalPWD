@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 include_once("../../configuracion.php");
 include_once("../menu/cabecera.php");
 $usuario = new c_usuario;
@@ -127,4 +127,4 @@ $usuario = $usuario->buscar($datos)[0];
 <script src="../js/md5.js"></script>
 <?php
 include_once("../menu/pie.php")
-?>
+?> -->

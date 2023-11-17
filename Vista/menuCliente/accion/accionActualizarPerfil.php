@@ -1,4 +1,5 @@
 <?php
+
 include_once("../../../configuracion.php");
 $datos = data_submitted();
 $controladorUsuario = new c_usuario();
@@ -35,12 +36,12 @@ if(array_key_exists('type', $datos) && $datos['type'] == "username") {
 }
 
 $datos['usDeshabilitado'] = $arrayUsuarios->getUsDeshabilitado();
-    
-    if ($controladorUsuario->modificacion(['idUsuario' => $datos['idUsuario'], 'usNombre' => $datos['usNombre'], 'usPass' => $datos['usPass'], 'usMail' => $datos['usMail'], 'usDeshabilitado' => $datos['usDeshabilitado']])) {
-        $objSesion->setUsNombre($datos['usNombre']);
-        $objSesion->setUsPass($datos['usPass']);
-        echo json_encode(array('success'=>1));
-    } else {
-        echo json_encode(array('success'=>0, 'message' => 'Ocurrió un error durante la modificación de la contraseña'));
-    }
+
+if ($controladorUsuario->modificacion(['idUsuario' => $datos['idUsuario'], 'usNombre' => $datos['usNombre'], 'usPass' => $datos['usPass'], 'usMail' => $datos['usMail'], 'usDeshabilitado' => $datos['usDeshabilitado']])) {
+    $objSesion->setUsNombre($datos['usNombre']);
+    $objSesion->setUsPass($datos['usPass']);
+    echo json_encode(array('success' => 1));
+} else {
+    echo json_encode(array('success' => 0, 'message' => 'Ocurrió un error durante la modificación de la contraseña'));
+}
 ?>

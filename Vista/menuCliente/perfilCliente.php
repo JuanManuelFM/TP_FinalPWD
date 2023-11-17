@@ -12,23 +12,7 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
         <div class="mb-3">
             <h5 class="text-black">Nombre de usuario: <?= $usuario->getUsNombre() ?> <button class="btn btn-secondary mt-2 col-3" name="boton_editarDatos" id="boton_editarDatos">Editar</button></h5>
             <h5 class="text-black">Email: <?= $usuario->getUsMail() ?> <button class="btn btn-secondary mt-2 col-3" name="boton_editarEmail" id="boton_editarEmail">Editar</button></h5>
-            <button class="btn btn-warning" id="boton_contra">Editar Contraseña</button>
-                <!-- <table class="table table-striped table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                    </tr>
-                <?php
-                    /* echo '<tr>';
-                    echo '<td>' . $usuario->getIdUsuario() . '</td>';
-                    echo '<td>' . $usuario->getUsNombre() . '</td>';
-                    echo '<td>' . $usuario->getUsMail() . '</td>';
-                    echo '</tr>'; */
-                ?>
-                </table>
-                <input class="btn btn-secondary mt-2 col-3" type="button" name="boton_editarDatos"  id="boton_editarDatos" value="EDITAR EMAIL">
-                <input class="btn btn-secondary mt-2 mx-3 col-5" type="button" name="boton_contra"  id="boton_contra" value="CAMBIAR MI CONTRASEÑA"> -->
+            <button class="btn btn-warning" id="boton_contra">Editar Contraseña</button
         </div>
     </div>
     <div class="container text-white mt-5 d-none" id='editarDatos'>
@@ -37,27 +21,26 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
             
         <form  id='form-editar' method="post" action="../accion/accionActualizarPerfil.php"class="needs-validation row text-white justify-content-center col-12" novalidate>
                 <table class="table table-striped table-dark">
-                    <tr>
-                         
+                    <tr> 
                         <th>Username:</th>
                         <th>Email:</th>
                     </tr>
- 
                     <tr>
-
-                    <td>
-                        <!-- <div class="col-lg-7 col-12"><?php echo $usuario->getUsNombre()?></div> -->
-                        <div class="col-lg-7 col-12">
-                            <input value = '<?php echo $usuario->getUsNombre()?>' type="text" style="width: 150px;" pattern="[a-zA-Z]+\s?[0-9]*" name="usNombre"></input>
-                        </div>
-                        <!-- <div class="col-lg-7 col-12 d-none">
-                            <input value = '<?php echo $usuario->getUsPass()?>' type="text" name="usPass"></input>
-                        </div> -->
-                    </td>
-                    <td><div class="col-lg-7 col-12 "><input value = '<?php echo $usuario->getUsMail()?>' type="email" style="width: 250px;" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.([a-z]{3})(\.[a-z]{2})*$" name="usMail" required></input><div class="invalid-feedback">
-                    Ingrese un email valido!</div>
-                    <div class="valid-feedback">
-                    Correcto!</div></div><div class="col-lg-7 col-12 d-none"><input value = '<?php echo $usuario->getIdUsuario()?>' type="number"  name="idUsuario" required></input></div></td>
+                        <td>
+                            <!-- <div class="col-lg-7 col-12"><?php echo $usuario->getUsNombre()?></div> -->
+                            <div class="col-lg-7 col-12">
+                                <input value = '<?php echo $usuario->getUsNombre()?>' type="text" style="width: 150px;" pattern="[a-zA-Z]+\s?[0-9]*" name="usNombre"></input>
+                            </div>
+                            <!-- <div class="col-lg-7 col-12 d-none">
+                                <input value = '<?php echo $usuario->getUsPass()?>' type="text" name="usPass"></input>
+                            </div> -->
+                        </td>
+                        <td>
+                            <div class="col-lg-7 col-12 "><input value = '<?php echo $usuario->getUsMail()?>' type="email" style="width: 250px;" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.([a-z]{3})(\.[a-z]{2})*$" name="usMail" required></input><div class="invalid-feedback">
+                            Ingrese un email valido!</div>
+                            <div class="valid-feedback">
+                            Correcto!</div></div><div class="col-lg-7 col-12 d-none"><input value = '<?php echo $usuario->getIdUsuario()?>' type="number"  name="idUsuario" required></input></div>
+                        </td>
                     </tr>
                 </table>
                 <input class="btn btn-success mt-2 col-3" type="submit" name="boton_enviar"  id="boton_enviar" value="GUARDAR">
@@ -65,6 +48,7 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
             </form>
         </div>
     </div>
+
     <div class="container-fluid col-md-9 text-white mt-5 d-none" id='editarContraseña'>
         <h2>Cambiar Contraseña:</h2>
         <div class="mb-3">
@@ -72,7 +56,7 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
             <input type="text" value="username" class="d-none" id="type">
                 <table class="table table-striped table-dark">
                     <tr>
-                        <th>Username</th>
+                        <th>Nombre de usuario</th>
                         <th>Ingrese contraseña actual</th>
                         <th>Ingrese contraseña nueva</th>
                         <th>Confirmar contraseña</th>
@@ -118,7 +102,7 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
                             <div class="invalid-password" style="display: none; color: red;">
                                 Las contraseñas no coinciden
                             </div>
-                            </div>
+                        </div>
                     </td>
                     </tr>
                 </table>

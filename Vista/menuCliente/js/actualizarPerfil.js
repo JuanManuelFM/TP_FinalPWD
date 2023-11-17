@@ -14,7 +14,6 @@ $(document).on('click', '#boton_cancelar', function() {
     document.getElementById('editarContraseña').classList.add('d-none');
 });
 
-
 $(document).ready(function () {
     $('#form-editar').submit(function (e) {
         e.preventDefault();
@@ -33,7 +32,7 @@ $(document).ready(function () {
                     }
                     else if (jsonData.success == "0") {
                         failure();
-                    } 
+                    }
                 }
             });
         } else {
@@ -43,35 +42,31 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('#form-contraseña').submit(function(e){
+    $('#form-contraseña').submit(function(e) {
         e.preventDefault();
-         const forms = document.querySelectorAll('.needs-validation');
+        const forms = document.querySelectorAll('.needs-validation');
         var passActual = document.getElementById('usPassVieja').value;
-            // passActual = hex_md5(passActual).toString();
+        // passActual = hex_md5(passActual).toString();
         var passSesion = document.getElementById('usPassSesion').value;
         // if(passActual == passSesion){ 
-                // var passhash = hex_md5(password).toString();
-            $.ajax({
-                type: "POST",
-                url: 'accion/accionActualizarPerfil.php',
-                data: $(this).serialize(),
-                success: function (response) {
-                    var jsonData = JSON.parse(response);
-                    // user is logged in successfully in the back-end
-                    // let's redirect
-                    if (jsonData.success == "1") {
-                        contraSucces();
-                        forms[1].reset();
-                    }
-                    else if (jsonData.success == "0") {
-                        contraFailure(jsonData.message);
-                    } 
+        // var passhash = hex_md5(password).toString();
+        $.ajax({
+            type: "POST",
+            url: 'accion/accionActualizarPerfil.php',
+            data: $(this).serialize(),
+            success: function (response) {
+                var jsonData = JSON.parse(response);
+                // user is logged in successfully in the back-end
+                // let's redirect
+                if (jsonData.success == "1") {
+                    contraSucces();
+                    forms[1].reset();
                 }
-            });
-    // }else{
-    //     failureContra();
-    //     forms[1].reset();
-    // }
+                else if (jsonData.success == "0") {
+                    contraFailure(jsonData.message);
+                }
+            }
+        });
     });
 });
 
@@ -110,7 +105,7 @@ function failureContra() {
     }, 1500);
 }
 
-function contraFailure(message){
+function contraFailure(message) {
     Swal.fire({
         icon: 'error',
         title: message,
@@ -122,7 +117,7 @@ function contraFailure(message){
     }, 1500);
 }
 
-function contraSucces(){
+function contraSucces() {
     Swal.fire({
         icon: 'success',
         title: 'Se ha modificado la contraseña!',
