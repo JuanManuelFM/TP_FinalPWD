@@ -1,12 +1,8 @@
 <?php
-include "../../configuracion.php";
-include_once("../menu/cabecera.php");
-//CAMBIO DE VISTA SI CAMBIA ROL
-/* if($objSession->getVista()!= null){
-  if ($objSession->getVista() == 2) {
-      $datos['usNombre'] = $objSession->getUsNombre();
-      $usuario = new c_usuario;
-      $usuario = $usuario->buscar($datos)[0]; */
+include_once ("../../configuracion.php");
+include_once ("../menu/cabecera.php");
+if($objSession->getVista()!= null && $objSession->getVista() == 2){
+
 ?>
 <div class="col-12 col-sm-12 col-md-4 col-lg-3 container py-2">
   <div class="caja_producto container col-9 col-sm-12 col-md-12 py-2">
@@ -126,12 +122,8 @@ include_once("../menu/cabecera.php");
 
 <!-- </html> -->
 <?php
-//CAMBIA VISTA SI CAMBIA ROL
-/*     }else{
-      header('Location: ../../index.php');
-  }
 }else{
   header('Location: ../../index.php');
-}  */
+} 
 include_once("../menu/pie.php") //holahhj
 ?>

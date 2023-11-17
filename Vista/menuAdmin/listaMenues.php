@@ -3,13 +3,14 @@ include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
 $objMenu = new C_menu();
 $arrayMenues = $objMenu->listar('');
-if ($arrayMenues != null) {
-    $cantMenues = count($arrayMenues);
-    // $rolesDesc = $objUsuarioRol->darDescripcionRoles($arrayUsuarios);
-} else {
-    $cantMenues = -1;
-}
-$i = 0;
+if($objSession->getVista()!= null && $objSession->getVista() == 1){
+    if ($arrayMenues != null) {
+        $cantMenues = count($arrayMenues);
+        // $rolesDesc = $objUsuarioRol->darDescripcionRoles($arrayUsuarios);
+    } else {
+        $cantMenues = -1;
+    }
+    $i = 0;
 ?>
 <style>
     body {
@@ -86,5 +87,8 @@ $i = 0;
 <script src="js/deshabilitarUsuario.js"></script>
 <script src="js/habilitarUsuario.js"></script>
 <?php
+}else{
+    header('Location: ../../index.php');
+} 
 include_once("../menu/pie.php");
 ?>

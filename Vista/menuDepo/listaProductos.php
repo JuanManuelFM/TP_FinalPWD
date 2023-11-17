@@ -3,12 +3,13 @@ include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
 $objProducto = new c_producto();
 $arrayProductos = $objProducto->buscar(null);
-if ($arrayProductos != null) {
-    $cantProductos = count($arrayProductos);
-} else {
-    $cantProductos = -1;
-}
-$i = 0;
+if($objSession->getVista()!= null && $objSession->getVista() == 3){
+    if ($arrayProductos != null) {
+        $cantProductos = count($arrayProductos);
+    } else {
+        $cantProductos = -1;
+    }
+    $i = 0;
 ?>
 <div class="container col-md-10">
 </div>
@@ -100,5 +101,8 @@ $i = 0;
 <script src="js/actualizarProducto.js"></script>
 <!-- </html> -->
 <?php
+}else{
+    header('Location: ../../index.php');
+} 
 include_once("../menu/pie.php");
 ?>

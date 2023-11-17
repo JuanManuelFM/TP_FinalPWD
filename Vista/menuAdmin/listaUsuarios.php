@@ -4,12 +4,13 @@ include_once("../../configuracion.php");
 $objControlUsuario = new c_usuario();
 $arrayUsuarios = $objControlUsuario->listar('');
 $objUsuarioRol = new c_usuarioRol();
-if ($arrayUsuarios != null) {
-    $cantUsuarios = count($arrayUsuarios);
-} else {
-    $cantUsuarios = -1;
-}
-$i = 0;
+if($objSession->getVista()!= null && $objSession->getVista() == 1){
+    if ($arrayUsuarios != null) {
+        $cantUsuarios = count($arrayUsuarios);
+    } else {
+        $cantUsuarios = -1;
+    }
+    $i = 0;
 ?>
 <style>
     body {
@@ -94,5 +95,8 @@ $i = 0;
 <script src="js/habilitarUsuario.js"></script>
 <script src="js/actualizarUsuario.js"></script>
 <?php
+}else{
+    header('Location: ../../index.php');
+} 
 include_once("../menu/pie.php")
 ?>

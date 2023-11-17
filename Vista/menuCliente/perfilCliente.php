@@ -1,11 +1,10 @@
 <?php
 include_once ("../../configuracion.php");
 include_once ("../menu/cabecera.php");
-if($objSession->getVista()!= null){
-    if ($objSession->getVista() == 2) {
-        $datos['usNombre'] = $objSession->getUsNombre();
-        $usuario = new c_usuario;
-        $usuario = $usuario->buscar($datos)[0];
+if($objSession->getVista()!= null && $objSession->getVista() == 2){
+    $datos['usNombre'] = $objSession->getUsNombre();
+    $usuario = new c_usuario;
+    $usuario = $usuario->buscar($datos)[0];
 ?>
 <div class="" style="margin-bottom: 15%">
 <div class="container mt-5 ">
@@ -133,9 +132,6 @@ if($objSession->getVista()!= null){
 <script src="js/actualizarPerfil.js"></script>
 <script src="../js/validarContraseñaIguales.js"></script>
 <?php
-    }else{
-        header('Location: ../../index.php');
-    }
 }else{
     header('Location: ../../index.php');
 } 
