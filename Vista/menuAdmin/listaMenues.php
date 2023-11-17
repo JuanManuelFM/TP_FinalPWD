@@ -3,15 +3,15 @@ include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
 $objMenu = new C_menu();
 $arrayMenues = $objMenu->listar('');
-if($objSession->getVista()!= null && $objSession->getVista() == 1){
+if($objSession->getVista() != null && $objSession->getVista() == 1) {
     if ($arrayMenues != null) {
         $cantMenues = count($arrayMenues);
-        // $rolesDesc = $objUsuarioRol->darDescripcionRoles($arrayUsuarios);
+    // $rolesDesc = $objUsuarioRol->darDescripcionRoles($arrayUsuarios);
     } else {
         $cantMenues = -1;
     }
     $i = 0;
-?>
+    ?>
 <style>
     body {
         background-color: #E47070;
@@ -34,21 +34,21 @@ if($objSession->getVista()!= null && $objSession->getVista() == 1){
             </thead>
             <tbody>
                 <?php
-                if (isset($arrayMenues)) { //isset se fija si la variable tiene algo
-                    foreach ($arrayMenues as $menu) {
-                        echo '<tr>';
-                        echo '<td>' . $menu->getMeNombre() . '</td>';
-                        echo '<td>' . $menu->getMeDescripcion() . '</td>';
-                        echo '<td>' . $menu->getMeDeshabilitado() . '</td>';
-                        echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Menu</button>';
-                        echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
-                        echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
-                        echo '</tr>';
+                    if (isset($arrayMenues)) { //isset se fija si la variable tiene algo
+                        foreach ($arrayMenues as $menu) {
+                            echo '<tr>';
+                            echo '<td>' . $menu->getMeNombre() . '</td>';
+                            echo '<td>' . $menu->getMeDescripcion() . '</td>';
+                            echo '<td>' . $menu->getMeDeshabilitado() . '</td>';
+                            echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Menu</button>';
+                            echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
+                            echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
+                            echo '</tr>';
+                        }
+                    } else {
+                        echo '<p class="lead"> Actualmente no hay menús registrados </p>';
                     }
-                } else {
-                    echo '<p class="lead"> Actualmente no hay menús registrados </p>';
-                }
-                ?>
+    ?>
             </tbody>
         </table>
     </div>
@@ -87,8 +87,8 @@ if($objSession->getVista()!= null && $objSession->getVista() == 1){
 <script src="js/deshabilitarUsuario.js"></script>
 <script src="js/habilitarUsuario.js"></script>
 <?php
-}else{
+} else {
     header('Location: ../../index.php');
-} 
+}
 include_once("../menu/pie.php");
 ?>

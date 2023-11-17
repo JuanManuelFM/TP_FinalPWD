@@ -1,30 +1,29 @@
-$(document).ready(function () {
-    $('form').submit(function (e) {
+$(document).ready(function() {
+    $('form').submit(function(e) {
         e.preventDefault();
         const forms = document.querySelectorAll('.needs-validation');
         if (forms[0].checkValidity()) {
-            if(document.getElementById('input_contrasena').value == document.getElementById('input_contrasenaRep').value){
-            var password = document.getElementById("input_contrasena").value;
-            var passhash = hex_md5(password).toString();
-            document.getElementById("input_contrasena").value = passhash;
-            $.ajax({
-                type: "POST",
-                url: 'accion/accionAjaxRegistro.php',
-                data: $(this).serialize(),
-                success: function (response) {
-                    var jsonData = JSON.parse(response);
-
-                    // user is logged in successfully in the back-end
-                    // let's redirect
-                    if (jsonData.success == "1") {
-                        registerSuccess();
+            if (document.getElementById('input_contrasena').value == document.getElementById('input_contrasenaRep').value) {
+                var password = document.getElementById("input_contrasena").value;
+                var passhash = hex_md5(password).toString();
+                document.getElementById("input_contrasena").value = passhash;
+                $.ajax({
+                    type: "POST",
+                    url: 'accion/accionAjaxRegistro.php',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        var jsonData = JSON.parse(response);
+                        // user is logged in successfully in the back-end
+                        // let's redirect
+                        if (jsonData.success == "1") {
+                            registerSuccess();
+                        }
+                        else if (jsonData.success == "0") {
+                            registerFailure();
+                        }
                     }
-                    else if (jsonData.success == "0") {
-                        registerFailure();
-                    }
-                }
-            });
-            } else { 
+                });
+            } else {
                 document.getElementsByClassName('invalid-password')[0].style = "display: block; color:red";
                 document.getElementsByClassName('invalid-password')[1].style = "display: block; color:red";
             }
@@ -34,7 +33,6 @@ $(document).ready(function () {
     });
 });
 
-
 function registerSuccess() {
     Swal.fire({
         icon: 'success',
@@ -42,7 +40,7 @@ function registerSuccess() {
         showConfirmButton: false,
         timer: 1500
     })
-    setTimeout(function () {
+    setTimeout(function() {
         window.location.href = "../paginasTienda/inicio.php";
     }, 1500);
 }
@@ -54,22 +52,10 @@ function registerFailure() {
         showConfirmButton: false,
         timer: 1500
     })
-    setTimeout(function () {
+    setTimeout(function() {
         recargarPagina();
     }, 1500);
 }
-
-/* function captchaFailure() {
-    Swal.fire({
-        icon: 'error',
-        title: 'El captcha no se realizo correctamente!',
-        showConfirmButton: false,
-        timer: 1500
-    })
-    setTimeout(function () {
-        recargarPagina();
-    }, 1500);
-} */
 
 function recargarPagina() {
     location.reload();

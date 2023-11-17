@@ -1,14 +1,10 @@
-$(document).ready(function () {
-    $('.editarBoton').on('click', function(){
-       
+$(document).ready(function() {
+    $('.editarBoton').on('click', function() {
         $('#exampleModal').modal('show');
-        
-            var tr = $(this).closest('tr');
-            var data = tr.children("td").map(function(){
+        var tr = $(this).closest('tr');
+        var data = tr.children("td").map(function() {
             return $(this).text();
         }).get();
-
-        console.log(data);
 
         $('#idUsuario').val(data[0]);
         $('#usNombre').val(data[1]);
@@ -18,8 +14,8 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $('form').submit(function (e) {
+$(document).ready(function() {
+    $('form').submit(function(e) {
         e.preventDefault();
         const forms = document.querySelectorAll('.needs-validation');
         if (forms[0].checkValidity()) {
@@ -52,7 +48,7 @@ function registerSuccess() {
         showConfirmButton: false,
         timer: 1500
     })
-    setTimeout(function () {
+    setTimeout(function() {
         recargarPagina();
     }, 1500);
 }
@@ -64,7 +60,7 @@ function registerFailure() {
         showConfirmButton: false,
         timer: 1500
     })
-    setTimeout(function () {
+    setTimeout(function() {
         recargarPagina();
     }, 1500);
 }

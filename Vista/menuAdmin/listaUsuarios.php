@@ -4,14 +4,14 @@ include_once("../../configuracion.php");
 $objControlUsuario = new c_usuario();
 $arrayUsuarios = $objControlUsuario->listar('');
 $objUsuarioRol = new c_usuarioRol();
-if($objSession->getVista()!= null && $objSession->getVista() == 1){
+if($objSession->getVista() != null && $objSession->getVista() == 1) {
     if ($arrayUsuarios != null) {
         $cantUsuarios = count($arrayUsuarios);
     } else {
         $cantUsuarios = -1;
     }
     $i = 0;
-?>
+    ?>
 <style>
     body {
         background-color: #E47070;
@@ -36,29 +36,29 @@ if($objSession->getVista()!= null && $objSession->getVista() == 1){
             </thead>
             <tbody>
                 <?php
-                if (isset($arrayUsuarios)) { //isset se fija si la variable tiene algo
-                    foreach ($arrayUsuarios as $usuario) {
-                        echo '<tr>';
-                        echo '<td>' . $usuario->getIdUsuario() . '</td>';
-                        echo '<td>' . $usuario->getUsNombre() . '</td>';
-                        echo '<td>' . $usuario->getUsMail() . '</td>';
-                        echo '<td>';
-                        $sepRoles = "-";
-                        $usRol = $objUsuarioRol->buscar(['idUsuario' => $usuario->getIdUsuario()]);
-                        foreach ($usRol as $rol) {
-                            $sepRoles = $rol->getObjRol()->getRolDescripcion() . "-";
+                    if (isset($arrayUsuarios)) { //isset se fija si la variable tiene algo
+                        foreach ($arrayUsuarios as $usuario) {
+                            echo '<tr>';
+                            echo '<td>' . $usuario->getIdUsuario() . '</td>';
+                            echo '<td>' . $usuario->getUsNombre() . '</td>';
+                            echo '<td>' . $usuario->getUsMail() . '</td>';
+                            echo '<td>';
+                            $sepRoles = "-";
+                            $usRol = $objUsuarioRol->buscar(['idUsuario' => $usuario->getIdUsuario()]);
+                            foreach ($usRol as $rol) {
+                                $sepRoles = $rol->getObjRol()->getRolDescripcion() . "-";
+                            }
+                            echo $sepRoles . '</td>';
+                            echo '<td>' . $usuario->getUsDeshabilitado() . '</td>';
+                            echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>';
+                            echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
+                            echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
+                            echo '</tr>';
                         }
-                        echo $sepRoles . '</td>';
-                        echo '<td>' . $usuario->getUsDeshabilitado() . '</td>';
-                        echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>';
-                        echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
-                        echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
-                        echo '</tr>';
+                    } else {
+                        echo '<p class="lead"> Actualmente no hay personas registradas </p>';
                     }
-                } else {
-                    echo '<p class="lead"> Actualmente no hay personas registradas </p>';
-                }
-                ?>
+    ?>
             </tbody>
         </table>
     </div>
@@ -95,8 +95,8 @@ if($objSession->getVista()!= null && $objSession->getVista() == 1){
 <script src="js/habilitarUsuario.js"></script>
 <script src="js/actualizarUsuario.js"></script>
 <?php
-}else{
+} else {
     header('Location: ../../index.php');
-} 
+}
 include_once("../menu/pie.php")
 ?>
