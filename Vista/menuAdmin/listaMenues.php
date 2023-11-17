@@ -1,18 +1,18 @@
 <?php
 include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
-$objMenu= new C_menu();
+$objMenu = new C_menu();
 $arrayMenues = $objMenu->listar('');
 if ($arrayMenues != null) {
     $cantMenues = count($arrayMenues);
-// $rolesDesc = $objUsuarioRol->darDescripcionRoles($arrayUsuarios);
+    // $rolesDesc = $objUsuarioRol->darDescripcionRoles($arrayUsuarios);
 } else {
     $cantMenues = -1;
 }
 $i = 0;
 ?>
 <style>
-    body{
+    body {
         background-color: #E47070;
     }
 </style>
@@ -32,13 +32,13 @@ $i = 0;
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 if (isset($arrayMenues)) { //isset se fija si la variable tiene algo
                     foreach ($arrayMenues as $menu) {
                         echo '<tr>';
-                        echo '<td>'. $menu->getMeNombre().'</td>';
-                        echo '<td>'. $menu->getMeDescripcion().'</td>';
-                        echo '<td>'. $menu->getMeDeshabilitado().'</td>';
+                        echo '<td>' . $menu->getMeNombre() . '</td>';
+                        echo '<td>' . $menu->getMeDescripcion() . '</td>';
+                        echo '<td>' . $menu->getMeDeshabilitado() . '</td>';
                         echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Menu</button>';
                         echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
                         echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
@@ -47,13 +47,13 @@ $i = 0;
                 } else {
                     echo '<p class="lead"> Actualmente no hay menús registrados </p>';
                 }
-?>
+                ?>
             </tbody>
         </table>
     </div>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role= "document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modifique datos menu</h5>
@@ -86,5 +86,5 @@ $i = 0;
 <script src="js/deshabilitarUsuario.js"></script>
 <script src="js/habilitarUsuario.js"></script>
 <?php
-    include_once("../menu/pie.php");
+include_once("../menu/pie.php");
 ?>

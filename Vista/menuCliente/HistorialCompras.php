@@ -8,81 +8,56 @@ $idUsuarioAux = 1;
 
 function buscarCompraItemsDeunaCompra($idCompra)
 {
-	$idCompra = intval($idCompra);
-    $objc_compraItem = new c_compraItem();
-
-    $arrayCompasItems = $objc_compraItem->buscar(["idcompra" => $idCompra]);
-
-    return $arrayCompasItems;
+  $idCompra = intval($idCompra);
+  $objc_compraItem = new c_compraItem();
+  $arrayCompasItems = $objc_compraItem->buscar(["idcompra" => $idCompra]);
+  return $arrayCompasItems;
 }
 
 
 function arrayComprasDeUnUsuario($idUsuario)
 {
-    $objC_Compra = new c_compra();
-    $idUsuario = intval($idUsuario);
-    //error
-    $arrayComprasDeUnUsuario = $objC_Compra->buscar(["idUsuario" => $idUsuario]);
-
-
-    return $arrayComprasDeUnUsuario;
+  $objC_Compra = new c_compra();
+  $idUsuario = intval($idUsuario);
+  //error
+  $arrayComprasDeUnUsuario = $objC_Compra->buscar(["idUsuario" => $idUsuario]);
+  return $arrayComprasDeUnUsuario;
 }
 
 function buscarCompraEstadosDeUnaCompra($idCompra)
 {
-    $idCompra = intval($idCompra);
-    $objC_compraEstado = new c_compraEstado();
-    $arrayComprasEstado = $objC_compraEstado->buscar(["idCompra" => $idCompra]);
-
-
-    return $arrayComprasEstado;
+  $idCompra = intval($idCompra);
+  $objC_compraEstado = new c_compraEstado();
+  $arrayComprasEstado = $objC_compraEstado->buscar(["idCompra" => $idCompra]);
+  return $arrayComprasEstado;
 }
 
 function crearhistorialCompras($idUsuario)
 {
-    $idUsuario = intval($idUsuario);
-
-
-    $comprasUsuario = arrayComprasDeUnUsuario($idUsuario);
-
-    $i = 1;
-    foreach ($comprasUsuario as $compra) {//recorro
-
-        crearCabecera($compra, $i);
-
-        $arrayComprtaItems = buscarCompraItemsDeunaCompra(intval($compra->getIdCompra()));
-
-        foreach ($arrayComprtaItems as $compraItem) {
-            crearCuerpo($compraItem);
-        }
-
-
-        crearModal($compra, $i);
-
-
-        $i++;
-
-
-
-        echo "
+  $idUsuario = intval($idUsuario);
+  $comprasUsuario = arrayComprasDeUnUsuario($idUsuario);
+  $i = 1;
+  foreach ($comprasUsuario as $compra) { //recorro
+    crearCabecera($compra, $i);
+    $arrayComprtaItems = buscarCompraItemsDeunaCompra(intval($compra->getIdCompra()));
+    foreach ($arrayComprtaItems as $compraItem) {
+      crearCuerpo($compraItem);
+    }
+    crearModal($compra, $i);
+    $i++;
+    echo "
     </tbody>
   </table>
   </div>
   ";
+  }
 
-    }
-
-    /* ahora busco los obj compra item para el cuerpo */
-
+  /* ahora busco los obj compra item para el cuerpo */
 }
 
 function crearCabecera($objCompra, $numero)
 {
-
-
-
-
-    echo "
+  echo "
   
 <div class=\"container align-items-center \" style=\"margin-top: 50px;\">
 
@@ -99,14 +74,14 @@ function crearCabecera($objCompra, $numero)
 
 function crearCuerpo($objCompraItem)
 {
-    $idProducto = $objCompraItem->getObjProducto()->getIdProducto();
-    $getProNombre = $objCompraItem->getObjProducto()->getProNombre();
-    $urlItem = $objCompraItem->getObjProducto()->getUrlItem();
-    $detalle = $objCompraItem->getObjProducto()->getProDetalle();
-    $cantida = $objCompraItem->getCiCantidad();
-    $precio = $objCompraItem->getObjProducto()->getProPrecio();
-    $a = 1;
-    echo "
+  $idProducto = $objCompraItem->getObjProducto()->getIdProducto();
+  $getProNombre = $objCompraItem->getObjProducto()->getProNombre();
+  $urlItem = $objCompraItem->getObjProducto()->getUrlItem();
+  $detalle = $objCompraItem->getObjProducto()->getProDetalle();
+  $cantida = $objCompraItem->getCiCantidad();
+  $precio = $objCompraItem->getObjProducto()->getProPrecio();
+  $a = 1;
+  echo "
 <tr>
   <td>{$objCompraItem->getObjProducto()->getIdProducto()}</td>
   <td>{$objCompraItem->getObjProducto()->getProNombre()}</td>
@@ -119,16 +94,12 @@ function crearCuerpo($objCompraItem)
 
 function crearModal($objCompra, $numero)
 {
-
-    $idCompra = $objCompra->getIdCompra();
-
-    $c_compra = new c_compraEstado();
-    $arrayCompraEstados = $c_compra->buscar(["idCompra" => $idCompra]);
-    $numero = intval($numero);
-
-    $string = "";
-
-    $string =  "
+  $idCompra = $objCompra->getIdCompra();
+  $c_compra = new c_compraEstado();
+  $arrayCompraEstados = $c_compra->buscar(["idCompra" => $idCompra]);
+  $numero = intval($numero);
+  $string = "";
+  $string =  "
 <table class=\"table table-hover table-bordered\">
   <thead>
     <th>estado</th>
@@ -136,62 +107,28 @@ function crearModal($objCompra, $numero)
     <th>fechaFinal</th>
   </thead>
   <tbody>
-  
   ";
-
-
-
-
-    foreach ($arrayCompraEstados as $compraEstados) {
-        //$compraEstados= new CompraEstado();
-
-
-        //$compraEstadoTipo= new CompraEstadoTipo;
-        //$compraEstados->getCeFechaFIN()
-        $string .= "
-  
+  foreach ($arrayCompraEstados as $compraEstados) {
+    //$compraEstados= new CompraEstado();
+    //$compraEstadoTipo= new CompraEstadoTipo;
+    //$compraEstados->getCeFechaFIN()
+    $string .= "
     <tr>
       <td>{$compraEstados->getObjCompraEstadoTipo()->getCetDescripcion()}</td>
       <td>{$compraEstados->getCeFechaINI()}</td>
       <td>{$compraEstados->getCeFechaFIN()}</td>      
     </tr>
   ";
-    }
-
-
-
-
-    $string .= "
+  }
+  $string .= "
 </tbody>
 </table>
 </div>";
-
-    echo $string;
-
-
+  echo $string;
 }
-
-
-
-
-
-
 ?>
-
-
-<html>
-<head>
-
-</head>
-
-<body>
-    
-
-<?php
-crearhistorialCompras($idUsuarioAux);
-?>
-
-</body>
+  <?php
+  crearhistorialCompras($idUsuarioAux);
+  ?>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-</html>

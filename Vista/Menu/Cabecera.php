@@ -6,13 +6,13 @@ $objSession = new c_session();
 $menuRoles = [];
 $arrayObjUsuario = $objSession->objUsuarioRegistrado();
 if ($arrayObjUsuario != null) {
-    $idRoles = $objSession->getRol($arrayObjUsuario[0]);
-    $objMenuRol = new c_menuRol();
-    $objRol = new c_rol();
-    $menuRoles = $objMenuRol->menuesByIdRol($objSession->getVista());
-    $objRoles = $objRol->obtenerObj($idRoles);
-    /* print_r($objRoles); */
-    //ERROR AL ACTUALIZAR USUARIO SE ROMPE PÁGINAS
+  $idRoles = $objSession->getRol($arrayObjUsuario[0]);
+  $objMenuRol = new c_menuRol();
+  $objRol = new c_rol();
+  $menuRoles = $objMenuRol->menuesByIdRol($objSession->getVista());
+  $objRoles = $objRol->obtenerObj($idRoles);
+  /* print_r($objRoles); */
+  //ERROR AL ACTUALIZAR USUARIO SE ROMPE PÁGINAS
 }
 ?>
 
@@ -51,40 +51,39 @@ if ($arrayObjUsuario != null) {
           <!-- aca va todo lo de cambio de menu -->
           <?php
           foreach ($menuRoles as $objMenu) {
-              if ($objMenu->getMeDeshabilitado() == null) {
-                  ?>
+            if ($objMenu->getMeDeshabilitado() == null) {
+          ?>
               <li><a href='<?php echo $objMenu->getMeDescripcion() ?>' role="button" class="px-2 mx-1 btn btn-danger btn-outline-light" style="font-family: 'Chivo', sans-serif;"><?php echo $objMenu->getMeNombre() ?></a></li>
           <?php
-              }
+            }
           }
-?>
+          ?>
         </ul>
         <!-- Aca chequeamos que tenga mas de 1 rol para mostrarle el dropdown -->
         <?php
         if ($objSession->activa()) {
-            if (count($objRoles) > 1) {
-                $objRolVista = $objRol->obtenerObj([$objSession->getVista()]);
-                ?>
+          if (count($objRoles) > 1) {
+            $objRolVista = $objRol->obtenerObj([$objSession->getVista()]);
+        ?>
             <div class="text-end d-flex align-items-center">
-                  <select class="form-select form-select-lg me-2" id="cambiar_vista" aria-label=".form-select-lg example">
-                    <option selected disabled><?php echo $objRolVista[0]->getRolDescripcion() ?></option>
-                    <?php
-                            foreach ($objRoles as $objRol) {
-                                ?>
-                      <option value="<?php echo $objRol->getIdRol() ?>"><?php echo $objRol->getRolDescripcion() ?></option>
-                  <?php
-                            }
-            }
-            ?>
-                  </select>
-                  <button type='button' class='px-2 mx-1 btn btn-danger btn-outline-light' style="font-family: 'Chivo', sans-serif;" onclick="cerrarSesion()">SALIR</button>
+              <select class="form-select form-select-lg me-2" id="cambiar_vista" aria-label=".form-select-lg example">
+                <option selected disabled><?php echo $objRolVista[0]->getRolDescripcion() ?></option>
                 <?php
-            } else {
-            ?>
-                  <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../login/login.php" style="font-family: 'Chivo', sans-serif;">INGRESAR</a>
+                foreach ($objRoles as $objRol) {
+                ?>
+                  <option value="<?php echo $objRol->getIdRol() ?>"><?php echo $objRol->getRolDescripcion() ?></option>
+              <?php
+                }
+              }
+              ?>
+              </select>
+              <button type='button' class='px-2 mx-1 btn btn-danger btn-outline-light' style="font-family: 'Chivo', sans-serif;" onclick="cerrarSesion()">SALIR</button>
             <?php
-            
-        }?>
+          } else {
+            ?>
+              <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../login/login.php" style="font-family: 'Chivo', sans-serif;">INGRESAR</a>
+            <?php
+          } ?>
             </div>
       </div>
     </div>

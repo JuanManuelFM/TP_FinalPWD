@@ -38,16 +38,12 @@ echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-togg
 <?php
 $(document).ready(function () {
     $('.editarBoton').on('click', function(){
-       
         $('#exampleModal').modal('show');
-        
             var tr = $(this).closest('tr');
             var data = tr.children("td").map(function(){
             return $(this).text();
         }).get();
-
         console.log(data);
-
         $('#idUsuario').val(data[0]);
         $('#usNombre').val(data[1]);
         /* $('#usPass').val(data[2]); */

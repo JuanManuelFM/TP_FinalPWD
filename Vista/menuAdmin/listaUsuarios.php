@@ -1,18 +1,18 @@
 <?php
 include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
-    $objControlUsuario = new c_usuario();
-    $arrayUsuarios = $objControlUsuario->listar('');
-    $objUsuarioRol = new c_usuarioRol();
-    if ($arrayUsuarios != null) {
-        $cantUsuarios = count($arrayUsuarios);
-    } else {
-        $cantUsuarios = -1;
-    }
-    $i = 0;
+$objControlUsuario = new c_usuario();
+$arrayUsuarios = $objControlUsuario->listar('');
+$objUsuarioRol = new c_usuarioRol();
+if ($arrayUsuarios != null) {
+    $cantUsuarios = count($arrayUsuarios);
+} else {
+    $cantUsuarios = -1;
+}
+$i = 0;
 ?>
 <style>
-    body{
+    body {
         background-color: #E47070;
     }
 </style>
@@ -38,17 +38,17 @@ include_once("../../configuracion.php");
                 if (isset($arrayUsuarios)) { //isset se fija si la variable tiene algo
                     foreach ($arrayUsuarios as $usuario) {
                         echo '<tr>';
-                        echo '<td>'. $usuario->getIdUsuario().'</td>';
-                        echo '<td>'. $usuario->getUsNombre().'</td>';
-                        echo '<td>'. $usuario->getUsMail().'</td>';
+                        echo '<td>' . $usuario->getIdUsuario() . '</td>';
+                        echo '<td>' . $usuario->getUsNombre() . '</td>';
+                        echo '<td>' . $usuario->getUsMail() . '</td>';
                         echo '<td>';
                         $sepRoles = "-";
-                        $usRol= $objUsuarioRol->buscar(['idUsuario' => $usuario->getIdUsuario()]);
+                        $usRol = $objUsuarioRol->buscar(['idUsuario' => $usuario->getIdUsuario()]);
                         foreach ($usRol as $rol) {
                             $sepRoles = $rol->getObjRol()->getRolDescripcion() . "-";
                         }
                         echo $sepRoles . '</td>';
-                        echo '<td>'. $usuario->getUsDeshabilitado().'</td>';
+                        echo '<td>' . $usuario->getUsDeshabilitado() . '</td>';
                         echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>';
                         echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
                         echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
@@ -57,13 +57,13 @@ include_once("../../configuracion.php");
                 } else {
                     echo '<p class="lead"> Actualmente no hay personas registradas </p>';
                 }
-                    ?>
+                ?>
             </tbody>
         </table>
     </div>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role= "document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modifique datos usuario</h5>
