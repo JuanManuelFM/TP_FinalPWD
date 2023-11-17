@@ -2,7 +2,6 @@
 include_once ("../../configuracion.php");
 include_once ("../menu/cabecera.php");
 if($objSession->getVista()!= null && $objSession->getVista() == 2){
-
 ?>
 <div class="col-12 col-sm-12 col-md-4 col-lg-3 container py-2">
   <div class="caja_producto container col-9 col-sm-12 col-md-12 py-2">

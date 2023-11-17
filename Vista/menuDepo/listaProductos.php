@@ -3,14 +3,14 @@ include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
 $objProducto = new c_producto();
 $arrayProductos = $objProducto->buscar(null);
-if($objSession->getVista()!= null && $objSession->getVista() == 3){
+if($objSession->getVista() != null && $objSession->getVista() == 3) {
     if ($arrayProductos != null) {
         $cantProductos = count($arrayProductos);
     } else {
         $cantProductos = -1;
     }
     $i = 0;
-?>
+    ?>
 <div class="container col-md-10">
 </div>
 <div class="container-fluid">
@@ -33,23 +33,23 @@ if($objSession->getVista()!= null && $objSession->getVista() == 3){
                 </thead>
                 <tbody>
                     <?php
-                    if (isset($arrayProductos)) { //isset se fija si la variable tiene algo
-                        foreach ($arrayProductos as $producto) {
-                            echo '<tr>';
-                            echo '<td><img src="' . $producto->getUrlItem() . '" alt="" height="100" width="100"></td>';
-                            echo '<td style= display:none;>' . $producto->getUrlItem() . '</td>';
-                            echo '<td>' . $producto->getIdProducto() . '</td>';
-                            echo '<td>' . $producto->getProNombre() . '</td>';
-                            echo '<td>' . $producto->getProDetalle() . '</td>';
-                            echo '<td>' . $producto->getProPrecio() . '</td>';
-                            echo '<td>' . $producto->getProCantStock() . '</td>';
-                            echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Producto</button>';
-                            echo '</tr>';
+                        if (isset($arrayProductos)) { //isset se fija si la variable tiene algo
+                            foreach ($arrayProductos as $producto) {
+                                echo '<tr>';
+                                echo '<td><img src="' . $producto->getUrlItem() . '" alt="" height="100" width="100"></td>';
+                                echo '<td style= display:none;>' . $producto->getUrlItem() . '</td>';
+                                echo '<td>' . $producto->getIdProducto() . '</td>';
+                                echo '<td>' . $producto->getProNombre() . '</td>';
+                                echo '<td>' . $producto->getProDetalle() . '</td>';
+                                echo '<td>' . $producto->getProPrecio() . '</td>';
+                                echo '<td>' . $producto->getProCantStock() . '</td>';
+                                echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Producto</button>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<p class="lead"> Actualmente no hay productos registrados </p>';
                         }
-                    } else {
-                        echo '<p class="lead"> Actualmente no hay productos registrados </p>';
-                    }
-                    ?>
+    ?>
         </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,8 +101,8 @@ if($objSession->getVista()!= null && $objSession->getVista() == 3){
 <script src="js/actualizarProducto.js"></script>
 <!-- </html> -->
 <?php
-}else{
+} else {
     header('Location: ../../index.php');
-} 
+}
 include_once("../menu/pie.php");
 ?>

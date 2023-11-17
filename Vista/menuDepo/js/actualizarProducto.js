@@ -1,15 +1,11 @@
 $(document).ready(function () {
-    $('.editarBoton').on('click', function(){
-       
+    $('.editarBoton').on('click', function () {
         $('#exampleModal').modal('show');
-        
-            var tr = $(this).closest('tr');
-            var data = tr.children("td").map(function(){
+        var tr = $(this).closest('tr');
+        var data = tr.children("td").map(function () {
             return $(this).text();
         }).get();
-
-        console.log(data);
-
+        
         $('#urlImagen').val(data[0]);
         $('#urlItem').val(data[1]);
         $('#idProducto').val(data[2]);

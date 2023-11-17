@@ -41,20 +41,20 @@ $(document).on('click', '.remove', function() {
         if (result.isConfirmed) {
             eliminar(fila);
         } else if (result.isDenied) {
-        
+
         }
-      })
-    
+    })
+
 });
 
-function eliminar(fila){
-    
-    var idProducto = fila[0].children[0].innerHTML;    
+function eliminar(fila) {
+
+    var idProducto = fila[0].children[0].innerHTML;
     $.ajax({
         type: "POST",
         url: 'accion/accionEliminarProducto.php',
-        data: {idProducto:idProducto},
-        
+        data: { idProducto: idProducto },
+
         success: function (respuesta) {
             var jsonData = JSON.parse(respuesta);
 
@@ -65,7 +65,7 @@ function eliminar(fila){
             }
             else if (jsonData.success == "0") {
                 registerFailure();
-            } 
+            }
         }
     });
 
