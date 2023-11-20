@@ -1,9 +1,8 @@
 <?php
+
 class c_usuario
 {
-
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
      * @return Usuario
      */
@@ -23,7 +22,7 @@ class c_usuario
         return $obj;
     }
 
-    private function cargarObjetoModificarPass($param)
+    /* private function cargarObjetoModificarPass($param)
     {
         $obj = null;
         if (array_key_exists('idUsuario', $param)) {
@@ -35,10 +34,9 @@ class c_usuario
             );
         }
         return $obj;
-    }
+    } */
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de
      * las variables instancias del objeto que son claves
      * @param array $param
      * @return Producto
@@ -53,22 +51,20 @@ class c_usuario
         return $obj;
     }
 
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
-
     private function seteadosCamposClaves($param)
     {
         $resp = false;
-        if (isset($param['idUsuario']))
+        if (isset($param['idUsuario'])) {
             $resp = true;
+        }
         return $resp;
     }
 
-    /**
-     * Inserta un objeto
+    /** Inserta un objeto
      * @param array $param
      */
     public function alta($param)
@@ -95,8 +91,7 @@ class c_usuario
         return $resp;
     }
 
-    /**
-     * permite eliminar un objeto 
+    /** permite eliminar un objeto
      * @param array $param
      * @return boolean
      */
@@ -124,8 +119,7 @@ class c_usuario
         return $resp;
     }
 
-    /**
-     * permite modificar un objeto
+    /** permite modificar un objeto
      * @param array $param
      * @return boolean
      */
@@ -141,7 +135,7 @@ class c_usuario
         return $resp;
     }
 
-    public function modificacionPass($param)
+    /* public function modificacionPass($param)
     {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
@@ -151,27 +145,26 @@ class c_usuario
             }
         }
         return $resp;
-    }
+    } */
 
-    /**
-     * permite buscar un objeto
+    /** permite buscar un objeto
      * @param array $param
      * @return array
      */
     public function buscar($param)
     {
         $where = " true ";
-        if ($param <> NULL) {
+        if ($param <> null) {
             $where .= '';
-            if (isset($param['idUsuario']))
+            if (isset($param['idUsuario'])) 
                 $where .= " and idUsuario ='" . $param['idUsuario'] . "'";
-            if (isset($param['usNombre']))
+            if (isset($param['usNombre'])) 
                 $where .= " and usNombre ='" . $param['usNombre'] . "'";
-            if (isset($param['usPass']))
+            if (isset($param['usPass'])) 
                 $where .= " and usPass ='" . $param['usPass'] . "'";
-            if (isset($param['usMail']))
+            if (isset($param['usMail'])) 
                 $where .= " and usMail ='" . $param['usMail'] . "'";
-            if (isset($param['usDeshabilitado']))
+            if (isset($param['usDeshabilitado'])) 
                 $where .= " and usDeshabilitado ='" . $param['usDeshabilitado'] . "'";
         }
         $obj = new Usuario();
@@ -183,17 +176,17 @@ class c_usuario
     public function buscarViejo($param)
     {
         $where = " true ";
-        if ($param <> NULL) {
+        if ($param <> null) {
             $where .= '';
-            if (isset($param['idUsuario']))
+            if (isset($param['idUsuario'])) 
                 $where .= " and idUsuario ='" . $param['idUsuario'] . "'";
-            if (isset($param['usNombre']))
+            if (isset($param['usNombre'])) 
                 $where .= " and usNombre ='" . $param['usNombre'] . "'";
-            if (isset($param['usPass']))
+            if (isset($param['usPass'])) 
                 $where .= " and usPass ='" . $param['usPass'] . "'";
-            if (isset($param['usMail']))
+            if (isset($param['usMail'])) 
                 $where .= " and usMail ='" . $param['usMail'] . "'";
-            if (isset($param['usDeshabilitado']))
+            if (isset($param['usDeshabilitado'])) 
                 $where .= " and usDeshabilitado ='" . $param['usDeshabilitado'] . "'";
         }
         $obj = new Usuario();

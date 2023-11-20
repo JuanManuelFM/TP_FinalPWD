@@ -1,7 +1,7 @@
 <?php
+
 class c_session
 {
-
     public function getIdUsuario()
     {
         if (isset($_SESSION['idUsuario'])) {
@@ -80,14 +80,6 @@ class c_session
             $this->cerrar();
         }
         return $resp;
-    } */
-
-    /* public function iniciar($nombreUsuario, $arrayRoles){
-        $_SESSION["nombreUsuario"] = $nombreUsuario;
-        $_SESSION["roles"] = $arrayRoles;
-        $objRol = new C_Rol();
-        $param = [2];
-        $_SESSION["vista"] = $objRol->obtenerObj($param)[0];
     } */
 
     public function iniciar($nombreUsuario, $roles)
@@ -176,14 +168,6 @@ class c_session
         return $idRoles;
     }
 
-    /* public function getRoles(){
-        $usuarioActual = $this->getUsuario();
-        $objUsuarioRol = new c_usuarioRol();
-        $param = ['idUsuario' => $usuarioActual->getIdUsuario()];
-        $listaRoles = $objUsuarioRol->buscar($param);
-        return $listaRoles;
-    } */
-
     public function tienePermisos()
     {
         $tienePermisos = false;
@@ -198,7 +182,7 @@ class c_session
         return $tienePermisos;
     }
 
-    function permisosMenu($data)
+    public function permisosMenu($data)
     {
         $resp = false;
         if (isset($data['idMenu'])) {
@@ -249,14 +233,6 @@ class c_session
         }
         return $res;
     } */
-
-    // public function getVista(){
-    //     $resp= null;
-    //     if($_SESSION['vista']!= null){
-    //         $resp= $_SESSION['vista'];
-    //     }
-    //     return $resp;
-    // }
 
     /** CERRAR **/
     public function cerrar()

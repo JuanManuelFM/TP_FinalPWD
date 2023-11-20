@@ -1,13 +1,14 @@
 <?php
 
-class c_usuarioRol{
+class c_usuarioRol
+{
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
      * @return object
      */
-
-    private function cargarObjeto($param){
+    private function cargarObjeto($param)
+    {
         $objUsuarioRol = null;
         $objRol = null;
         $objUsuario = null;
@@ -21,8 +22,8 @@ class c_usuarioRol{
         }
         return $objUsuarioRol;
     }
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto que son claves
+
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto que son claves
      * @param array $param
      * @return object
      */
@@ -37,25 +38,23 @@ class c_usuarioRol{
         return $objUsuarioRol;
     }
 
-
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
-
-    private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param)
+    {
         $resp = false;
         if (isset($param['idUsuario']) && isset($param['idRol']));
-            $resp = true;
+        $resp = true;
         return $resp;
     }
 
-    /**
-     *
+     /** 
      * @param array $param
      */
-    public function alta($param){
+    public function alta($param)
+    {
         $resp = false;
         $objUsuarioRol = $this->cargarObjeto($param);
         if ($objUsuarioRol != null) {
@@ -66,13 +65,12 @@ class c_usuarioRol{
         return $resp;
     }
 
-    /**
-     * permite eliminar un objeto
+    /** permite eliminar un objeto
      * @param array $param
      * @return boolean
      */
-
-    public function baja($param){
+    public function baja($param)
+    {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $objUsuarioRol = $this->cargarObjetoConClave($param);
@@ -83,12 +81,12 @@ class c_usuarioRol{
         return $resp;
     }
 
-    /**
-     * permite modificar un objeto
+    /** permite modificar un objeto
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $objUsuarioRol = $this->cargarObjeto($param);
@@ -99,16 +97,14 @@ class c_usuarioRol{
         return $resp;
     }
 
-
-    /**
-     * permite buscar un objeto
+    /** permite buscar un objeto
      * @param array $param
      * @return boolean
      */
-
-    public function buscar($param){
+    public function buscar($param)
+    {
         $where = " true ";
-        if ($param <> null){
+        if ($param <> null) {
             $where .= '';
             if (isset($param['idUsuario']))
                 $where .= " and idUsuario='" . $param['idUsuario'] . "'";
@@ -121,7 +117,8 @@ class c_usuarioRol{
     }
 
     //esta funcion me devuelve un array de descripcion de roles de un array de usuarios:
-    public function darDescripcionRoles($arrayUsuarios){
+    public function darDescripcionRoles($arrayUsuarios)
+    {
         $rolesUs = [];
         foreach ($arrayUsuarios as $us) {
             $param['idUsuario'] = $us->getIdUsuario();
@@ -139,7 +136,8 @@ class c_usuarioRol{
         return $rolesDesc;
     }
 
-    public function darIdRoles($arrayUsuarios){
+    public function darIdRoles($arrayUsuarios)
+    {
         $rolesUs = [];
         foreach ($arrayUsuarios as $us) {
             $param['idUsuario'] = $us->getIdUsuario();
