@@ -61,9 +61,6 @@ class Compra extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-
-        $objque= $this->getObjUsuario();
-        
         //Creo la consulta 
         $consulta = "INSERT INTO compra (idCompra, coFecha, idUsuario) VALUES ('".
         $this->getIdCompra()."',
@@ -85,8 +82,6 @@ class Compra extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-
-        $objque= $this->getObjUsuario();
         
         //Creo la consulta 
         $consulta = "INSERT INTO compra (idCompra, coFecha, idUsuario) VALUES (DEFAULT,DEFAULT,{$this->getObjUsuario()->getIdUsuario()})";
@@ -101,9 +96,6 @@ class Compra extends baseDatos{
         }
         return $resp;
     }
-
-
-    
 
     //MODIFICAR
     public function modificar()

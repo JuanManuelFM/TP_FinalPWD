@@ -3,7 +3,7 @@ include_once("../menu/cabecera.php");
 $metodo = data_submitted();
 $metodo['usPass'] = md5($metodo["usPass"]); //Encriptar en el cliente como en el registro
 $objUsuario = new c_usuario();
-if($objSession->validar($metodo)){
+if($objSession->validar($metodo)) {
     ?>
     <script>
         Swal.fire({
@@ -19,7 +19,7 @@ if($objSession->validar($metodo)){
         setTimeout("redireccionarPagina()", 1450);
     </script>
     <?php
-}else{
+} else {
     ?>
     <script>
         Swal.fire({

@@ -6,7 +6,6 @@ class Rol extends baseDatos
     private $rolDescripcion;
     private $mensajeFuncion;
     
-
     public function __construct()
     {
         $this->idRol = "";
@@ -46,7 +45,6 @@ class Rol extends baseDatos
     }
 
     //Funciones BD
-
     //INSERTAR
     public function insertar()
     {

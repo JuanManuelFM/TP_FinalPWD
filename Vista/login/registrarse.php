@@ -2,7 +2,7 @@
 include_once("../menu/cabecera.php");
 ?>
 <style>
-    body{
+    body {
         background-color: rgb(70, 70, 70);
     }
 </style>

@@ -3,28 +3,28 @@ $(document).ready(function () {
         e.preventDefault();
         const forms = document.querySelectorAll('.needs-validation');
         if (forms[0].checkValidity()) {
-            if(document.getElementById('usPassVisible').value == document.getElementById('usPassRep').value){
-            var password = document.getElementById("usPassVisible").value;
-            var passhash = hex_md5(password).toString();
-            document.getElementById("usPass").value = passhash;
-            $.ajax({
-                type: "POST",
-                url: 'accion/accionAjaxRegistro.php',
-                data: $(this).serialize(),
-                success: function (response) {
-                    var jsonData = JSON.parse(response);
+            if (document.getElementById('usPassVisible').value == document.getElementById('usPassRep').value) {
+                var password = document.getElementById("usPassVisible").value;
+                var passhash = hex_md5(password).toString();
+                document.getElementById("usPass").value = passhash;
+                $.ajax({
+                    type: "POST",
+                    url: 'accion/accionAjaxRegistro.php',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        var jsonData = JSON.parse(response);
 
-                    // user is logged in successfully in the back-end
-                    // let's redirect
-                    if (jsonData.success == "1") {
-                        registerSuccess();
+                        // user is logged in successfully in the back-end
+                        // let's redirect
+                        if (jsonData.success == "1") {
+                            registerSuccess();
+                        }
+                        else if (jsonData.success == "0") {
+                            registerFailure();
+                        }
                     }
-                    else if (jsonData.success == "0") {
-                        registerFailure();
-                    }
-                }
-            });
-            } else { 
+                });
+            } else {
                 document.getElementsByClassName('invalid-password')[0].style = "display: block; color:red";
                 document.getElementsByClassName('invalid-password')[1].style = "display: block; color:red";
             }
@@ -33,7 +33,6 @@ $(document).ready(function () {
         }
     });
 });
-
 
 function registerSuccess() {
     Swal.fire({

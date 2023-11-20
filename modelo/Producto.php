@@ -1,6 +1,7 @@
 <?php
 //TERMINADO (ver situación de modificar)
-class Producto extends baseDatos{
+class Producto extends baseDatos
+{
     private $idProducto;
     private $proNombre;
     private $proDetalle;
@@ -106,7 +107,6 @@ class Producto extends baseDatos{
     public function insertar(){
         $base = new baseDatos();
         $resp = false;
-        
         //Creo la consulta 
         $consulta = "INSERT INTO producto (idProducto, proNombre, proDetalle, proCantStock, proPrecio, urlItem) VALUES ('".$this->getIdProducto()."', 
         '".$this->getProNombre()."',

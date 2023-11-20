@@ -1,6 +1,5 @@
 <?php
 include_once("../../../configuracion.php");
-
 $datos = data_submitted();
 $objPersona = new c_usuario();
 $objUsuario = $objPersona->buscar(["usNombre" => $datos["usNombre"]]); // Busca el usuario con el nombre

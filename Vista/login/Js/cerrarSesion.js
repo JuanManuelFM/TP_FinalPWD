@@ -15,6 +15,7 @@ function cerrarSesion() {
         }
     });
 }
+
 function sesionCerrada(){
     Swal.fire({
         icon: 'success',

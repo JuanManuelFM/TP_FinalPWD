@@ -73,8 +73,6 @@ class CompraItem extends baseDatos{
         $objCompra= $this->getObjCompra();
         $objProducto= $this->getObjProducto();
        
-        
-    
         //Creo la consulta 
         $consulta = "INSERT INTO compraitem (idCompraItem, idProducto, idCompra, ciCantidad) VALUES (
          DEFAULT ,
@@ -99,7 +97,6 @@ class CompraItem extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-        
         $consulta = "UPDATE compraitem 
         SET idProducto= '".$this->getObjProducto()->getIdProducto()."',
         idCompra= '".$this->getObjCompra()->getIdCompra()."',

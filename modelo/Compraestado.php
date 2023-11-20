@@ -74,7 +74,6 @@ class CompraEstado extends baseDatos{
     }
 
     //Funciones BD
-
     //INSERTAR
     public function insertar(){
         $base = new baseDatos();
@@ -103,7 +102,6 @@ class CompraEstado extends baseDatos{
     public function insertar_Id_Ce($idCompra, $compraEstadoTipo){
         $base = new baseDatos();
         $resp = false;
-
         $compraEstadoTipo= intval($compraEstadoTipo);
         $idCompra= intval($idCompra);
         
@@ -131,7 +129,6 @@ class CompraEstado extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-        
         $consulta = "UPDATE compraestado
         SET 
         idCompra = '".$this->getObjCompra()->getIdCompra()."',
