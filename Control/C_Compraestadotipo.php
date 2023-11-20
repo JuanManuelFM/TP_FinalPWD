@@ -1,8 +1,8 @@
 <?php
-class c_compraEstadoTipo{
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
+class c_compraEstadoTipo
+{
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
      * @return Compraestadotipo
      */
@@ -20,8 +20,7 @@ class c_compraEstadoTipo{
         return $obj;
     }
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
      * @return Producto
@@ -36,12 +35,10 @@ class c_compraEstadoTipo{
         return $obj;
     }
 
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
-
     private function seteadosCamposClaves($param)
     {
         $resp = false;
@@ -50,8 +47,7 @@ class c_compraEstadoTipo{
         return $resp;
     }
 
-    /**
-     * Inserta un objeto
+    /** Inserta un objeto
      * @param array $param
      */
     public function alta($param)
@@ -65,8 +61,7 @@ class c_compraEstadoTipo{
         return $resp;
     }
 
-    /**
-     * permite eliminar un objeto 
+    /** permite eliminar un objeto 
      * @param array $param
      * @return boolean
      */
@@ -82,8 +77,7 @@ class c_compraEstadoTipo{
         return $resp;
     }
 
-    /**
-     * permite modificar un objeto
+    /** permite modificar un objeto
      * @param array $param
      * @return boolean
      */
@@ -98,8 +92,7 @@ class c_compraEstadoTipo{
         return $resp;
     }
 
-    /**
-     * permite buscar un objeto
+    /** permite buscar un objeto
      * @param array $param
      * @return array
      */
@@ -110,9 +103,9 @@ class c_compraEstadoTipo{
             if  (isset($param['idCompraEstadoTipo']))
                 $where.=" and idCompraEstadoTipo ='".$param['idCompraEstadoTipo']."'"; 
             if  (isset($param['cetDescripcion']))
-                    $where.=" and cetDescripcion ='".$param['cetDescripcion']."'";
+                $where.=" and cetDescripcion ='".$param['cetDescripcion']."'";
             if  (isset($param['cetDetalle']))
-                    $where.=" and cetDetalle ='".$param['cetDetalle']."'";
+                $where.=" and cetDetalle ='".$param['cetDetalle']."'";
         }
         $obj = new CompraEstadoTipo();
         $arreglo =  $obj->listar($where);  

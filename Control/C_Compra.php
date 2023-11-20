@@ -1,9 +1,8 @@
 <?php
+
 class c_compra
 {
-
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
      * @return Compra
      */
@@ -20,8 +19,7 @@ class c_compra
         return $obj;
     }
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
      * @return Producto
@@ -36,8 +34,7 @@ class c_compra
         return $obj;
     }
 
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
@@ -50,8 +47,7 @@ class c_compra
         return $resp;
     }
 
-    /**
-     * Inserta un objeto
+    /** Inserta un objeto
      * @param array $param
      */
     public function alta($param)
@@ -64,8 +60,7 @@ class c_compra
         return $resp;
     }
 
-    /**
-     * permite eliminar un objeto 
+    /** permite eliminar un objeto 
      * @param array $param
      * @return boolean
      */
@@ -81,8 +76,7 @@ class c_compra
         return $resp;
     }
 
-    /**
-     * permite modificar un objeto
+    /** permite modificar un objeto
      * @param array $param
      * @return boolean
      */
@@ -97,8 +91,7 @@ class c_compra
         return $resp;
     }
 
-    /**
-     * permite buscar un objeto
+    /** permite buscar un objeto
      * @param array $param
      * @return array
      */
@@ -109,13 +102,12 @@ class c_compra
             if  (isset($param['idCompra']))
                 $where.=" and idCompra ='".$param['idCompra']."'"; 
             if  (isset($param['coFecha']))
-                    $where.=" and coFecha ='".$param['cofecha']."'";
+                $where.=" and coFecha ='".$param['cofecha']."'";
             if  (isset($param['idUsuario']))
-                    $where.=" and idUsuario ='".$param['idUsuario']."'";
+                $where.=" and idUsuario ='".$param['idUsuario']."'";
         }
         $obj = new Compra();
         $arreglo =  $obj->listar($where);  
-        
         return $arreglo;
     }
 
@@ -142,7 +134,6 @@ class c_compra
 				}
 			}
 		}
-
         return $compra_borrador;
     }
 
@@ -154,23 +145,16 @@ class c_compra
     public function buscarComprasEstadosIniciadofalso($id_usuario){
         $obj_Ccompra= new c_compra();
         $compra_iniciada= null;
-
         $compras_usuario= $obj_Ccompra->buscar(['idUsuario'=>$id_usuario]);//le doy a buscar compra jeje
-
         if (is_array($compras_usuario) && $compras_usuario != null) {
             foreach($compras_usuario as $compra){
                 $estado = new c_compraEstado();
-
-
                 $estado_iniciado= $estado->buscar(['idCompra' => $compra->getIdCompra(), 'idCompraEstadoTipo'=> 0, 'ceFechaFin'=> NULL]);
-
                 if ($estado_iniciado != null && $estado_iniciado[0]->getCeFechaFIN()== '0000-00-00 00:00:00') {
                     $compra_iniciada= $obj_Ccompra->buscar(['idCompra'=>$compra->getIdCompra(),'idUsuario'=>$id_usuario]);
                 }
-
             }
         }
-
         return $compra_iniciada;
     }
 
@@ -179,14 +163,11 @@ class c_compra
     //NO SE QUE HACE LO DE ARRIBA O SI SE USA
     //NO SE QUE HACE LO DE ARRIBA O SI SE USA
 
-
-    /**
-     * crea una nueva compra con un id de usuario
+    /** crea una nueva compra con un id de usuario
      */
     public function crearNuevaCompra($idUsuario){
         $objUsuarioControl= new c_usuario();
         $objUsuario = $objUsuarioControl->buscarViejo(["idUsuario" => intval($idUsuario)]);
-        
         $objCompra= new Compra();
         $objCompra->cargar("DEFAULT","DEFAULT", $objUsuario[0]);
         $objCompra->nuevaCompra();
