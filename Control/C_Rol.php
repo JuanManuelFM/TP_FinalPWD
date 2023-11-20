@@ -1,6 +1,7 @@
 <?php
-class c_rol{
 
+class c_rol
+{
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objRoleto
      * @param array $param
@@ -18,8 +19,7 @@ class c_rol{
         return $objRol;
     }
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objRoleto que son claves
      * @param array $param
      * @return Producto
@@ -33,12 +33,10 @@ class c_rol{
         return $objRol;
     }
 
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
-
     private function seteadosCamposClaves($param){
         $resp = false;
         if (isset($param['idRol']))
@@ -46,8 +44,7 @@ class c_rol{
         return $resp;
     }
 
-    /**
-     * Inserta un objRoleto
+    /** Inserta un objRoleto
      * @param array $param
      */
     public function alta($param){
@@ -60,8 +57,7 @@ class c_rol{
         return $resp;
     }
 
-    /**
-     * permite eliminar un objRoleto 
+    /** permite eliminar un objRoleto 
      * @param array $param
      * @return boolean
      */
@@ -77,8 +73,7 @@ class c_rol{
         return $resp;
     }
 
-    /**
-     * permite modificar un objRoleto
+    /** permite modificar un objRoleto
      * @param array $param
      * @return boolean
      */
@@ -93,8 +88,7 @@ class c_rol{
         return $resp;
     }
 
-    /**
-     * permite buscar un objRoleto
+    /** permite buscar un objRoleto
      * @param array $param
      * @return array
      */
@@ -105,11 +99,10 @@ class c_rol{
             if  (isset($param['idRol']))
                 $where.=" and idRol ='".$param['idRol']."'"; 
             if  (isset($param['rolDescripcion']))
-                    $where.=" and rolDescripcion ='".$param['rolDescripcion']."'";
+                $where.=" and rolDescripcion ='".$param['rolDescripcion']."'";
         }
         $objRol = new Rol();
         $arreglo =  $objRol->listar($where);  
-        
         return $arreglo;
     }
 

@@ -1,15 +1,14 @@
 <?php
-class c_producto{
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
+class c_producto
+{
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
      * @return Producto
      */
     private function cargarObjeto($param){
         $objProducto = null;
         if (array_key_exists('idProducto', $param)) {
-
             $objProducto = new Producto();
             $objProducto->cargar(
                 $param['idProducto'],
@@ -23,8 +22,7 @@ class c_producto{
         return $objProducto;
     }
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
      * @return Producto
@@ -38,12 +36,10 @@ class c_producto{
         return $obj;
     }
 
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
-
     private function seteadosCamposClaves($param){
         $resp = false;
         if (isset($param['idProducto']))
@@ -51,8 +47,7 @@ class c_producto{
         return $resp;
     }
 
-    /**
-     * Inserta un objeto
+    /** Inserta un objeto
      * @param array $param
      */
     public function alta($param){
@@ -65,8 +60,7 @@ class c_producto{
         return $resp;
     }
 
-    /**
-     * permite eliminar un objeto 
+    /** permite eliminar un objeto 
      * @param array $param
      * @return boolean
      */
@@ -81,8 +75,7 @@ class c_producto{
         return $resp;
     }
 
-    /**
-     * permite modificar un objeto
+    /** permite modificar un objeto
      * @param array $param
      * @return boolean
      */
@@ -97,8 +90,7 @@ class c_producto{
         return $resp;
     }
 
-    /**
-     * permite buscar un objeto
+    /** permite buscar un objeto
      * @param array $param
      * @return array
      */
@@ -121,21 +113,16 @@ class c_producto{
         }
         $obj = new Producto();
         $arreglo =  $obj->listar($where);  
-        
         return $arreglo;
     }
 
     /* public function validar_stock($idProducto,$cantidad){
-
         if($idProducto == null || $idProducto == '' ){
             return false;
         }
-
         $obj = new Producto();
         //return un booleano
         return $obj->validar_stock($idProducto, $cantidad);
-
-
     } */
 
     // Da booleano si hay stock o no de productos
@@ -143,25 +130,18 @@ class c_producto{
         $objProducto= new Producto();
         $resp= false;
         $objProducto->buscar($idProducto);
-
         if (intval($objProducto->getProCantStock()) >= intval($pedido)) {
             $resp= true;
         }
-
         return $resp;
     }
 
     // Resta productos del total actual en tienda
     public function restarStock($idProducto, $cantidad){
         $objProducto= new Producto();
-        
-        
         $objProducto->buscar(intval($idProducto));
-
-
         $nuevaCantidad= intval($objProducto->getProCantStock()) - intval($cantidad);
         $objProducto->setProCantStock($nuevaCantidad);
-
         $objProducto->modificar();
     }
 }

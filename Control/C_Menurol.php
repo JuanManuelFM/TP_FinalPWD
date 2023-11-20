@@ -1,11 +1,12 @@
 <?php
+
 class c_menuRol{
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param
      * @return Menurol
      */
-    private function cargarObjeto($param){
+    private function cargarObjeto($param)
+    {
         $objMenuRol = null;
         $objMenu = null;
         $objRol = null;
@@ -20,13 +21,13 @@ class c_menuRol{
         return $objMenuRol;
     }
 
-    /**
-     * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
      * @return Producto
      */
-    private function cargarObjetoConClave($param){
+    private function cargarObjetoConClave($param)
+    {
         $obj = null;
         if (isset($param['idMenu'])) {
             $obj = new MenuRol();
@@ -35,21 +36,19 @@ class c_menuRol{
         return $obj;
     }
 
-    /**
-     * Corrobora que dentro del arreglo asociativo estan seteados los campos claves
+    /** Corrobora que dentro del arreglo asociativo estan seteados los campos claves
      * @param array $param
      * @return boolean
      */
-
-    private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param)
+    {
         $resp = false;
         if (isset($param['idMenu'], $param['idRol']))
             $resp = true;
         return $resp;
     }
 
-    /**
-     * Inserta un objeto
+    /** Inserta un objeto
      * @param array $param
      */
     public function alta($param)
@@ -62,8 +61,7 @@ class c_menuRol{
         return $resp;
     }
 
-    /**
-     * permite eliminar un objeto 
+    /** permite eliminar un objeto 
      * @param array $param
      * @return boolean
      */
@@ -79,12 +77,12 @@ class c_menuRol{
         return $resp;
     }
 
-    /**
-     * permite modificar un objeto
+    /** permite modificar un objeto
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $obj= $this->cargarObjeto($param);
@@ -100,13 +98,14 @@ class c_menuRol{
      * @param array $param
      * @return array
      */
-    public function buscar($param){//
-        $where = " true "; 
+    public function buscar($param)
+    {
+        $where = "true"; 
         if ($param<>NULL){
             if  (isset($param['idMenu']))
-                    $where.=" and idMenu ='".$param['idMenu']."'";
+                $where.=" and idMenu ='".$param['idMenu']."'";
             if  (isset($param['idRol']))
-                    $where.=" and idRol ='".$param['idRol']."'";
+                $where.=" and idRol ='".$param['idRol']."'";
         }
         $objMenuRol = new MenuRol();
         $arreglo =  $objMenuRol->listar($where);  
