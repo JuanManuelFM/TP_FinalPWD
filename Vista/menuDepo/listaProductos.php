@@ -10,7 +10,7 @@ if($objSession->getVista() != null && $objSession->getVista() == 3) {
         $cantProductos = -1;
     }
     $i = 0;
-    ?>
+?>
 <div class="container col-md-10">
 </div>
 <div class="container-fluid">

@@ -11,7 +11,7 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
         <h2>Mis Datos:</h2>
         <div class="mb-3">
             <h5 class="text-black">Nombre de usuario: <?= $usuario->getUsNombre() ?> <button class="btn btn-secondary mt-2 col-3" name="boton_editarDatos" id="boton_editarDatos">Editar</button></h5>
-            <h5 class="text-black">Email: <?= $usuario->getUsMail() ?> <button class="btn btn-secondary mt-2 col-3" name="boton_editarEmail" id="boton_editarEmail">Editar</button></h5>
+            <h5 class="text-black">Email: <?= $usuario->getUsMail() ?></h5>
             <button class="btn btn-warning" id="boton_contra">Editar Contraseña</button
         </div>
     </div>
@@ -20,9 +20,9 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
         <div class="mb-3">
             
         <form  id='form-editar' method="post" action="../accion/accionActualizarPerfil.php"class="needs-validation row text-white justify-content-center col-12" novalidate>
-                <table class="table table-striped table-dark">
+                <table class="table table-striped table-secondary">
                     <tr> 
-                        <th>Username:</th>
+                        <th>Nombre de usuario:</th>
                         <th>Email:</th>
                     </tr>
                     <tr>
@@ -54,7 +54,7 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
         <div class="mb-3">
         <form  id='form-contraseña' method="post" action="../Accion/accionActualizarPerfil.php"class="needs-validation row text-white justify-content-center col-12" novalidate>
             <input type="text" value="username" class="d-none" id="type">
-                <table class="table table-striped table-dark">
+                <table class="table table-striped table-secondary">
                     <tr>
                         <th>Nombre de usuario</th>
                         <th>Ingrese contraseña actual</th>
@@ -62,8 +62,8 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
                         <th>Confirmar contraseña</th>
                     </tr>
                     <tr>
-                    <td><div class="col-lg-7 col-12"><?php echo $usuario->getUsNombre()?></div>
-                        <div class="col-lg-7 col-12 d-none "><input  value = '<?php echo $usuario->getUsNombre()?>' type="text" name="usNombre"></input></div>
+                    <td ><div class="col-lg-7 col-12"><?php echo $usuario->getUsNombre()?></div>
+                        <div class="col-lg-7 col-12 d-none "><input value = '<?php echo $usuario->getUsNombre()?>' type="text" name="usNombre"></input></div>
                         <div class="col-lg-7 col-12 d-none"><input value = '<?php echo $usuario->getUsPass()?>' type="text" name="usPass"></input></div>
                     </td>
                     <td>
