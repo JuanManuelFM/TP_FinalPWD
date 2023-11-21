@@ -35,10 +35,10 @@ if ($arrayObjUsuario != null) {
   <script src="../login/js/cerrarSesion.js"></script>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-xl navbar-light  barra_navegacion" aria-label="Third navbar example" id="header" style="background-color: #4B515D">
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-xl navbar-light  barra_navegacion" aria-label="Third navbar example" id="header" style="background: linear-gradient(to right, pink, purple);">
     <div class="container-fluid">
-      <span class="navbar-brand card-title text-danger fw-bold text-center" style="font-family: 'Chivo', sans-serif; margin-top: 5px">MonsterPath</span>
+      <span class="navbar-brand card-title text-light fw-bold text-center" style="font-family: 'Chivo', sans-serif; margin-top: 5px">BeatWorld</span>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -46,14 +46,14 @@ if ($arrayObjUsuario != null) {
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
           <li class="nav-item">
-            <a class="px-2 mx-1 btn btn-danger  btn-outline-light" href="../paginaSegura/inicio.php" style="font-family: 'Chivo', sans-serif;">INICIO</a>
+            <a class="px-2 mx-1 btn btn-light  btn-outline-dark" href="../paginaSegura/inicio.php" style="font-family: 'Chivo', sans-serif;">INICIO</a>
           </li>
           <!-- aca va todo lo de cambio de menu -->
           <?php
           foreach ($menuRoles as $objMenu) {
             if ($objMenu->getMeDeshabilitado() == null) {
           ?>
-              <li><a href='<?php echo $objMenu->getMeDescripcion() ?>' role="button" class="px-2 mx-1 btn btn-danger btn-outline-light" style="font-family: 'Chivo', sans-serif;"><?php echo $objMenu->getMeNombre() ?></a></li>
+              <li><a href='<?php echo $objMenu->getMeDescripcion() ?>' role="button" class="px-2 mx-1 btn btn-light btn-outline-dark" style="font-family: 'Chivo', sans-serif;"><?php echo $objMenu->getMeNombre() ?></a></li>
           <?php
             }
           }
@@ -77,11 +77,11 @@ if ($arrayObjUsuario != null) {
               }
               ?>
               </select>
-              <button type='button' class='px-2 mx-1 btn btn-danger btn-outline-light' style="font-family: 'Chivo', sans-serif;" onclick="cerrarSesion()">SALIR</button>
+              <button type='button' class='px-2 mx-1 btn btn-light btn-outline-dark' style="font-family: 'Chivo', sans-serif;" onclick="cerrarSesion()">SALIR</button>
             <?php
           } else {
             ?>
-              <a class="px-2 mx-1 btn btn-danger btn-outline-light" href="../login/login.php" style="font-family: 'Chivo', sans-serif;">INGRESAR</a>
+              <a class="px-2 mx-1 btn btn-light btn-outline-dark" href="../login/login.php" style="font-family: 'Chivo', sans-serif;">INGRESAR</a>
             <?php
           } ?>
             </div>

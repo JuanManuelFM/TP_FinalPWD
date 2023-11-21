@@ -35,7 +35,7 @@ if($objSession->getVista() != null && $objSession->getVista() == 3) {
                     <?php
                         if (isset($arrayProductos)) { //isset se fija si la variable tiene algo
                             foreach ($arrayProductos as $producto) {
-                                echo '<tr>';
+                                echo '<tr class="align-middle text-center">';
                                 echo '<td><img src="' . $producto->getUrlItem() . '" alt="" height="100" width="100"></td>';
                                 echo '<td style= display:none;>' . $producto->getUrlItem() . '</td>';
                                 echo '<td>' . $producto->getIdProducto() . '</td>';

@@ -12,20 +12,20 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
     }
     $i = 0;
     ?>
-<style>
+<!-- <style>
     body {
         background-color: #E47070;
     }
-</style>
-<div class="container-fluid" style="margin-top: 30px;">
+</style> -->
+<div class="container-fluid" style="margin-top: 25px;">
     <div class="container col-md-12">
-        <h2>Lista de todos los usuarios</h2>
+        <h2>Lista de todos los menues</h2>
         <br>
         <table class="table table-hover">
             <thead class="text-center">
                 <tr>
                     <th>Nombre Menu</th>
-                    <th>Rol asociado</th>
+                    <!-- <th>Rol asociado</th> -->
                     <th>Estado actual</th>
                     <th>Editar</th>
                     <th>Deshabilitar</th>
@@ -36,9 +36,9 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
                 <?php
                     if (isset($arrayMenues)) { //isset se fija si la variable tiene algo
                         foreach ($arrayMenues as $menu) {
-                            echo '<tr>';
+                            echo '<tr class="align-middle text-center">';
                             echo '<td>' . $menu->getMeNombre() . '</td>';
-                            echo '<td>' . $menu->getMeDescripcion() . '</td>';
+                            // echo '<td>' . $menu->getMeDescripcion() . '</td>';
                             echo '<td>' . $menu->getMeDeshabilitado() . '</td>';
                             echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Menu</button>';
                             echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';

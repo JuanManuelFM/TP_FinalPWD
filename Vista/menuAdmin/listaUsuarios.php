@@ -12,12 +12,12 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
     }
     $i = 0;
     ?>
-<style>
+<!-- <style>
     body {
         background-color: #E47070;
     }
-</style>
-<div class="container-fluid" style="margin-top: 30px;">
+</style> -->
+<div class="container-fluid" style="margin-top: 25px;">
     <div class="container col-md-12">
         <h2>Lista de todos los usuarios</h2>
         <br>
@@ -38,7 +38,7 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
                 <?php
                     if (isset($arrayUsuarios)) { //isset se fija si la variable tiene algo
                         foreach ($arrayUsuarios as $usuario) {
-                            echo '<tr>';
+                            echo '<tr class="align-middle text-center">';
                             echo '<td>' . $usuario->getIdUsuario() . '</td>';
                             echo '<td>' . $usuario->getUsNombre() . '</td>';
                             echo '<td>' . $usuario->getUsMail() . '</td>';
