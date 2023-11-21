@@ -3,7 +3,7 @@ include_once("../menu/cabecera.php");
 ?>
 <style>
     body {
-        background-color: rgb(70, 70, 70);
+        background-color: purple;
     }
 </style>
 <div class="container-fluid" style="margin-top: 80px;">
