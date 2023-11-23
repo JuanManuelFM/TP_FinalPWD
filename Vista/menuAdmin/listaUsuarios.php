@@ -43,10 +43,14 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
                             echo '<td>' . $usuario->getUsNombre() . '</td>';
                             echo '<td>' . $usuario->getUsMail() . '</td>';
                             echo '<td>';
-                            $sepRoles = "-";
+                            $sepRoles = "";
                             $usRol = $objUsuarioRol->buscar(['idUsuario' => $usuario->getIdUsuario()]);
                             foreach ($usRol as $rol) {
-                                $sepRoles = $rol->getObjRol()->getRolDescripcion() . "-";
+                                //para no hacer salto de linea extra (if)
+                                $sepRoles .= $rol->getObjRol()->getRolDescripcion();
+                                if($rol->getObjRol()->getRolDescripcion() != end($usRol)->getObjRol()->getRolDescripcion()) {
+                                    $sepRoles .= '<br>';
+                                } 
                             }
                             echo $sepRoles . '</td>';
                             echo '<td>' . $usuario->getUsDeshabilitado() . '</td>';
@@ -71,9 +75,9 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
             </div>
             <div class="modal-body">
                 <form id="actualizaUsuario" action="accionActualizarUsuario.php" class="needs-validation" method="POST">
-                    <input type="hidden" name="idUsuario" id="idUsuario">
-                    <input type="hidden" name="usPass" id="usPass">
-                    <input type="hidden" name="usDeshabilitado" id="usDeshabilitado">
+                    <input type="hidden" name="idUsuario" id="idUsuario" value="<?= $usuario->getIdUsuario() ?>">
+                    <input type="hidden" name="usPass" id="usPass" value="<?= $usuario->getUsPass() ?>">
+                    <input type="hidden" name="usDeshabilitado" id="usDeshabilitado" value="<?= $usuario->getUsDeshabilitado() ?>">
                     <div class="form-group" style="margin-bottom: 10px ;">
                         <label>Nombre Usuario</label>
                         <input type="text" name="usNombre" id="usNombre" class="form-control" placeholder="Ingrese nuevo nombre de usuario" required>

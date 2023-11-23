@@ -3,15 +3,43 @@
 include_once("../../../configuracion.php");
 
 $datos = data_submitted();
-$idUsuario = 1; //manu completa esto
-
+//
 $obj_producto = new C_Producto();
 $sesion = new c_session();
 $obj_compra = new c_compra();
 $objCompraEstado = new c_compraEstado();
+//
+
+$usuarioController = new c_usuario();
+$compraEstadoController = new c_compraEstado();
+$compraController = new c_compra();
+$listadoDeCompras = $compraController->buscar(['idUsuario' => $datos['idUsuario']]);
+
+$ultimaCompra = null;
+
+if ($listadoDeCompras && count($listadoDeCompras) > 0) {
+    //La ultima posicion del listado es la última compra realizada
+    $ultimaCompra = $listadoDeCompras[count($listadoDeCompras) - 1];
+    //Verifico que la última compra esté iniciada y no en otro estado
+    if ($ultimaCompra->getCompraEstado()?->getObjCompraEstadoTipo()?->getIdCompraEstadoTipo() != 1) {
+        //Si la última compra ya pasó a otro estado difrente de iniciada, entonces se vuelve nula
+        $ultimaCompra = null;
+    }
+}
+
+//Si no hay una compra iniciada, inicia una nueva
+if (!$ultimaCompra) {
+    if ($ultimaCompra = $compraController->alta(['idCompra' => 'DEFAULT', 'idUsuario' => $usuarioController->buscar(['idUsuario' => $datos['idUsuario']])[0], 'coFecha' => ""])) {
+        $ultimaCompra = $compraController->buscar(['idUsuario' => $datos['idUsuario']])[0];
+    }
+} else {
+}
+print_r($ultimaCompra);
+exit;
 
 /* buscar ultima compra de un usuario */
-$array_compraEstadoIniciada = $objCompraEstado->buscarCompraEstadoNull($idUsuario);
+// $array_compraEstadoIniciada = $objCompraEstado->buscarCompraEstadoNull($idUsuario);
+
 if (count($array_compraEstadoIniciada) <> 0) {
     /* en caso e tener una compra iniciada significa que la compra se tiene que agregar a esa compra */
     $objCompraEstado = $array_compraEstadoIniciada[0];
@@ -20,25 +48,25 @@ if (count($array_compraEstadoIniciada) <> 0) {
     /* lo necesario para el alta */
     $objProductoAux = new Producto();
     $objProductoAux->buscar(intval($datos["idProducto"]));
-    if ($obj_producto->hayStock($datos["idProducto"], $datos["ciCantidad"])) {//valido si hay stock de ese producto
-        $objCompraItem->alta(['idcompraitem' => null,
-        "idproducto" => $objProductoAux,
-        "idcompra" => $objCompraEstado->getObjCompra(),
-        "cicantidad" => intval($datos["ciCantidad"])
+    if ($obj_producto->hayStock($datos["idProducto"], $datos["ciCantidad"])) { //valido si hay stock de ese producto
+        $objCompraItem->alta([
+            'idcompraitem' => null,
+            "idproducto" => $objProductoAux,
+            "idcompra" => $objCompraEstado->getObjCompra(),
+            "cicantidad" => intval($datos["ciCantidad"])
         ]);
         $obj_producto->restarStock(intval($datos['idProducto']), $datos["ciCantidad"]);
         echo json_encode(array('success' => 1));
     } else {
         echo json_encode(array('success' => 0));
     }
-
-} else {//en caso de no encontrar ninguna compra estado iniciada creariamos una nueva compra
+} else { //en caso de no encontrar ninguna compra estado iniciada creariamos una nueva compra
     $obj_compra = new c_compra();
     $obj_compra->crearNuevaCompra($idUsuario);
     /* ahora una forma de buscar la ultima compra */
     //SELECT * FROM `compra` WHERE `idCompra` = (SELECT MAX(idCompra) FROM compra)
     $ultimaCompraCreada = $obj_compra->buscarUltimaCompraCreada();
-    $idCompraCreada = $ultimaCompraCreada->getIdCompra();//obtengoo el id de la ultima compra creada
+    $idCompraCreada = $ultimaCompraCreada->getIdCompra(); //obtengoo el id de la ultima compra creada
     /* ahora creada la compra le asigno el producto comprado */
     $objCompraItemAux = new c_compraItem();
     $objCompraItemAux->crearCompraItem($datos['idProducto'], $datos['ciCantidad'], $idCompraCreada);

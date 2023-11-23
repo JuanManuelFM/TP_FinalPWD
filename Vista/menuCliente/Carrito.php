@@ -22,12 +22,12 @@ $controlCompraItem = new c_compraItem();
 		</thead>
 		<tbody>
 			<tr class="table-primary">
-				<th scope="col">id_p</th>
-				<th scope="col">nombre_producto</th>
-				<th scope="col">foto_prod</th>
-				<th scope="col">descripcion_prod</th>
-				<th scope="col">cant</th>
-				<th scope="col">acciones_cli</th>
+				<th scope="col">ID</th>
+				<th scope="col">Producto</th>
+				<th scope="col">Imagen</th>
+				<th scope="col">Descripcion</th>
+				<th scope="col">Cantidad</th>
+				<th scope="col">???</th>
 			</tr>
 			<div>
 				<?php

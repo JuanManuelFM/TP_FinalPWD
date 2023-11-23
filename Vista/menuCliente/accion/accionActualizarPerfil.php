@@ -7,7 +7,7 @@ $objUsuario = new Usuario();
 $objSesion = new c_session();
 
 $arrayUsuarios = $controladorUsuario->buscar(['idUsuario' => $datos['idUsuario']])[0];
-
+/* print_r($datos); */
 if(array_key_exists('type', $datos) && $datos['type'] == "username") {
     $datos['usPass'] = $arrayUsuarios->getUsPass();
 } else {

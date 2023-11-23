@@ -19,8 +19,7 @@ class c_compra
         return $obj;
     }
 
-    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
-     * las variables instancias del objeto que son claves
+    /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto que son claves
      * @param array $param
      * @return Producto
      */
@@ -54,7 +53,7 @@ class c_compra
     {
         $resp = false;
         $obj = $this->cargarObjeto($param);
-        if ($obj != null and $obj->insertar()) {
+        if ($obj != null && $obj->insertar()) {
             $resp = true;
         }
         return $resp;
@@ -80,7 +79,8 @@ class c_compra
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $obj= $this->cargarObjeto($param);
@@ -97,7 +97,7 @@ class c_compra
      */
     public function buscar($param){
         $where = " true "; 
-        if ($param<>NULL){
+        if ($param <> NULL){
             $where .= '';
             if  (isset($param['idCompra']))
                 $where.=" and idCompra ='".$param['idCompra']."'"; 

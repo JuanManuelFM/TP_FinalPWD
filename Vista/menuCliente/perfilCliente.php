@@ -28,14 +28,16 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
                         <td>
                             <!-- <div class="col-lg-7 col-12"><?php echo $usuario->getUsNombre()?></div> -->
                             <div class="col-lg-7 col-12">
-                                <input value = '<?php echo $usuario->getUsNombre()?>' type="text" style="width: 150px;" pattern="[a-zA-Z]+\s?[0-9]*" name="usNombre"></input>
+                                <input value = '<?php echo $usuario->getUsNombre()?>' type="text" style="width: 150px;" pattern="[a-zA-Z]+\s?[0-9]*" name="usNombre" value="usNombre"></input>
+                                <!-- Para que es el de abajo????????? -->
+                                <input name="type" value="username" class="d-none"/>
                             </div>
                             <!-- <div class="col-lg-7 col-12 d-none">
                                 <input value = '<?php echo $usuario->getUsPass()?>' type="text" name="usPass"></input>
                             </div> -->
                         </td>
                         <td>
-                            <div class="col-lg-7 col-12 "><input value = '<?php echo $usuario->getUsMail()?>' type="email" style="width: 250px;" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.([a-z]{3})(\.[a-z]{2})*$" name="usMail" required></input><div class="invalid-feedback">
+                            <div class="col-lg-7 col-12 "><input value = '<?php echo $usuario->getUsMail()?>' type="email" style="width: 250px;" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.([a-z]{3})(\.[a-z]{2})*$" name="usMail" value="usMail" required></input><div class="invalid-feedback">
                             Ingrese un email valido!</div>
                             <div class="valid-feedback">
                             Correcto!</div></div><div class="col-lg-7 col-12 d-none"><input value = '<?php echo $usuario->getIdUsuario()?>' type="number"  name="idUsuario" required></input></div>
@@ -83,10 +85,10 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
                                 Ingrese una contraseña!
                             </div>
                             <div class="invalid-password" style="display: none; color: red;">
-                            Las contraseñas no coinciden
+                                Las contraseñas no coinciden
                             </div>
                             <div class="valid-feedback password-correcta">
-                            Correcto!
+                                Correcto!
                             </div>
                         </div>
                         <div class="col-10 col-lg-7 d-none"><input type="password" class="form-control" name="usPass" id="usPass">

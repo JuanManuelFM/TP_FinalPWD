@@ -1,7 +1,7 @@
 $(document).on('submit', '.Comprar', function () {
     $('form').submit(function (e) {
         e.preventDefault();
-        const forms = document.querySelectorAll('.need-validation');
+        const forms = document.querySelectorAll('.needs-validation');
         if (forms[0].checkValidity()) {
             $.ajax({
                 type: "POST",
@@ -27,14 +27,14 @@ $(document).on('submit', '.Comprar', function () {
 
 function cargaExitosa() {
     alert("se ah añadido");
-    recargarPagina();
+    // recargarPagina();
 }
 
 function cargaFallida() {
     alert("no se pudo agregar");
-    recargarPagina();
+    // recargarPagina();
 }
 
-function recargarPagina() {
-    location.reload();
-}
+// function recargarPagina() {
+//     location.reload();
+// }

@@ -1,6 +1,6 @@
 
 <!-- Boton que activa modal -->
-echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>';
+<?='<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Usuario</button>'?>
 
 
 
@@ -35,12 +35,13 @@ echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-togg
 </div>
 
 <!-- JS que activa la actualización y responde a la llamada -->
-<?php
+
+<script>
 $(document).ready(function () {
     $('.editarBoton').on('click', function(){
         $('#exampleModal').modal('show');
-            var tr = $(this).closest('tr');
-            var data = tr.children("td").map(function(){
+        var tr = $(this).closest('tr');
+        var data = tr.children("td").map(function(){
             return $(this).text();
         }).get();
         console.log(data);
@@ -78,4 +79,4 @@ $(document).ready(function () {
         }
     });
 });
-?>
+</script>

@@ -13,15 +13,15 @@ $(document).ready(function () {
                     // let's redirect
                     if (jsonData.success == "1") {
                         cargaExitosa();
-                        recargarPagina();
+                        // recargarPagina();
                     }
                     else if (jsonData.success == "0") {
                         cargaFallida();
-                        recargarPagina();
+                        // recargarPagina();
                     }
                 }
             });
-            recargarPagina();
+            // recargarPagina();
         } else {
             forms[0].classList.add('was-validated');
         }

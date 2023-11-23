@@ -92,7 +92,7 @@ class c_rol
      * @param array $param
      * @return array
      */
-    public function buscar($param){
+    public function buscar($param = null){
         $where = " true "; 
         if ($param<>null){
             $where .= '';

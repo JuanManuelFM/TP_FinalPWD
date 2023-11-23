@@ -44,10 +44,10 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#form-contraseña').submit(function(e) {
         e.preventDefault();
-        const forms = document.querySelectorAll('.needs-validation');
-        var passActual = document.getElementById('usPassVieja').value;
+        //const forms = document.querySelectorAll('.needs-validation');
+        //var passActual = document.getElementById('usPassVieja').value;
         // passActual = hex_md5(passActual).toString();
-        var passSesion = document.getElementById('usPassSesion').value;
+        //var passSesion = document.getElementById('usPassSesion').value;
         // if(passActual == passSesion){ 
         // var passhash = hex_md5(password).toString();
         $.ajax({
@@ -73,7 +73,7 @@ $(document).ready(function () {
 function success() {
     Swal.fire({
         icon: 'success',
-        title: 'Tu email se ha modificado!',
+        title: 'Datos actualizados correctamente!',
         showConfirmButton: false,
         timer: 1500
     })

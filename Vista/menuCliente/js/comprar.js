@@ -27,14 +27,14 @@ $(document).ready(function () {
 
 function cargaExitosa() {
     alert("se ah añadido");
-    recargarPagina();
+    // recargarPagina();
 }
 
 function cargaFallida() {
     alert("no se pudo agregar");
-    recargarPagina();
+    // recargarPagina();
 }
 
-function recargarPagina() {
-    location.reload();
-}
+// function recargarPagina() {
+//     location.reload();
+// }
