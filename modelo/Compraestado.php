@@ -1,9 +1,10 @@
 <?php
-class CompraEstado extends baseDatos{
+class CompraEstado extends baseDatos
+{
     private $idCompraEstado;
     private $objCompra;
     private $objCompraEstadoTipo;
-    private $ceFechaINI; 
+    private $ceFechaINI;
     private $ceFechaFIN;
     private $mensajeFuncion;
 
@@ -25,67 +26,81 @@ class CompraEstado extends baseDatos{
         $this->setCeFechaFIN($ceFechaFIN);
     }
 
-    public function getIdCompraEstado(){
+    public function getIdCompraEstado()
+    {
         return $this->idCompraEstado;
     }
 
-    public function setIdCompraEstado($idCompraEstado){
+    public function setIdCompraEstado($idCompraEstado)
+    {
         $this->idCompraEstado = $idCompraEstado;
     }
 
-    public function getObjCompra(){
+    public function getObjCompra()
+    {
         return $this->objCompra;
     }
 
-    public function setObjCompra($objCompra){
+    public function setObjCompra($objCompra)
+    {
         $this->objCompra = $objCompra;
     }
 
-    public function getObjCompraEstadoTipo(){
+    public function getObjCompraEstadoTipo()
+    {
         return $this->objCompraEstadoTipo;
     }
 
-    public function setObjCompraEstadoTipo($objCompraEstadoTipo){
+    public function setObjCompraEstadoTipo($objCompraEstadoTipo)
+    {
         $this->objCompraEstadoTipo = $objCompraEstadoTipo;
     }
 
-    public function getCeFechaINI(){
+    public function getCeFechaINI()
+    {
         return $this->ceFechaINI;
     }
 
-    public function setCeFechaINI($ceFechaINI){
+    public function setCeFechaINI($ceFechaINI)
+    {
         $this->ceFechaINI = $ceFechaINI;
     }
 
-    public function getCeFechaFIN(){
+    public function getCeFechaFIN()
+    {
         return $this->ceFechaFIN;
     }
 
-    public function setCeFechaFIN($ceFechaFIN){
+    public function setCeFechaFIN($ceFechaFIN)
+    {
         $this->ceFechaFIN = $ceFechaFIN;
     }
 
-    public function getMensajeFuncion(){
+    public function getMensajeFuncion()
+    {
         return $this->mensajeFuncion;
     }
 
-    public function setMensajeFuncion($mensajeFuncion){
+    public function setMensajeFuncion($mensajeFuncion)
+    {
         $this->mensajeFuncion = $mensajeFuncion;
     }
 
     //Funciones BD
     //INSERTAR
-    public function insertar(){
+    public function insertar()
+    {
         $base = new baseDatos();
         $resp = false;
-        
+
         //Creo la consulta 
-        $consulta = "INSERT INTO compraestado (idCompraEstado, idCompra, idCompraEstadoTipo, ceFechaINI, ceFechaFIN) VALUES (
+        $consulta = "INSERT INTO compraestado (idCompraEstado, idCompra, idCompraEstadoTipo, ceFechaIni, ceFechaFin) VALUES (
         DEFAULT,
-        '".$this->getObjCompra()->getIdCompra()."',
-        '".$this->getObjCompraEstadoTipo()->getIdCompraEstadoTipo()."',
-        '".$this->getCeFechaINI()."',
-        '".$this->getCeFechaFIN()."')";
+        " . $this->getObjCompra()->getIdCompra() . ",
+        " . $this->getObjCompraEstadoTipo()->getIdCompraEstadoTipo() . ",
+        " . $this->getCeFechaINI() . ",
+        " . $this->getCeFechaFIN() . ");";
+
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -99,12 +114,13 @@ class CompraEstado extends baseDatos{
     }
 
     /* INSERTA UN COMPRA ESTADO TIPO INICIAL SOLO CON EL ID COMPRA  y el compra estado tipo que queramos*/
-    public function insertar_Id_Ce($idCompra, $compraEstadoTipo){
+    public function insertar_Id_Ce($idCompra, $compraEstadoTipo)
+    {
         $base = new baseDatos();
         $resp = false;
-        $compraEstadoTipo= intval($compraEstadoTipo);
-        $idCompra= intval($idCompra);
-        
+        $compraEstadoTipo = intval($compraEstadoTipo);
+        $idCompra = intval($idCompra);
+
         //Creo la consulta 
         $consulta = "INSERT INTO compraestado (idCompraEstado, idCompra, idCompraEstadoTipo, ceFechaINI, ceFechaFIN) VALUES (
         DEFAULT,
@@ -131,11 +147,11 @@ class CompraEstado extends baseDatos{
         $resp = false;
         $consulta = "UPDATE compraestado
         SET 
-        idCompra = '".$this->getObjCompra()->getIdCompra()."',
-        idCompraEstadoTipo = '".$this->getObjCompraEstadoTipo()->getIdCompraEstadoTipo()."',
-        ceFechaINI = '".$this->getCeFechaINI()."',
-        ceFechaFIN = ".$this->getCeFechaFIN()."
-        WHERE idCompraEstado = ".$this->getIdCompraEstado();
+        idCompra = '" . $this->getObjCompra()->getIdCompra() . "',
+        idCompraEstadoTipo = '" . $this->getObjCompraEstadoTipo()->getIdCompraEstadoTipo() . "',
+        ceFechaINI = '" . $this->getCeFechaINI() . "',
+        ceFechaFIN = " . $this->getCeFechaFIN() . "
+        WHERE idCompraEstado = " . $this->getIdCompraEstado();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -187,7 +203,7 @@ class CompraEstado extends baseDatos{
         if ($condicion != '') {
             $consultaCET = $consultaCET . ' WHERE ' . $condicion;
         }
-                    $consultaCET.=" ORDER BY idCompraEstado ";
+        $consultaCET .= " ORDER BY idCompraEstado ";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaCET)) {
                 $arrayCET = array();
@@ -206,7 +222,8 @@ class CompraEstado extends baseDatos{
     }
 
     //ELIMINAR
-    public function eliminar(){
+    public function eliminar()
+    {
         $base = new baseDatos();
         $resp = false;
         if ($base->Iniciar()) {
@@ -222,13 +239,13 @@ class CompraEstado extends baseDatos{
         return $resp;
     }
 
-    public function __toString(){
-        return ( 
+    public function __toString()
+    {
+        return (
             "ID compra estado: " . $this->getIdCompraEstado() .
             "\n ID de compra: " . $this->getObjCompra()->getIdCompra() .
             "\n ID CET: " . $this->getObjCompraEstadoTipo()->getIdCompraEstadoTipo() .
             "\n Fecha inicio compra: " . $this->getCeFechaINI() .
             "\n Fecha inicio compra: " . $this->getCeFechaFIN() . "\n");
     }
-    
 }

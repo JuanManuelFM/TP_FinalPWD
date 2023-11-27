@@ -122,11 +122,10 @@ CREATE TABLE IF NOT EXISTS `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `producto` (`pronombre`,`prodetalle`, `proCantStock`, `proPrecio`, `urlItem`) VALUES 
-('ESTACAS CAZAVAMPIROS', '35cm de pino tallado', 25, 500, 'https://i.pinimg.com/originals/3b/01/4a/3b014ad3e88e199cea4862a0efddca4b.jpg'),
-('BALAS DE PLATA', 'bendecidas', 100, 50, 'https://comunaslitoral.com.ar/06-2016/resize_1465306129.jpg'),
-('BALAS DE PLATA', 'bendecidas', 100, 50, 'https://comunaslitoral.com.ar/06-2016/resize_1465306129.jpg'),
-('EXORCISMO', 'viene un tipo a tu casa y te saca los fantasmas ', 20, 250,'https://pbs.twimg.com/media/EY1UeCdWkAEsJKX.jpg');
-
+('Parlante JBL', 'Color único', 10, 100000, 'https://d2r9epyceweg5n.cloudfront.net/stores/002/236/760/products/parlante-portatil-flip-5-bt-rojo_2166509_md1-47258b2c773a12be4816594622307967-640-0.jpg'),
+('Vinilo LOVER Taylor Swift', 'Ambas ediciones azul y rosa', 100, 20000, 'https://http2.mlstatic.com/D_NQ_NP_991248-MLA48589916416_122021-O.jpg'),
+('Auriculares Apple AirPods Max', 'Conexión única por Bluetooth', 30, 500000, 'https://dcdn.mitiendanube.com/stores/001/423/123/products/airpods-max-blanco1-bb648643b88bcef3c316112513611506-640-0.png'),
+('Ariana Grande POSITIONS CD Set', 'Set exclusivo con Polaroids, posters, la versión común y deluxe del disco', 20, 15000,'https://i.ebayimg.com/images/g/ckYAAOSwquxivNvo/s-l1200.jpg');
 -- --------------------------------------------------------
 
 --
@@ -173,12 +172,13 @@ INSERT INTO `menu` (`idMenu`, `meNombre`, `meDescripcion`, `idPadre`, `meDeshabi
 (3, 'Depósito', '#', NULL, NULL), */
 (1, 'Tienda', '../menuCliente/tienda.php', NULL, NULL),
 (2, 'Perfil', '../menuCliente/perfilCliente.php', NULL, NULL),
-(3, 'Historial mis compras', '../menuCliente/historialCompras.php', NULL, '0000-00-00 00:00:00'),
+(3, 'Historial mis compras', '../menuCliente/historialCompras.php', NULL, NULL),
 (4, 'Lista usuarios', '../menuAdmin/listaUsuarios.php', NULL, NULL),
 (5, 'Lista menus', '../menuAdmin/listaMenues.php', NULL, NULL),
 (6, 'Lista productos', '../menuDepo/listaProductos.php', NULL, NULL),
 (7, 'Cargar producto', '../menuDepo/cagarProducto.php', NULL, NULL),
 (8, 'Estado compras', '../menuDepo/estadoCompras.php', NULL, NULL);
+-- (9, 'Lista Roles', '../menuAdmin/listaRoles.php', NULL, NULL);
 
 
 -- --------------------------------------------------------

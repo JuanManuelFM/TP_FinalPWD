@@ -1,6 +1,7 @@
 <?php
 //TERMINADO (ver situación de modificar)
-class CompraItem extends baseDatos{
+class CompraItem extends baseDatos
+{
     private $idCompraItem;
     private $objProducto;
     private $objCompra;
@@ -23,62 +24,73 @@ class CompraItem extends baseDatos{
     }
 
     //Metodos de acceso
-    
-    public function getIdCompraItem(){
+
+    public function getIdCompraItem()
+    {
         return $this->idCompraItem;
     }
 
-    public function setIdCompraItem($idCompraItem){
+    public function setIdCompraItem($idCompraItem)
+    {
         $this->idCompraItem = $idCompraItem;
     }
 
-    public function getObjProducto(){
+    public function getObjProducto()
+    {
         return $this->objProducto;
     }
 
-    public function setObjProducto($objProducto){
+    public function setObjProducto($objProducto)
+    {
         $this->objProducto = $objProducto;
     }
 
-    public function getObjCompra(){
+    public function getObjCompra()
+    {
         return $this->objCompra;
     }
 
-    public function setObjCompra($objCompra){
+    public function setObjCompra($objCompra)
+    {
         $this->objCompra = $objCompra;
     }
 
-    public function getCiCantidad(){
+    public function getCiCantidad()
+    {
         return $this->ciCantidad;
     }
 
-    public function setCiCantidad($ciCantidad){
+    public function setCiCantidad($ciCantidad)
+    {
         $this->ciCantidad = $ciCantidad;
     }
 
-    public function getMensajeFuncion(){
+    public function getMensajeFuncion()
+    {
         return $this->mensajeFuncion;
     }
 
-    public function setMensajeFuncion($mensajeFuncion){
+    public function setMensajeFuncion($mensajeFuncion)
+    {
         $this->mensajeFuncion = $mensajeFuncion;
     }
 
     //Funciones BD
 
     //INSERTAR
-    public function insertar(){
+    public function insertar()
+    {
         $base = new baseDatos();
         $resp = false;
-        $objCompra= $this->getObjCompra();
-        $objProducto= $this->getObjProducto();
-       
+        $objCompra = $this->getObjCompra();
+        $objProducto = $this->getObjProducto();
+
         //Creo la consulta 
         $consulta = "INSERT INTO compraitem (idCompraItem, idProducto, idCompra, ciCantidad) VALUES (
          DEFAULT ,
-        '{$objProducto->getIdProducto()}',
-        '{$objCompra->getIdCompra()}',
-        '{$this->getCiCantidad()}')"; 
+        {$objProducto->getIdProducto()},
+        {$objCompra->getIdCompra()},
+        {$this->getCiCantidad()})";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -91,17 +103,17 @@ class CompraItem extends baseDatos{
         return $resp;
     }
 
-    
+
     //MODIFICAR
     public function modificar()
     {
         $base = new baseDatos();
         $resp = false;
         $consulta = "UPDATE compraitem 
-        SET idProducto= '".$this->getObjProducto()->getIdProducto()."',
-        idCompra= '".$this->getObjCompra()->getIdCompra()."',
-        ciCantidad= '".$this->getCiCantidad()."' 
-        WHERE idCompraItem= ". $this->getIdCompraItem();
+        SET idProducto= " . $this->getObjProducto()->getIdProducto() . ",
+        idCompra= " . $this->getObjCompra()->getIdCompra() . ",
+        ciCantidad= " . $this->getCiCantidad() . " 
+        WHERE idCompraItem= " . $this->getIdCompraItem();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -115,10 +127,11 @@ class CompraItem extends baseDatos{
     }
 
     //BUSCAR
-    public function buscar($idCompraItem){
+    public function buscar($idCompraItem)
+    {
         $base = new baseDatos();
         $resp = false;
-        $consulta = "SELECT * FROM compraitem WHERE idCompraItem =" .$idCompraItem;
+        $consulta = "SELECT * FROM compraitem WHERE idCompraItem =" . $idCompraItem;
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 if ($item = $base->Registro()) {
@@ -151,7 +164,7 @@ class CompraItem extends baseDatos{
         if ($condicion != '') {
             $consultaItem = $consultaItem . ' WHERE ' . $condicion;
         }
-        $consultaItem.=" ORDER BY idCompraItem ";
+        $consultaItem .= " ORDER BY idCompraItem ";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaItem)) {
                 $arrayCompraItem = array();
@@ -170,7 +183,8 @@ class CompraItem extends baseDatos{
     }
 
     //ELIMINAR
-    public function eliminar(){
+    public function eliminar()
+    {
         $base = new baseDatos();
         $resp = false;
         if ($base->Iniciar()) {
@@ -188,10 +202,10 @@ class CompraItem extends baseDatos{
 
     public function __toString()
     {
-        return(
+        return (
             "ID de compra-item: " . $this->getIdCompraItem() .
             "\n ID del producto: " . $this->getObjProducto()->getIdProducto() .
             "\n ID de compra: " . $this->getObjCompra()->getIdCompra() .
-            "\n Cantidad de compra-item: " . $this->getCiCantidad() . "\n" );
+            "\n Cantidad de compra-item: " . $this->getCiCantidad() . "\n");
     }
 }

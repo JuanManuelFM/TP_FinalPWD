@@ -1,6 +1,7 @@
 <?php
 //REVISAR COSAS
-class Compra extends baseDatos{
+class Compra extends baseDatos
+{
     private $idCompra;
     private $coFecha;
     private $objUsuario; //Delegación 
@@ -21,28 +22,34 @@ class Compra extends baseDatos{
     }
 
     //Metodos de acceso
-    
-    public function getIdCompra(){
+
+    public function getIdCompra()
+    {
         return $this->idCompra;
     }
 
-    public function setIdCompra($idCompra){
+    public function setIdCompra($idCompra)
+    {
         $this->idCompra = $idCompra;
     }
 
-    public function getCoFecha(){
+    public function getCoFecha()
+    {
         return $this->coFecha;
     }
 
-    public function setCoFecha($coFecha){
+    public function setCoFecha($coFecha)
+    {
         $this->coFecha = $coFecha;
     }
 
-    public function getObjUsuario(){
+    public function getObjUsuario()
+    {
         return $this->objUsuario;
     }
 
-    public function setObjUsuario($objUsuario){
+    public function setObjUsuario($objUsuario)
+    {
         $this->objUsuario = $objUsuario;
     }
 
@@ -62,10 +69,10 @@ class Compra extends baseDatos{
         $base = new baseDatos();
         $resp = false;
         //Creo la consulta 
-        $consulta = "INSERT INTO compra (idCompra, coFecha, idUsuario) VALUES ('".
-        $this->getIdCompra()."',
-        '".$this->getCoFecha()."',
-        '".$this->getObjUsuario()->getIdUsuario()."')";
+        $consulta = "INSERT INTO compra (idCompra, coFecha, idUsuario) VALUES (
+        DEFAULT,
+        DEFAULT,
+        '" . $this->getObjUsuario()->getIdUsuario() . "')";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -82,7 +89,7 @@ class Compra extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-        
+
         //Creo la consulta 
         $consulta = "INSERT INTO compra (idCompra, coFecha, idUsuario) VALUES (DEFAULT,DEFAULT,{$this->getObjUsuario()->getIdUsuario()})";
         if ($base->Iniciar()) {
@@ -104,9 +111,9 @@ class Compra extends baseDatos{
         $resp = false;
         //coFecha SE MODIFICA??????????? Está DEFAULT
         $consulta = "UPDATE compra SET 
-        coFecha= '".$this->getCoFecha()."',
-        idUsuario = ".$this->getObjUsuario()->getIdUsuario()."
-        WHERE idCompra= ". $this->getIdCompra();
+        coFecha= '" . $this->getCoFecha() . "',
+        idUsuario = " . $this->getObjUsuario()->getIdUsuario() . "
+        WHERE idCompra= " . $this->getIdCompra();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -154,7 +161,7 @@ class Compra extends baseDatos{
         if ($condicion != '') {
             $consultaCompra = $consultaCompra . ' WHERE ' . $condicion;
         }
-        $consultaCompra.=" ORDER BY idCompra ";
+        $consultaCompra .= " ORDER BY idCompra ";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaCompra)) {
                 $arrayCompra = array();
@@ -179,7 +186,7 @@ class Compra extends baseDatos{
         $base = new baseDatos();
         $resp = false;
         if ($base->Iniciar()) {
-            $consulta = "DELETE FROM compra WHERE idCompra = ". $this->getIdCompra();
+            $consulta = "DELETE FROM compra WHERE idCompra = " . $this->getIdCompra();
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
             } else {
@@ -199,7 +206,8 @@ class Compra extends baseDatos{
             "\n ID del usuario que realizó la compra: " . $this->getObjUsuario()->getIdUsuario() . "\n");
     }
 
-    public function ultimaCompra(){
+    public function ultimaCompra()
+    {
         $base = new baseDatos();
         $resp = false;
         if ($base->Iniciar()) {
@@ -223,4 +231,3 @@ class Compra extends baseDatos{
         return $resp;
     }
 }
-?>

@@ -6,16 +6,17 @@ class c_compraEstado
      * @param array $param
      * @return Compraestado
      */
-    private function cargarObjeto($param){
+    private function cargarObjeto($param)
+    {
         $obj = null;
-        if (array_key_exists('idCompraEstado', $param)){
+        if (array_key_exists('idCompraEstado', $param)) {
             $obj = new CompraEstado();
             $obj->cargar(
                 $param['idCompraEstado'],
                 $param['idCompra'],
-                $param['idCompraEstadotipo'],
-                $param['ceFechaINI'],
-                $param['cefechaFIN']
+                $param['idCompraEstadoTipo'],
+                $param['ceFechaIni'],
+                $param['ceFechaFin']
             );
         }
         return $obj;
@@ -40,7 +41,8 @@ class c_compraEstado
      * @param array $param
      * @return boolean
      */
-    private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param)
+    {
         $resp = false;
         if (isset($param['idCompraEstado']))
             $resp = true;
@@ -81,11 +83,12 @@ class c_compraEstado
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)){
-            $obj= $this->cargarObjeto($param);
-            if($obj!=null && $obj->modificar()){
+        if ($this->seteadosCamposClaves($param)) {
+            $obj = $this->cargarObjeto($param);
+            if ($obj != null && $obj->modificar()) {
                 $resp = true;
             }
         }
@@ -96,23 +99,24 @@ class c_compraEstado
      * @param array $param
      * @return array
      */
-    public function buscar($param){
-        $where = " true "; 
-        if ($param<>NULL){
+    public function buscar($param)
+    {
+        $where = " true ";
+        if ($param <> NULL) {
             $where .= '';
-            if  (isset($param['idCompraEstado']))
-                $where.=" and idCompraEstado ='".$param['idCompraEstado']."'"; 
-            if  (isset($param['idCompra']))
-                $where.=" and idCompra ='".$param['idCompra']."'";
-            if  (isset($param['idCompraEstadoTipo']))
-                $where.=" and idCompraEstadoTipo ='".$param['idCompraEstadoTipo']."'";
-            if  (isset($param['ceFechaIni']))
-                $where.=" and ceFechaIni ='".$param['ceFechaIni']."'";
-            if  (isset($param['ceFechaFin']))
-                $where.=" and ceFechaFin ='".$param['ceFechaFin']."'";
+            if (isset($param['idCompraEstado']))
+                $where .= " and idCompraEstado ='" . $param['idCompraEstado'] . "'";
+            if (isset($param['idCompra']))
+                $where .= " and idCompra ='" . $param['idCompra'] . "'";
+            if (isset($param['idCompraEstadoTipo']))
+                $where .= " and idCompraEstadoTipo ='" . $param['idCompraEstadoTipo'] . "'";
+            if (isset($param['ceFechaIni']))
+                $where .= " and ceFechaIni ='" . $param['ceFechaIni'] . "'";
+            if (isset($param['ceFechaFin']))
+                $where .= " and ceFechaFin ='" . $param['ceFechaFin'] . "'";
         }
         $obj = new Compraestado();
-        $arreglo =  $obj->listar($where);  
+        $arreglo =  $obj->listar($where);
         return $arreglo;
     }
 
@@ -121,18 +125,19 @@ class c_compraEstado
      * @param array $param
      * @return array
      */
-    public function buscarCompraEstadoNull($id){
-        $where = " true "; 
-            $where .= '';
-            $where.=" and ceFechaFin is null";
-            $where.= " and idCompraEstadoTipo= 1";
+    public function buscarCompraEstadoNull($id)
+    {
+        $where = " true ";
+        $where .= '';
+        $where .= " and ceFechaFin is null";
+        $where .= " and idCompraEstadoTipo= 1";
         $obj = new Compraestado();
-        $arreglo =  $obj->listar($where);//analizar esto      
+        $arreglo =  $obj->listar($where); //analizar esto      
         /* ahora que tengo el arreglo con las compra estados iniciadas filtro las que tengan el id compra que quiero*/
-        $arregloFiltrado= [];
+        $arregloFiltrado = [];
         if ($arreglo != null) {
             foreach ($arreglo as $compraEstado) {
-                $objCompraAux= $compraEstado->getObjCompra();
+                $objCompraAux = $compraEstado->getObjCompra();
                 if (intval($objCompraAux->getObjUsuario()->getIdUsuario()) == intval($id)) {
                     array_push($arregloFiltrado, $compraEstado);
                 }
@@ -141,7 +146,8 @@ class c_compraEstado
         return $arregloFiltrado;
     }
 
-    public function buscarCompraIniciada($arrayCompra){
+    public function buscarCompraIniciada($arrayCompra)
+    {
         $objCompraEstadoInciada = null;
         $i = 0;
         /* Busca en el array de compra si hay alguna que este con el estado "iniciada" (tipo 1) */
@@ -156,4 +162,4 @@ class c_compraEstado
         }
         return $objCompraEstadoInciada;
     }
-}   
+}

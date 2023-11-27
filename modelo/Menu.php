@@ -1,9 +1,10 @@
 <?php
-class Menu extends baseDatos{
+class Menu extends baseDatos
+{
     private $idMenu;
     private $meNombre;
     private $meDescripcion;
-    private $idPadre; 
+    private $idPadre;
     private $meDeshabilitado;
     private $mensajeFuncion;
 
@@ -25,51 +26,63 @@ class Menu extends baseDatos{
         $this->setMensajeFuncion($meDeshabilitado);
     }
 
-    public function getIdMenu(){
+    public function getIdMenu()
+    {
         return $this->idMenu;
     }
 
-    public function setIdMenu($idMenu){
+    public function setIdMenu($idMenu)
+    {
         $this->idMenu = $idMenu;
     }
 
-    public function getMeNombre(){
+    public function getMeNombre()
+    {
         return $this->meNombre;
     }
 
-    public function setMeNombre($meNombre){
+    public function setMeNombre($meNombre)
+    {
         $this->meNombre = $meNombre;
     }
 
-    public function getMeDescripcion(){
+    public function getMeDescripcion()
+    {
         return $this->meDescripcion;
     }
 
-    public function setMeDescripcion($meDescripcion){
+    public function setMeDescripcion($meDescripcion)
+    {
         $this->meDescripcion = $meDescripcion;
     }
 
-    public function getIdPadre(){
+    public function getIdPadre()
+    {
         return $this->idPadre;
     }
 
-    public function setIdPadre($idPadre){
+    public function setIdPadre($idPadre)
+    {
         $this->idPadre = $idPadre;
     }
 
-    public function getMeDeshabilitado(){
+    public function getMeDeshabilitado()
+    {
         return $this->meDeshabilitado;
     }
 
-    public function setMeDeshabilitado($meDeshabilitado){
+    public function setMeDeshabilitado($meDeshabilitado)
+    {
         $this->meDeshabilitado = $meDeshabilitado;
     }
 
-    public function getMensajeFuncion(){
+    public function getMensajeFuncion()
+    {
         return $this->mensajeFuncion;
     }
 
-    public function setMensajeFuncion($mensajeFuncion){
+    public function setMensajeFuncion($mensajeFuncion)
+    {
         $this->mensajeFuncion = $mensajeFuncion;
     }
 
@@ -80,14 +93,14 @@ class Menu extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-        
+
         //Creo la consulta 
         $consulta = "INSERT INTO menu (idMenu, meNombre, meDescripcion, idPadre, meDeshabilitado) VALUES (
-        '".$this->getIdMenu()."',
-         '".$this->getMeNombre()."',
-        '".$this->getMeDescripcion()."',
-        '".$this->getIdPadre()."',
-        '".$this->getMeDeshabilitado()."')"; 
+        '" . $this->getIdMenu() . "',
+         '" . $this->getMeNombre() . "',
+        '" . $this->getMeDescripcion() . "',
+        '" . $this->getIdPadre() . "',
+        '" . $this->getMeDeshabilitado() . "')";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;
@@ -105,14 +118,9 @@ class Menu extends baseDatos{
     {
         $base = new baseDatos();
         $resp = false;
-        
-        $consulta = "UPDATE menu 
-        SET
-        meNombre = '".$this->getMeNombre()."',
-        meDescripcion = '".$this->getMeDescripcion()."',
-        idPadre = '".$this->getIdPadre()."',
-        meDeshabilitado = ".$this->getMeDeshabilitado()."
-        WHERE idMenu = ". $this->getIdMenu();
+
+        $consulta = "UPDATE menu SET idPadre = NULL, meDeshabilitado = NULL, meNombre = '" . $this->getMeNombre() . "', meDescripcion = '" . $this->getMeDescripcion() . "' WHERE idMenu = " . $this->getIdMenu();
+
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $resp = true;

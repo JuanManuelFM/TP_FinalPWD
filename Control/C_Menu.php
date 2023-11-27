@@ -10,18 +10,12 @@ class c_menu
     {
         $obj = null;
         if (array_key_exists('idMenu', $param)) {
-            if (isset($param['idPadre'])) {
-                $padre = new Menu();
-                $padre->buscar(['idMenu' => $param['idPadre']]);
-            } else {
-                $padre = null;
-            }
             $obj = new Menu();
             $obj->cargar(
                 $param['idMenu'],
                 $param['meNombre'],
                 $param['meDescripcion'],
-                $padre,
+                null,
                 $param['meDeshabilitado'],
                 );
         }

@@ -6,15 +6,16 @@ class c_compraItem
      * @param array $param
      * @return Compraitem
      */
-    private function cargarObjeto($param){
+    private function cargarObjeto($param)
+    {
         $obj = null;
-        if (array_key_exists('idcompraitem', $param)) {
-            $obj = new Compraitem();
+        if (array_key_exists('idCompraItem', $param)) {
+            $obj = new CompraItem();
             $obj->cargar(
-                $param['idcompraitem'],
-                $param['idproducto'],
-                $param['idcompra'],
-                $param['cicantidad']
+                $param['idCompraItem'],
+                $param['idProducto'],
+                $param['idCompra'],
+                $param['ciCantidad']
             );
         }
         return $obj;
@@ -25,11 +26,12 @@ class c_compraItem
      * @param array $param
      * @return Producto
      */
-    private function cargarObjetoConClave($param){
+    private function cargarObjetoConClave($param)
+    {
         $obj = null;
-        if (isset($param['idcompraitem'])) {
-            $obj = new Compraitem();
-            $obj->cargar($param['idcompraitem'], null, null, null);
+        if (isset($param['idCompraItem'])) {
+            $obj = new CompraItem();
+            $obj->cargar($param['idCompraItem'], null, null, null);
         }
         return $obj;
     }
@@ -38,9 +40,10 @@ class c_compraItem
      * @param array $param
      * @return boolean
      */
-    private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param)
+    {
         $resp = false;
-        if (isset($param['idcompraitem']))
+        if (isset($param['idCompraItem']))
             $resp = true;
         return $resp;
     }
@@ -48,8 +51,10 @@ class c_compraItem
     /** Inserta un objeto
      * @param array $param
      */
-    public function alta($param){
+    public function alta($param)
+    {
         $resp = false;
+        $param['idCompraItem'] = null;
         $obj = $this->cargarObjeto($param);
         if ($obj != null and $obj->insertar()) {
             $resp = true;
@@ -61,7 +66,8 @@ class c_compraItem
      * @param array $param
      * @return boolean
      */
-    public function baja($param){
+    public function baja($param)
+    {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $obj = $this->cargarObjetoConClave($param);
@@ -76,11 +82,12 @@ class c_compraItem
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)){
-            $obj= $this->cargarObjeto($param);
-            if($obj!=null && $obj->modificar()){
+        if ($this->seteadosCamposClaves($param)) {
+            $obj = $this->cargarObjeto($param);
+            if ($obj != null && $obj->modificar()) {
                 $resp = true;
             }
         }
@@ -91,71 +98,75 @@ class c_compraItem
      * @param array $param
      * @return array
      */
-    public function buscar($param){
-        $where = " true "; 
-        if ($param<>NULL){
+    public function buscar($param)
+    {
+        $where = " true ";
+        if ($param <> NULL) {
             $where .= '';
-            if  (isset($param['idcompraitem']))
-                $where.=" and idcompraitem ='".$param['idcompraitem']."'"; 
-            if  (isset($param['idproducto']))
-                    $where.=" and idproducto ='".$param['idproducto']."'";
-            if  (isset($param['idcompra']))
-                    $where.=" and idcompra ='".$param['idcompra']."'";
-            if  (isset($param['cicantidad']))
-                    $where.=" and cicantidad ='".$param['cicantidad']."'";
+            if (isset($param['idCompraItem']))
+                $where .= " and idCompraItem ='" . $param['idCompraItem'] . "'";
+            if (isset($param['idProducto']))
+                $where .= " and idProducto ='" . $param['idProducto'] . "'";
+            if (isset($param['idCompra']))
+                $where .= " and idCompra ='" . $param['idCompra'] . "'";
+            if (isset($param['ciCantidad']))
+                $where .= " and ciCantidad ='" . $param['ciCantidad'] . "'";
         }
-        $obj = new Compraitem();
-        $arreglo =  $obj->listar($where);  
+        $obj = new CompraItem();
+        $arreglo =  $obj->listar($where);
         return $arreglo;
     }
 
     //Devuelve el carrito iniciado de un usuario
-    public function carritoIniciado($id){
-    /* inicializo variables */
-    $compraIniciada= [];
-    $objCompraEstado= new CompraEstado();
-    $objCompra= new Compra();
-    $objCompra->getIdCompra();
-    $compraEstados1= $objCompraEstado->listar("idCompraEstadoTipo = 1"); //Todos las compras estados iniciadas 1
-    if ($compraEstados1 != null) {
-        foreach ($compraEstados1 as $compraE) {
-            $compra= $compraE->getObjCompra();
-            if ($compraE->getObjCompra()->getObjUsuario()->getIdUsuario() == $id) {
-               array_push($compraIniciada, $compraE);
+    public function carritoIniciado($id)
+    {
+        /* inicializo variables */
+        $compraIniciada = [];
+        $objCompraEstado = new CompraEstado();
+        $objCompra = new Compra();
+        $objCompra->getIdCompra();
+        $compraEstados1 = $objCompraEstado->listar("idCompraEstadoTipo = 1"); //Todos las compras estados iniciadas 1
+        if ($compraEstados1 != null) {
+            foreach ($compraEstados1 as $compraE) {
+                $compra = $compraE->getObjCompra();
+                if ($compraE->getObjCompra()->getObjUsuario()->getIdUsuario() == $id) {
+                    array_push($compraIniciada, $compraE);
+                }
             }
         }
+        return $compraIniciada;
     }
-    return $compraIniciada;
-    }
-    
+
     // Crea carrito segun ID usuario
-    public function crearCarrito($id){
-        $carrito= $this->carritoIniciado($id);
-        $i= 0;
+    public function crearCarrito($id)
+    {
+        $carrito = $this->carritoIniciado($id);
+        $i = 0;
         foreach ($carrito as $item) {
-            $idCompra= $item->getObjCompra()->getIdCompra();
-            $compraItem= new CompraItem();
-            $arrayCompraItems= $compraItem->listar("idCompra = {$idCompra}");
-        foreach ($arrayCompraItems as $items) {
-          $this->formatoCarrito($items);
+            $idCompra = $item->getObjCompra()->getIdCompra();
+            $compraItem = new CompraItem();
+            $arrayCompraItems = $compraItem->listar("idCompra = {$idCompra}");
+            foreach ($arrayCompraItems as $items) {
+                $this->formatoCarrito($items);
+            }
+            $i++;
         }
-        $i++;
-      }
-      if ($i == 0) {
-      /* echo "
+        if ($i == 0) {
+            /* echo "
       <tr>
         <th scope=\"row\" colspan=\"6\">no hay nada en el carrito</th>
       </tr>"; */
-      }
+        }
     }
-    
+
     /** Crea el carrito con compraitem
      * @param obj $objCompraItem
      */
-    public function formatoCarrito($objCompraItem){
-      $objProducto= $objCompraItem->getObjProducto();
-      echo "
-      <tr>
+    public function formatoCarrito($objCompraItem)
+    {
+        $objProducto = $objCompraItem->getObjProducto();
+        echo "
+      <tr id=\"row{$objCompraItem->getIdCompraItem()}\">
         <th scope=\"row\">{$objProducto->getIdProducto()}</th>
         <td>{$objProducto->getProNombre()}</td>
         <td style=\"text-align:center;\">
@@ -164,27 +175,23 @@ class c_compraItem
         <td>{$objProducto->getProDetalle()}</td>
         <td>{$objCompraItem->getCiCantidad()}</td>
         <td>
-            <form action=\"accion/eliminarDeCarrito.php\" method=\"post\" class=\"form needs-validation eliminar\" novalidate>
+            <form class=\"form needs-validation Eliminar\" novalidate>
                 <input type=\"number\" name=\"idCompraItem\" value=\"{$objProducto->getIdProducto()}\" class=\"d-none\">
-                <input  onclick=\"enviarFormulario();\" type=\"submit\"  alt='eliminar' class=\"eliminarCss\" value=\"X\" >
+                <input type=\"submit\"  alt='eliminar' class=\"eliminarCss\" value=\"X\" >
             </form>
-            <button onclick=\"alert('eliminar');background-color= 'none'; \" style=\"border: none; background-color: transparent;\" alt='eliminar'><img width='24px' src=\"css/img/Skull-icon.png\" alt='eliminar'></button>
-            <button onclick=\"alert('eliminar');background-color= 'none'; \" style=\"border: none; background-color: transparent;\" alt='editar'><img width='24px' src=\"css/img/editar.png\" alt='editar'></button>
         </td>
       </tr>";
     }
 
-    public function crearCompraItem($idProducto, $cantidad, $idCompra){
-        $objCompraitem= new CompraItem();
-        $objCompraAux= new c_compra();
-        $objProducto= new c_producto();
+    public function crearCompraItem($idProducto, $cantidad, $idCompra)
+    {
+        $objCompraitem = new CompraItem();
+        $objCompraAux = new c_compra();
+        $objProducto = new c_producto();
         //posible error
-        $objProductoAux= $objProducto->buscar(["idProducto"=>$idProducto]);
-        $compraEncontrada= $objCompraAux->buscar(["idCompra"=> intval($idCompra)]);
+        $objProductoAux = $objProducto->buscar(["idProducto" => $idProducto]);
+        $compraEncontrada = $objCompraAux->buscar(["idCompra" => intval($idCompra)]);
         $objCompraitem->cargar(null, $objProductoAux[0], $compraEncontrada[0], intval($cantidad));
         $objCompraitem->insertar();
     }
 }
-?>
-
-
