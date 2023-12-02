@@ -237,7 +237,7 @@ class Usuario extends baseDatos{
         $resp = false;
         if ($base->Iniciar()) {
             // $consulta = "DELETE FROM usuario WHERE idUsuario = " . $this->getIdUsuario();
-            $consulta = "UPDATE usuario SET usDeshabilitado = DEFAULT WHERE idUsuario =" .$this->getIdUsuario();
+            $consulta = "UPDATE usuario SET usDeshabilitado = NULL WHERE idUsuario =" .$this->getIdUsuario();
             if ($base->Ejecutar($consulta)){
                 $resp = true;
             } else {

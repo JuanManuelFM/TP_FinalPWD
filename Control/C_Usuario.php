@@ -39,7 +39,7 @@ class c_usuario
     /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de
      * las variables instancias del objeto que son claves
      * @param array $param
-     * @return Producto
+     * @return Usuario
      */
     private function cargarObjetoConClave($param)
     {
@@ -110,6 +110,7 @@ class c_usuario
     public function noBaja($param)
     {
         $resp = false;
+        //ARREGLAR PARA QUE EL DESHABILITADO CAMBIE
         if ($this->seteadosCamposClaves($param)) {
             $obj = $this->cargarObjetoConClave($param);
             if ($obj != null and $obj->noEliminar()) {

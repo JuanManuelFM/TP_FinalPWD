@@ -43,15 +43,14 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
                     <?php
                     if (isset($arrayMenues)) { //isset se fija si la variable tiene algo
                         foreach ($arrayMenues as $menu) {
-                            echo '<tr class="align-middle text-center">';
-                            echo '<td id="nombreMenu' . $menu->getIdMenu() . '">' . $menu->getMeNombre() . '</td>';
-                            // echo '<td>' . $menu->getMeDescripcion() . '</td>';
-                            echo '<td id="deshabilitadoMenu' . $menu->getIdMenu() .  '">' . $menu->getMeDeshabilitado() . '</td>';
-                            echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#editModal' . $menu->getIdMenu() . '" data-bs-whatever="@mdo">Editar Menu</button>';
-                            echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
-                            echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>';
-                            echo '</tr>';
                     ?>
+                            <tr class="align-middle text-center">
+                                <td id="nombreMenu<?= $menu->getIdMenu() ?>"><?= $menu->getMeNombre() ?></td>
+                                <td id="deshabilitadoMenu<?= $menu->getIdMenu() ?>"><?= $menu->getMeDeshabilitado() ?></td>
+                                <td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal" data-bs-target="#editModal<?= $menu->getIdMenu() ?>" data-bs-whatever="@mdo">Editar Menu</button>
+                                <td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>
+                                <td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>
+                            </tr>
                             <div class="modal fade" id="editModal<?= $menu->getIdMenu() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -87,9 +86,9 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
             </table>
         </div>
     </div>
-    <script src="js/deshabilitarMenu.js"></script>
-    <script src="js/habilitarMenu.js"></script>
-    <script src="js/actualizarMenu.js"></script>
+    <script src="./js/deshabilitarMenu.js"></script>
+    <script src="./js/habilitarMenu.js"></script>
+    <!-- <script src="./js/actualizarMenu.js"></script> -->
 <?php
 } else {
     header('Location: ../../index.php');

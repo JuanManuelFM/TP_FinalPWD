@@ -191,8 +191,25 @@ class Menu extends baseDatos
         $base = new baseDatos();
         $resp = false;
         if ($base->Iniciar()) {
-            $consulta = "DELETE FROM menu WHERE idMenu = " . $this->getIdMenu();
+            $consulta = "UPDATE menu SET meDeshabilitado = CURRENT_TIMESTAMP WHERE idMenu =" .$this->getIdMenu();
             if ($base->Ejecutar($consulta)) {
+                $resp = true;
+            } else {
+                $this->setMensajeFuncion($base->getError());
+            }
+        } else {
+            $this->setMensajeFuncion($base->getError());
+        }
+        return $resp;
+    }
+
+    public function noEliminar(){
+        $base = new baseDatos();
+        $resp = false;
+        if ($base->Iniciar()) {
+            // $consulta = "DELETE FROM usuario WHERE idUsuario = " . $this->getIdUsuario();
+            $consulta = "UPDATE menu SET meDeshabilitado = NULL WHERE idMenu =" .$this->getIdMenu();
+            if ($base->Ejecutar($consulta)){
                 $resp = true;
             } else {
                 $this->setMensajeFuncion($base->getError());

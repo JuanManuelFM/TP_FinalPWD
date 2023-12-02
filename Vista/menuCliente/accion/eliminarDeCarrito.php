@@ -1,16 +1,17 @@
 <?php
+include_once("../../../configuracion.php");
 
-$datos = $_POST;
+$datos = data_submitted();
 
 $idCompraItem = $datos['idCompraItem'];
-$compraItemController = new c_compraItem();
+$compraItemController = new c_compraitem();
 
 
 $objCompraItem = $compraItemController->buscar(['idCompraItem' => $idCompraItem])[0];
 
 /* aca devuelvo el stock a producto jeje */
-$idProducto = $objCompraItem->getObjProducto()->getIdProducto();
-$cantidadActualCompraItem = $objCompraItem->getCiCantidad();//este es la cantidad actual de este compra item y la que se tiene que devolver
+$idProducto = $objCompraItem?->getObjProducto()?->getIdProducto();
+$cantidadActualCompraItem = $objCompraItem?->getCiCantidad();//este es la cantidad actual de este compra item y la que se tiene que devolver
 
 
 /*ahora le sumo la cantidad al producto */

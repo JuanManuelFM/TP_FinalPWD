@@ -1,8 +1,8 @@
 <?php
 include_once("../menu/cabecera.php");
 include_once("../../configuracion.php");
-/* $objRol = new c_menuRol();
-$arrayRoles = $objRol->listar(''); */
+$objRol = new c_rol();
+$arrayRoles = $objRol->buscar(); 
 if ($objSession->getVista() != null && $objSession->getVista() == 1) {
     if ($arrayRoles != null) {
         $cantRoles = count($arrayRoles);

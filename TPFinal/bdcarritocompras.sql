@@ -125,7 +125,9 @@ INSERT INTO `producto` (`pronombre`,`prodetalle`, `proCantStock`, `proPrecio`, `
 ('Parlante JBL', 'Color único', 10, 100000, 'https://d2r9epyceweg5n.cloudfront.net/stores/002/236/760/products/parlante-portatil-flip-5-bt-rojo_2166509_md1-47258b2c773a12be4816594622307967-640-0.jpg'),
 ('Vinilo LOVER Taylor Swift', 'Ambas ediciones azul y rosa', 100, 20000, 'https://http2.mlstatic.com/D_NQ_NP_991248-MLA48589916416_122021-O.jpg'),
 ('Auriculares Apple AirPods Max', 'Conexión única por Bluetooth', 30, 500000, 'https://dcdn.mitiendanube.com/stores/001/423/123/products/airpods-max-blanco1-bb648643b88bcef3c316112513611506-640-0.png'),
-('Ariana Grande POSITIONS CD Set', 'Set exclusivo con Polaroids, posters, la versión común y deluxe del disco', 20, 15000,'https://i.ebayimg.com/images/g/ckYAAOSwquxivNvo/s-l1200.jpg');
+('Ariana Grande POSITIONS CD Set', 'Set exclusivo con Polaroids, posters, la versión común y deluxe del disco', 20, 15000,'https://i.ebayimg.com/images/g/ckYAAOSwquxivNvo/s-l1200.jpg'),
+('Amazon Echo Dot 5th Gen', 'Con asistente virtual Alexa glacier white 110V/240V', 10, 60000,'https://http2.mlstatic.com/D_NQ_NP_646450-MLA52316805283_112022-O.jpg'),
+('Reproductor Cd Mp3 Usb Bluetooth Philco', 'Color único', 5, 75000,'https://philco.com.ar/media/catalog/product/cache/c8f6a96bef9e9f64cd4973587df2520f/r/e/repro.jpg');
 -- --------------------------------------------------------
 
 --
@@ -158,9 +160,10 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `idPadre` bigint(20) DEFAULT NULL COMMENT 'Referencia al id del menu que es subitem',
   `meDeshabilitado` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en la que el menu fue deshabilitado por ultima vez',
   PRIMARY KEY (`idMenu`),
-  UNIQUE KEY `idmenu` (`idMenu`),
-  FOREIGN KEY (`idPadre`) REFERENCES `menu` (`idMenu`)
+  UNIQUE KEY `idmenu` (`idMenu`)
+  /* FOREIGN KEY (`idPadre`) REFERENCES `menu` (`idMenu`) */
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
 
 --
 -- Volcado de datos para la tabla `menu`
@@ -177,8 +180,8 @@ INSERT INTO `menu` (`idMenu`, `meNombre`, `meDescripcion`, `idPadre`, `meDeshabi
 (5, 'Lista menus', '../menuAdmin/listaMenues.php', NULL, NULL),
 (6, 'Lista productos', '../menuDepo/listaProductos.php', NULL, NULL),
 (7, 'Cargar producto', '../menuDepo/cagarProducto.php', NULL, NULL),
-(8, 'Estado compras', '../menuDepo/estadoCompras.php', NULL, NULL);
--- (9, 'Lista Roles', '../menuAdmin/listaRoles.php', NULL, NULL);
+(8, 'Estado compras', '../menuDepo/estadoCompras.php', NULL, NULL),
+(9, 'Lista Roles', '../menuAdmin/listaRoles.php', NULL, NULL);
 
 
 -- --------------------------------------------------------
@@ -232,7 +235,8 @@ INSERT INTO `menurol` (`idMenu`, `idRol`) VALUES
 (5, 1),
 (6, 3),
 (7, 3),
-(8, 3);
+(8, 3),
+(9, 1);
 
 
 -- --------------------------------------------------------

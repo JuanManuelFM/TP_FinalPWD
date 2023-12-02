@@ -25,7 +25,7 @@ class c_menu
     /** Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de 
      * las variables instancias del objeto que son claves
      * @param array $param
-     * @return Producto
+     * @return Menu
      */
     private function cargarObjetoConClave($param)
     {
@@ -152,6 +152,20 @@ class c_menu
         $objMenu->setMeDeshabilitado('habilitar');
         if ($objMenu!= null and $objMenu->modificar()) {
             $resp = true;
+        }
+        return $resp;
+    }
+
+    public function noBaja($param)
+    {
+        $resp = false;
+        //ARREGLAR PARA QUE EL DESHABILITADO CAMBIE
+        // $obj = new Menu();
+        if ($this->seteadosCamposClaves($param)) {
+            $obj = $this->cargarObjetoConClave($param);
+            if ($obj != null and $obj->noEliminar()) {
+                $resp = true;
+            }
         }
         return $resp;
     }
