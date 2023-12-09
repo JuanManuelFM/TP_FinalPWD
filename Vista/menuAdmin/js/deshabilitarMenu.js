@@ -27,13 +27,14 @@ function recargarPagina() {
 }
 
 var cantidadBorrar;
-$(document).on('click', '.remove', function() {
+$(document).on('click', '.removeMenu', function() {
     var fila = $(this).closest('tr');
     // console.log(fila[0].children[0].id.substring(10));
+    console.log("holis");
     $.ajax({
         type: "POST",
         url: 'accion/accionDeshabilitarMenu.php',
-        data: { idMenu: fila[0].children[0].id.substring(10) },
+        data: { idMenu: fila[0].children[0].innerHTML },
         success: function (respuesta) {
             var jsonData = JSON.parse(respuesta);
             // user is logged in successfully in the back-end

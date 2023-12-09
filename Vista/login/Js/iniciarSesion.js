@@ -10,22 +10,22 @@ $(document).ready(function () {
         e.preventDefault();
         const forms = document.querySelectorAll('.needs-validation');
         if (forms[0].checkValidity()) {
-            let password = document.getElementById("usPassVisible").value;
-            let passhash = hex_md5(password).toString();
-            document.getElementById("usPass").value = passhash;
+            // let password = document.getElementById("usPassVisible").value;
+            // let passhash = hex_md5(password).toString();
+            // document.getElementById("usPass").value = passhash;
             $.ajax({
                 type: "POST",
-                url: 'accion/verificarLogin.php',
+                url: 'accion/accionVerificarLogin.php',
                 data: $(this).serialize(),
                 success: function (response) {
                     var jsonData = JSON.parse(response);
                     // user is logged in successfully in the back-end
                     // let's redirect
                     if (jsonData.success == "1") {
-                        loginSuccess();
+                        loginSuccess(jsonData.message);
                     }
                     else if (jsonData.success == "0") {
-                        loginFailure();
+                        loginFailure(jsonData.message);
                     }
                 }
             });
@@ -35,10 +35,10 @@ $(document).ready(function () {
     });
 });
 
-function loginSuccess() {
+function loginSuccess(title) {
     Swal.fire({
         icon: 'success',
-        title: 'La sesión se inició correctamente!',
+        title,
         showConfirmButton: false,
         timer: 1500
     })
@@ -47,10 +47,10 @@ function loginSuccess() {
     }, 1500);
 }
 
-function loginFailure() {
+function loginFailure(title) {
     Swal.fire({
         icon: 'error',
-        title: 'La contraseña y/o el usuario no coinciden!',
+        title,
         showConfirmButton: false,
         timer: 1500
     })

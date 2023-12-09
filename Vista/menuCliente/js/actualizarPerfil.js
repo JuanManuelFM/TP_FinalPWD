@@ -94,7 +94,7 @@ function failure() {
     }, 1500);
 }
 
-function failureContra() {
+/* function failureContra() {
     Swal.fire({
         icon: 'error',
         title: 'La contraseña no coincide con la actual!',
@@ -103,7 +103,7 @@ function failureContra() {
     })
     setTimeout(function () {
     }, 1500);
-}
+} */
 
 function contraFailure(message) {
     Swal.fire({

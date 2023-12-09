@@ -22,7 +22,7 @@ function registerFailureUnRemove() {
     // }, 1500);
 }
 
-$(document).on('click', '.unRemove', function () {
+$(document).on('click', '.unRemoveMenu', function () {
     var fila = $(this).closest('tr');
     console.log(fila[0].children[0].id.substring(10));
     $.ajax({

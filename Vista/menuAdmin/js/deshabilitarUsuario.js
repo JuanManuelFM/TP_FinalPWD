@@ -29,7 +29,7 @@ function recargarPagina() {
 var cantidadBorrar;
 $(document).on('click', '.remove', function() {
     var fila = $(this).closest('tr');
-    console.log();
+    console.log('asdasdadsd');
     $.ajax({
         type: "POST",
         url: 'accion/accionDeshabilitarUsuario.php',

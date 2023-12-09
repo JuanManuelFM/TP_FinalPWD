@@ -52,7 +52,7 @@ if ($arrayObjUsuario != null) {
                         <!-- aca va todo lo de cambio de menu -->
                         <?php
                         foreach ($menuRoles as $objMenu) {
-                            if ($objMenu->getMeDeshabilitado() == null) {
+                            if ($objMenu->getMeDeshabilitado() == null || $objMenu->getMeDeshabilitado() == "0000-00-00 00:00:00") {
                         ?>
                                 <li><a href='<?php echo $objMenu->getMeDescripcion() ?>' role="button" class="px-2 mx-1 btn btn-light btn-outline-dark" style="font-family: 'Chivo', sans-serif;"><?php echo $objMenu->getMeNombre() ?></a></li>
                         <?php
