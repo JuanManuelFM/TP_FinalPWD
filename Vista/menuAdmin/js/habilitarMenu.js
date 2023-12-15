@@ -5,9 +5,9 @@ function registerSuccessUnRemove() {
         showConfirmButton: false,
         timer: 1500
     })
-    // setTimeout(function() {
-    //     recargarPagina();
-    // }, 1500);
+    setTimeout(function() {
+        recargarPagina();
+    }, 1500);
 }
 
 function registerFailureUnRemove() {
@@ -17,9 +17,9 @@ function registerFailureUnRemove() {
         showConfirmButton: false,
         timer: 1500
     })
-    // setTimeout(function() {
-    //     recargarPagina();
-    // }, 1500);
+    setTimeout(function() {
+        recargarPagina();
+    }, 1500);
 }
 
 $(document).on('click', '.unRemoveMenu', function () {

@@ -10,6 +10,11 @@ $obj_compra = new c_compra();
 $objCompraEstado = new c_compraEstado();
 //
 
+if ($datos['ciCantidad'] <= 0) {
+    echo json_encode(['success' => 0, 'message' => "La cantidad del producto es inválida"]);
+    exit;
+}
+
 $usuarioController = new c_usuario();
 $compraEstadoController = new c_compraEstado();
 $compraEstadoTipoController = new c_compraEstadoTipo();

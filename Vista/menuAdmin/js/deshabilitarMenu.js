@@ -5,9 +5,9 @@ function registerSuccessD() {
         showConfirmButton: false,
         timer: 1500
     })
-    // setTimeout(function() {
-    //     recargarPagina();
-    // }, 1500);
+    setTimeout(function() {
+        recargarPagina();
+    }, 1500);
 }
 
 function registerFailureD() {
@@ -17,35 +17,33 @@ function registerFailureD() {
         showConfirmButton: false,
         timer: 1500
     })
-    // setTimeout(function() {
-    //     recargarPagina();
-    // }, 1500);
+    setTimeout(function() {
+        recargarPagina();
+    }, 1500);
 }
 
 function recargarPagina() {
     location.reload();
 }
 
-var cantidadBorrar;
-$(document).on('click', '.removeMenu', function() {
-    var fila = $(this).closest('tr');
-    // console.log(fila[0].children[0].id.substring(10));
+function handleClickDeshabilitar(idMenu) {
     console.log("holis");
     $.ajax({
         type: "POST",
         url: 'accion/accionDeshabilitarMenu.php',
-        data: { idMenu: fila[0].children[0].innerHTML },
-        success: function (respuesta) {
+        data: {
+            idMenu
+        },
+        success: function(respuesta) {
             var jsonData = JSON.parse(respuesta);
             // user is logged in successfully in the back-end
             // let's redirect
             if (jsonData.success == "1") {
                 registerSuccessD();
-            }
-            else if (jsonData.success == "0") {
+            } else if (jsonData.success == "0") {
                 console.log("falla");
                 registerFailureD();
             }
         }
     });
-});
+}

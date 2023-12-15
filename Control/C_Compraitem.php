@@ -142,20 +142,23 @@ class c_compraitem
     {
         $carrito = $this->carritoIniciado($id);
         $i = 0;
-        foreach ($carrito as $item) {
-            $idCompra = $item->getObjCompra()->getIdCompra();
-            $compraItem = new CompraItem();
-            $arrayCompraItems = $compraItem->listar("idCompra = {$idCompra}");
-            foreach ($arrayCompraItems as $items) {
-                $this->formatoCarrito($items);
+        if (count($carrito) > 0) {
+            foreach ($carrito as $item) {
+                $idCompra = $item->getObjCompra()->getIdCompra();
+                $compraItem = new CompraItem();
+                $arrayCompraItems = $compraItem->listar("idCompra = {$idCompra}");
+                if ($arrayCompraItems && ($arrayCompraItems) > 0) {
+                    foreach ($arrayCompraItems as $items) {
+                        $this->formatoCarrito($items);
+                    }
+                }
+                $i++;
             }
-            $i++;
-        }
-        if ($i == 0) {
-            /* echo "
-      <tr>
-        <th scope=\"row\" colspan=\"6\">no hay nada en el carrito</th>
-      </tr>"; */
+        } else {
+            echo "
+            <tr>
+                <th scope=\"row\" colspan=\"6\">no hay nada en el carrito</th>
+            </tr>";
         }
     }
 
@@ -176,7 +179,7 @@ class c_compraitem
         <td>{$objCompraItem->getCiCantidad()}</td>
         <td>
             <form class=\"form needs-validation Eliminar\" novalidate>
-                <input type=\"number\" name=\"idCompraItem\" value=\"{$objProducto->getIdProducto()}\" class=\"d-none\">
+                <input type=\"number\" name=\"idCompraItem\" value=\"{$objCompraItem->getIdCompraItem()}\" class=\"d-none\">
                 <input type=\"submit\"  alt='eliminar' class=\"eliminarCss\" value=\"X\" >
             </form>
         </td>

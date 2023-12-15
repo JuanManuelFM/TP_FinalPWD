@@ -14,11 +14,6 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
     }
     $i = 0;
 ?>
-    <!-- <style>
-    body {
-        background-color: #E47070;
-    }
-</style> -->
     <div class="container-fluid" style="margin-top: 25px;">
         <div class="container col-md-12">
             <h2>Lista de todos los menues</h2> <button class="btn btn-primary mt-1 col-2" name="boton_crearMenu" id="boton_crearMenu">Crear Menú</button>
@@ -48,7 +43,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
                                 <td id="nombreMenu<?= $menu->getIdMenu() ?>"><?= $menu->getMeNombre() ?></td>
                                 <td id="deshabilitadoMenu<?= $menu->getIdMenu() ?>"><?= $menu->getMeDeshabilitado() ?></td>
                                 <td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal" data-bs-target="#editModal<?= $menu->getIdMenu() ?>" data-bs-whatever="@mdo">Editar Menu</button>
-                                <td><button type="button" class="btn btn-warning removeMenu">Deshabilitar</button></td>
+                                <td><button type="button" class="btn btn-warning removeMenu" onclick="handleClickDeshabilitar(<?= $menu->getIdMenu() ?>)">Deshabilitar</button></td>
                                 <td><button type="button" class="btn btn-warning unRemoveMenu">Habilitar</button></td>
                             </tr>
                             <div class="modal fade" id="editModal<?= $menu->getIdMenu() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,70 +82,104 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
         </div>
     </div>
 
-    <div class="container text-white mt-5 d-none" id='crearMenu'>
-        <h2>Ingrese los datos:</h2>
-        <div class="mb-3">
-        <form  id='form-crearMenu' method="post" action="../accion/accionCrearMenu.php"class="needs-validation row text-white justify-content-center col-12" novalidate>
-                <table class="table table-striped table-secondary">
-                    <tr> 
-                        <th>Nombre del menu:</th>
-                        <th>Descripcion (ruta):</th>
-                        <th>Id padre:</th>
-                        <th>Roles con acceso:</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- <div class="col-lg-7 col-12"><?php echo $usuario->getUsNombre()?></div> -->
-                            <div class="col-lg-7 col-12">
-                                <input value = '<?php echo $usuario->getUsNombre()?>' type="text" style="width: 150px;" pattern="[a-zA-Z]+\s?[0-9]*" name="usNombre" value="usNombre"></input>
-                                <!-- Para que es el de abajo????????? -->
-                                <input name="type" value="username" class="d-none"/>
-                            </div>
-                            <!-- <div class="col-lg-7 col-12 d-none">
-                                <input value = '<?php echo $usuario->getUsPass()?>' type="text" name="usPass"></input>
-                            </div> -->
-                        </td>
-                        <td>
-                            <div class="col-lg-7 col-12 "><input value = '<?php echo $usuario->getUsMail()?>' type="email" style="width: 250px;" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*\.([a-z]{3})(\.[a-z]{2})*$" name="usMail" value="usMail" required></input><div class="invalid-feedback">
-                            Ingrese un email valido!</div>
-                            <div class="valid-feedback">
-                            Correcto!</div></div><div class="col-lg-7 col-12 d-none"><input value = '<?php echo $usuario->getIdUsuario()?>' type="number"  name="idUsuario" required></input></div>
-                        </td>
-                    </tr>
-                </table>
-                <input class="btn btn-success mt-2 col-3" type="submit" name="boton_enviar"  id="boton_enviar" value="GUARDAR">
-                <input class="btn btn-danger mx-4 mt-2 col-3" name="boton_cancelar" type="button" id="boton_cancelar" value="CANCELAR">
-            </form>
-        </div>
-    </div>
-   
     <script>
-    $(document).on('click', '.removeMenu', function() {
+        function handleClickDeshabilitar(idMenu) {
+            $.ajax({
+                type: "POST",
+                url: 'accion/accionDeshabilitarMenu.php',
+                data: {
+                    idMenu
+                },
+                success: function(respuesta) {
+                    var jsonData = JSON.parse(respuesta);
+                    // user is logged in successfully in the back-end
+                    // let's redirect
+                    if (jsonData.success == "1") {
+                        registerSuccessD();
+                    } else if (jsonData.success == "0") {
+                        console.log("falla");
+                        registerFailureD();
+                    }
+                }
+            });
+        }
+
+        function registerSuccessD() {
+            Swal.fire({
+                icon: 'success',
+                title: 'El menú se ha deshabilitado correctamente!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(function() {
+                recargarPagina();
+            }, 1500);
+        }
+
+        function registerFailureD() {
+            Swal.fire({
+                icon: 'error',
+                title: 'No se ha podido deshabilitado el menú!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(function() {
+                recargarPagina();
+            }, 1500);
+        }
+
+        function recargarPagina() {
+            location.reload();
+        }
+
+        function registerSuccessUnRemove() {
+    Swal.fire({
+        icon: 'success',
+        title: 'El menú se ha habilitado correctamente!',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    setTimeout(function() {
+        recargarPagina();
+    }, 1500);
+}
+
+function registerFailureUnRemove() {
+    Swal.fire({
+        icon: 'error',
+        title: 'No se ha podido habilitar el menú!',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    setTimeout(function() {
+        recargarPagina();
+    }, 1500);
+}
+
+$(document).on('click', '.unRemoveMenu', function () {
     var fila = $(this).closest('tr');
-    // console.log(fila[0].children[0].id.substring(10));
-    console.log("holis");
+    console.log(fila[0].children[0].id.substring(10));
     $.ajax({
         type: "POST",
-        url: 'accion/accionDeshabilitarMenu.php',
-        data: { idMenu: fila[0].children[0].innerHTML },
+        url: 'accion/accionHabilitarMenu.php',
+        data: { idMenu: fila[0].children[0].id.substring(10) },
         success: function (respuesta) {
             var jsonData = JSON.parse(respuesta);
             // user is logged in successfully in the back-end
             // let's redirect
             if (jsonData.success == "1") {
-                registerSuccessD();
+                registerSuccessUnRemove();
             }
             else if (jsonData.success == "0") {
-                console.log("falla");
-                registerFailureD();
+                registerFailureUnRemove();
             }
         }
     });
 });
     </script>
-    <script src="js/habilitarMenu.js"></script>
+    <!-- <script src="js/habilitarMenu.js"></script> -->
     <!-- <script src="js/crearMenu.js"></script> -->
-    <script src="js/actualizarMenu.js"></script> 
+    <script src="js/actualizarMenu.js"></script>
 <?php
 } else {
     header('Location: ../../index.php');

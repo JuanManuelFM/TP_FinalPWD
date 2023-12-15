@@ -1,4 +1,4 @@
-$(document).on('click', '#boton_crearMenu', function() {
+/* $(document).on('click', '#boton_crearMenu', function() {
     document.getElementById('crearMenu').classList.remove('d-none');
 });
 
@@ -59,4 +59,4 @@ function registerFailure() {
 
 function recargarPagina() {
     location.reload();
-}
+} */
