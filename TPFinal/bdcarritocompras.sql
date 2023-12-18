@@ -179,7 +179,7 @@ INSERT INTO `menu` (`idMenu`, `meNombre`, `meDescripcion`, `idPadre`, `meDeshabi
 (4, 'Lista usuarios', '../menuAdmin/listaUsuarios.php', NULL, NULL),
 (5, 'Lista menus', '../menuAdmin/listaMenues.php', NULL, NULL),
 (6, 'Lista productos', '../menuDepo/listaProductos.php', NULL, NULL),
-(7, 'Cargar producto', '../menuDepo/cagarProducto.php', NULL, NULL),
+(7, 'Cargar producto', '../menuDepo/cargarProducto.php', NULL, NULL),
 (8, 'Estado compras', '../menuDepo/estadoCompras.php', NULL, NULL),
 (9, 'Lista Roles', '../menuAdmin/listaRoles.php', NULL, NULL);
 

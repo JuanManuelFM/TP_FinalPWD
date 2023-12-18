@@ -14,7 +14,7 @@
 // });
 
 $(document).ready(function() {
-    $('form').submit(function(e) {
+    $('#actualizarMenu').submit(function(e) {
         e.preventDefault();
         // const forms = document.querySelectorAll('.needs-validation');
         // if (forms[0].checkValidity()) {

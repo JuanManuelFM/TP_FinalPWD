@@ -2,15 +2,14 @@
 include_once("../../../configuracion.php");
 $datos = data_submitted();
 $controllerMenu = new c_menu();
-$objMenu = $controllerMenu->buscar(["meNombre" => $datos["meNombre"]]); // Busca el menu con el nombre
-if($objMenu == null){
-    if ($controllerMenu->alta($datos)) {
-        echo json_encode(array('success'=>1));
-    } else {
-        echo json_encode(array('success'=>0));
+$controllerMenuRol = new c_menuRol();
+// $objMenu = $controllerMenu->buscar(["meNombre" => $datos["meNombre"]]); // Busca el menu con el nombre
+if ($controllerMenu->alta([...$datos, 'meDeshabilitado' => null])) {
+    $lastMenu = $controllerMenu->buscar([]);
+    $lastMenu = $lastMenu[count($lastMenu) - 1];
+    if ($controllerMenuRol->alta(['idRol' => $datos['idRol'], 'idMenu' => $lastMenu->getIdMenu()])) {
+        echo json_encode(array('success' => 1));
+        exit;
     }
-}else{
-    //Existe ya el menu
-    echo json_encode(["success" => 0]);
-    exit; //deja de ejecutar en adelante
 }
+echo json_encode(array('success' => 0));

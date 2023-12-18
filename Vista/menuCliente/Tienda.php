@@ -93,7 +93,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <button type="button" class="btn btn-primary">ACEPTAR</button>
+                    <a href="pago.php"><button type="button" class="btn btn-primary">COMPRAR</button></a>
                 </div>
             </div>
         </div>

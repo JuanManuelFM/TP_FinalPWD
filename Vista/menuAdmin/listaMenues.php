@@ -18,6 +18,51 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
         <div class="container col-md-12">
             <h2>Lista de todos los menues</h2> <button class="btn btn-primary mt-1 col-2" name="boton_crearMenu" id="boton_crearMenu">Crear Menú</button>
             <br>
+            <div class="container text-white mt-5 d-none" id='crearMenu'>
+                <h2>Ingrese los datos:</h2>
+                <div class="mb-3">
+                    <form id='form-crearMenu' method="post" action="../accion/accionCrearMenu.php" class="needs-validation row text-white justify-content-center col-12" novalidate>
+                        <table class="table table-striped table-secondary">
+                            <tr>
+                                <th>Nombre del menu:</th>
+                                <th>Descripcion (ruta):</th>
+                                <!-- <th>Id padre:</th> -->
+                                <th>Roles con acceso:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="meNombre"  type="text">
+                                </td>
+                                <td>
+                                    <input id="meDescripcion" type="text" placeholder="../menu(Admin-Cliente-Depo)/script.php">
+                                </td>
+                                <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Administrador
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Cliente
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="3">
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        Deposito
+                                    </label>
+                                </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input class="btn btn-success mt-2 col-3" type="submit" name="boton_enviar" id="boton_enviar" value="GUARDAR">
+                        <input class="btn btn-danger mx-4 mt-2 col-3" name="boton_cancelar" type="button" id="boton_cancelar" value="CANCELAR">
+                    </form>
+                </div>
+            </div>
             <table class="table table-hover">
                 <thead class="text-center">
                     <tr>
@@ -80,8 +125,12 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
                 </tbody>
             </table>
         </div>
+
+
     </div>
 
+    <script src="js/crearMenu.js"></script>
+    <script src="js/actualizarMenu.js"></script>
     <script>
         function handleClickDeshabilitar(idMenu) {
             $.ajax({
@@ -133,53 +182,52 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
         }
 
         function registerSuccessUnRemove() {
-    Swal.fire({
-        icon: 'success',
-        title: 'El menú se ha habilitado correctamente!',
-        showConfirmButton: false,
-        timer: 1500
-    })
-    setTimeout(function() {
-        recargarPagina();
-    }, 1500);
-}
-
-function registerFailureUnRemove() {
-    Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido habilitar el menú!',
-        showConfirmButton: false,
-        timer: 1500
-    })
-    setTimeout(function() {
-        recargarPagina();
-    }, 1500);
-}
-
-$(document).on('click', '.unRemoveMenu', function () {
-    var fila = $(this).closest('tr');
-    console.log(fila[0].children[0].id.substring(10));
-    $.ajax({
-        type: "POST",
-        url: 'accion/accionHabilitarMenu.php',
-        data: { idMenu: fila[0].children[0].id.substring(10) },
-        success: function (respuesta) {
-            var jsonData = JSON.parse(respuesta);
-            // user is logged in successfully in the back-end
-            // let's redirect
-            if (jsonData.success == "1") {
-                registerSuccessUnRemove();
-            }
-            else if (jsonData.success == "0") {
-                registerFailureUnRemove();
-            }
+            Swal.fire({
+                icon: 'success',
+                title: 'El menú se ha habilitado correctamente!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(function() {
+                recargarPagina();
+            }, 1500);
         }
-    });
-});
+
+        function registerFailureUnRemove() {
+            Swal.fire({
+                icon: 'error',
+                title: 'No se ha podido habilitar el menú!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(function() {
+                recargarPagina();
+            }, 1500);
+        }
+
+        $(document).on('click', '.unRemoveMenu', function() {
+            var fila = $(this).closest('tr');
+            console.log(fila[0].children[0].id.substring(10));
+            $.ajax({
+                type: "POST",
+                url: 'accion/accionHabilitarMenu.php',
+                data: {
+                    idMenu: fila[0].children[0].id.substring(10)
+                },
+                success: function(respuesta) {
+                    var jsonData = JSON.parse(respuesta);
+                    // user is logged in successfully in the back-end
+                    // let's redirect
+                    if (jsonData.success == "1") {
+                        registerSuccessUnRemove();
+                    } else if (jsonData.success == "0") {
+                        registerFailureUnRemove();
+                    }
+                }
+            });
+        });
     </script>
     <!-- <script src="js/habilitarMenu.js"></script> -->
-    <!-- <script src="js/crearMenu.js"></script> -->
-    <script src="js/actualizarMenu.js"></script>
 <?php
 } else {
     header('Location: ../../index.php');
