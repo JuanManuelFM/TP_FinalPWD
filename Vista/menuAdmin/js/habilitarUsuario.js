@@ -22,7 +22,7 @@ function registerFailureUnRemove() {
     }, 1500);
 }
 
-$(document).on('click', '.unRemove', function () {
+/* $(document).on('click', '.unRemove', function () {
     var fila = $(this).closest('tr');
     console.log();
     $.ajax({
@@ -41,4 +41,25 @@ $(document).on('click', '.unRemove', function () {
             }
         }
     });
-});
+}); */
+
+function handleClickHabilitar(idMenu) {
+    $.ajax({
+        type: "POST",
+        url: 'accion/accionHabilitarMenu.php',
+        data: {
+            idMenu
+        },
+        success: function(respuesta) {
+            var jsonData = JSON.parse(respuesta);
+            // user is logged in successfully in the back-end
+            // let's redirect
+            if (jsonData.success == "1") {
+                registerSuccessD();
+            } else if (jsonData.success == "0") {
+                console.log("falla");
+                registerFailureD();
+            }
+        }
+    });
+}

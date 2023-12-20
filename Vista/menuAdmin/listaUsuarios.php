@@ -19,8 +19,56 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
 </style> -->
 <div class="container-fluid" style="margin-top: 25px;">
     <div class="container col-md-12">
-        <h2>Lista de todos los usuarios</h2>
+        <h2>Lista de todos los usuarios</h2> <button class="btn btn-primary mt-1 col-2" name="boton_crearUsuario" id="boton_crearUsuario">Crear Usuario</button>
         <br>
+        <div class="container text-black mt-3 d-none" id='crearUsuario'>
+                <h2>Ingrese los datos:</h2>
+                <div class="mb-3">
+                    <form id='form-crearMenu' method="post" action="../accion/accionCrearUsuario.php" class="needs-validation row text-white justify-content-center col-12" novalidate>
+                        <table class="table table-striped table-secondary">
+                            <tr>
+                                <th>Nombre del usuario:</th>
+                                <th>Contraseña:</th>
+                                <th>E-mail:</th>
+                                <th>Rol:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="usNombre"  type="text">
+                                </td>
+                                <td>
+                                    <input id="usPass" type="password">
+                                </td>
+                                <td>
+                                    <input id="usMail" type="mail">
+                                </td>
+                                <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Administrador
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Cliente
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="3">
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        Deposito
+                                    </label>
+                                </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input class="btn btn-success mt-2 col-3" type="submit" name="boton_enviar" id="boton_enviar" value="GUARDAR">
+                        <input class="btn btn-danger mx-4 mt-2 col-3" name="boton_cancelar" type="button" id="boton_cancelar" value="CANCELAR">
+                    </form>
+                </div>
+            </div>
         <table class="table table-hover">
             <thead class="text-center">
                 <tr>
@@ -80,11 +128,11 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
                     <input type="hidden" name="usDeshabilitado" id="usDeshabilitado" value="<?= $usuario->getUsDeshabilitado() ?>">
                     <div class="form-group" style="margin-bottom: 10px ;">
                         <label>Nombre Usuario</label>
-                        <input type="text" name="usNombre" id="usNombre" class="form-control" placeholder="Ingrese nuevo nombre de usuario" required>
+                        <input type="text" name="usNombre" id="usNombre" class="form-control" placeholder="Ingrese nuevo nombre de usuario" value="<?= $usuario->getUsNombre() ?>" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px ;">
                         <label>Mail Usuario</label>
-                        <input type="email" name="usMail" id="usMail" class="form-control" placeholder="Ingrese nuevo mail del usuario" required>
+                        <input type="email" name="usMail" id="usMail" class="form-control" placeholder="Ingrese nuevo mail del usuario" value="<?= $usuario->getUsMail() ?>" required>
                     </div>
                 </form>
             </div>
@@ -98,6 +146,7 @@ if($objSession->getVista() != null && $objSession->getVista() == 1) {
 <script src="js/deshabilitarUsuario.js"></script>
 <script src="js/habilitarUsuario.js"></script>
 <script src="js/actualizarUsuario.js"></script>
+<script src="js/crearUsuario.js"></script>
 <?php
 } else {
     header('Location: ../../index.php');

@@ -1,30 +1,23 @@
-$(document).on('click', '#boton_crearMenu', function () {
-    document.getElementById('crearMenu').classList.remove('d-none');
-});
-
-$(document).on('click', '#boton_cancelar', function () {
-    document.getElementById('crearMenu').classList.add('d-none');
-});
-
 $(document).ready(function () {
-    $('#form-crearMenu').submit(function (e) {
+    $('#form-crearProducto').submit(function (e) {
         e.preventDefault();
         // const forms = document.querySelectorAll('.needs-validation');
         // if (forms[0].checkValidity()) {
-        let idRol = 0;
-        let i = 1;
-        do {
-            idRol = document.getElementById(`flexRadioDefault${i}`).checked ? Number(document.getElementById(`flexRadioDefault${i}`).value) : 0;
-            i++;
-        } while (idRol === 0 && i <= 3);
-
+        /* $param['idProducto'],
+                $param['proNombre'],
+                $param['proDetalle'],
+                $param['proCantStock'],
+                $param['proPrecio'],
+                $param['urlItem'] */
         $.ajax({
             type: "POST",
-            url: 'accion/accionCrearMenu.php',
+            url: 'accion/accionCrearProducto.php',
             data: {
-                meNombre: document.getElementById('meNombre').value,
-                meDescripcion: document.getElementById('meDescripcion').value,
-                idRol
+                proNombre: document.getElementById('proNombre').value,
+                proDetalle: document.getElementById('proDetalle').value,
+                proCantStock: document.getElementById('proCantStock').value,
+                proPrecio: document.getElementById('proPrecio').value,
+                proUrlItem: document.getElementById('proUrlItem').value
             },
             success: function (response) {
                 var jsonData = JSON.parse(response);
@@ -47,7 +40,7 @@ $(document).ready(function () {
 function registerSuccess() {
     Swal.fire({
         icon: 'success',
-        title: 'El menú se creó correctamente!',
+        title: 'El producto se creó correctamente!',
         showConfirmButton: false,
         timer: 1500
     })
@@ -59,7 +52,7 @@ function registerSuccess() {
 function registerFailure() {
     Swal.fire({
         icon: 'error',
-        title: 'El menú no se pudo crear, intente nuevamente',
+        title: 'El producto no se pudo crear, intente nuevamente',
         showConfirmButton: false,
         timer: 1500
     })

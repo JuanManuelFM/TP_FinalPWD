@@ -18,7 +18,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
         <div class="container col-md-12">
             <h2>Lista de todos los menues</h2> <button class="btn btn-primary mt-1 col-2" name="boton_crearMenu" id="boton_crearMenu">Crear Menú</button>
             <br>
-            <div class="container text-white mt-5 d-none" id='crearMenu'>
+            <div class="container text-black mt-3 d-none" id='crearMenu'>
                 <h2>Ingrese los datos:</h2>
                 <div class="mb-3">
                     <form id='form-crearMenu' method="post" action="../accion/accionCrearMenu.php" class="needs-validation row text-white justify-content-center col-12" novalidate>
@@ -131,6 +131,9 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
 
     <script src="js/crearMenu.js"></script>
     <script src="js/actualizarMenu.js"></script>
+    <!-- <script src="js/deshabilitarMenu.js"></script>
+    <script src="js/habilitarMenu.js"></script>
+    onclick="handleClickHabilitar()" -->
     <script>
         function handleClickDeshabilitar(idMenu) {
             $.ajax({
@@ -227,7 +230,6 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
             });
         });
     </script>
-    <!-- <script src="js/habilitarMenu.js"></script> -->
 <?php
 } else {
     header('Location: ../../index.php');

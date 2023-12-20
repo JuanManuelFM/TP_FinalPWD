@@ -1,13 +1,13 @@
-$(document).on('click', '#boton_crearMenu', function () {
-    document.getElementById('crearMenu').classList.remove('d-none');
+$(document).on('click', '#boton_crearUsuario', function () {
+    document.getElementById('crearUsuario').classList.remove('d-none');
 });
 
 $(document).on('click', '#boton_cancelar', function () {
-    document.getElementById('crearMenu').classList.add('d-none');
+    document.getElementById('crearUsuario').classList.add('d-none');
 });
 
 $(document).ready(function () {
-    $('#form-crearMenu').submit(function (e) {
+    $('#form-crearUsuario').submit(function (e) {
         e.preventDefault();
         // const forms = document.querySelectorAll('.needs-validation');
         // if (forms[0].checkValidity()) {
@@ -20,10 +20,12 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: 'accion/accionCrearMenu.php',
+            url: 'accion/accionCrearUsuario.php',
             data: {
-                meNombre: document.getElementById('meNombre').value,
-                meDescripcion: document.getElementById('meDescripcion').value,
+                //Editar para usuario
+                usNombre: document.getElementById('usNombre').value,
+                usPass: document.getElementById('usPass').value,
+                usMail: document.getElementById('usMail').value,
                 idRol
             },
             success: function (response) {
@@ -47,7 +49,7 @@ $(document).ready(function () {
 function registerSuccess() {
     Swal.fire({
         icon: 'success',
-        title: 'El menú se creó correctamente!',
+        title: 'El usuario se creó correctamente!',
         showConfirmButton: false,
         timer: 1500
     })
@@ -59,7 +61,7 @@ function registerSuccess() {
 function registerFailure() {
     Swal.fire({
         icon: 'error',
-        title: 'El menú no se pudo crear, intente nuevamente',
+        title: 'El usuario no se pudo crear, intente nuevamente',
         showConfirmButton: false,
         timer: 1500
     })

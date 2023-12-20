@@ -19,8 +19,27 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
 </style> -->
     <div class="container-fluid" style="margin-top: 25px;">
         <div class="container col-md-12">
-            <h2>Lista de todos los menues</h2>
+            <h2>Lista de todos los menues</h2><button class="btn btn-primary mt-1 col-2" name="boton_crearRol" id="boton_crearRol">Crear Rol</button>
             <br>
+            <div class="container text-black mt-3 d-none" id='crearRol'>
+                <h2>Ingrese los datos:</h2>
+                <div class="mb-3">
+                    <form id='form-crearRol' method="post" action="../accion/accionCrearRol.php" class="needs-validation row text-white justify-content-center col-12" novalidate>
+                        <table class="table table-striped table-secondary">
+                            <tr>
+                                <th>Nombre del Rol:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="rolDescripcion"  type="text">
+                                </td>
+                            </tr>
+                        </table>
+                        <input class="btn btn-success mt-2 col-3" type="submit" name="boton_enviar" id="boton_enviar" value="GUARDAR">
+                        <input class="btn btn-danger mx-4 mt-2 col-3" name="boton_cancelar" type="button" id="boton_cancelar" value="CANCELAR">
+                    </form>
+                </div>
+            </div>
             <table class="table table-hover">
                 <thead class="text-center">
                     <tr>
@@ -74,6 +93,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
         </div>
     </div>
 <script src="js/actualizarRol.js"></script>
+<script src="js/crearRol.js"></script>
 <?php
 } else {
     header('Location: ../../index.php');
