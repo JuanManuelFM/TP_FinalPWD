@@ -1,7 +1,22 @@
 <?php
 include_once("../../configuracion.php");
-include_once("../menu/cabecera.php");
+$objSession= new c_session();
+$controllerCompraItem= new c_compraItem();
+/* $compra= $controllerCompraItem->carritoIniciado($objSession->getUsuario()->getIdUsuario())[0];
+echo $compra->getObjCompra()->getIdCompra(); */
 ?>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP FINAL PWD</title>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../alertas/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="../alertas/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../css/genera.css">
+</head>
+<body>
 <div class="card">
     <div class="card-top border-bottom text-center">
         <a href="../PaginaSegura/Inicio.php"> Volver al inicio</a>
@@ -67,7 +82,8 @@ include_once("../menu/cabecera.php");
                         <div class="col text-left"><b>Total to pay</b></div>
                         <div class="col text-right"><b>$ 46.98</b></div>
                     </div>
-                    <button class="btn">Pagar</button>
+                    
+                    <button class="btn pagar">Pagar</button>
                     <p class="text-muted text-center">Politica de reembolsos y devoluciones</p>
                 </div>
             </div>

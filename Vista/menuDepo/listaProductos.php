@@ -28,7 +28,6 @@ if($objSession->getVista() != null && $objSession->getVista() == 3) {
                         <th>Precio</th>
                         <th>En stock</th>
                         <th>Editar</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

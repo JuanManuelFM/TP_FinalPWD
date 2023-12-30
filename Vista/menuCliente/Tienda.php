@@ -5,6 +5,8 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
     $productoController = new c_producto();
     $productos = $productoController->buscar(null);
     $controlCompraItem = new c_compraItem();
+    $compra= $controlCompraItem->carritoIniciado($objSession->getUsuario()->getIdUsuario())[0];
+    print_r($compra);
 ?>
     <div class="w-100 row px-3">
         <?php
@@ -75,12 +77,12 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
                             </thead>
                             <tbody>
                                 <tr class="table-primary">
-                                    <th scope="col">id_p</th>
-                                    <th scope="col">nombre_producto</th>
-                                    <th scope="col">foto_prod</th>
-                                    <th scope="col">descripcion_prod</th>
-                                    <th scope="col">cant</th>
-                                    <th scope="col">acciones_cli</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre Producto</th>
+                                    <th scope="col">Foto</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 <div>
                                     <?php
@@ -93,7 +95,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <a href="pago.php"><button type="button" class="btn btn-primary">COMPRAR</button></a>
+                    <a href="pago.php?compra=<?= $compra->getObjCompra()->getIdCompra()?>"><button type="button" class="btn btn-primary"> COMPRAR </button></a>
                 </div>
             </div>
         </div>
