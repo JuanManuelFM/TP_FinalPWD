@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('.pagar').submit(function(e) {
         e.preventDefault();
-        if (forms[0].checkValidity()) {
+        if (e.target.checkValidity()) {
             $.ajax({
                 type: "POST",
-                url: 'accion/accionActualizarCompraEstadoTipo.php',
+                url: 'accion/accionActualizarEstado.php',
                 data: $(this).serialize(),
                 success: function (response) {
                     var jsonData = JSON.parse(response);
@@ -19,7 +19,7 @@ $(document).ready(function() {
                 }
             });
         } else {
-            forms[0].classList.add('was-validated');
+            e.target.classList.add('was-validated');
         }
     });
 });

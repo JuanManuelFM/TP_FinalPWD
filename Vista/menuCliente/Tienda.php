@@ -6,7 +6,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
     $productos = $productoController->buscar(null);
     $controlCompraItem = new c_compraItem();
     $compra= $controlCompraItem->carritoIniciado($objSession->getUsuario()->getIdUsuario())[0];
-    print_r($compra);
+    /* print_r($compra); */
 ?>
     <div class="w-100 row px-3">
         <?php

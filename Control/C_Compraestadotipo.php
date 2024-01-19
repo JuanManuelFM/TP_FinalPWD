@@ -92,6 +92,26 @@ class c_compraEstadoTipo
         return $resp;
     }
 
+    public function aceptarCompra($param){
+        $resp = false;
+        $fecha = new DateTime();
+        //Modifico estado anterior de la compra
+        $compraEstadoOld = new compraEstado();
+        $compraEstadoOld->buscarUltimoEstado($param);
+        $fechaStamp = $fecha->format('Y-m-d H:i:s');
+        $compraEstadoOld->setCeFechaFIN($fechaStamp);
+        //error con fecha en modificar??? Revisar modificar de compra estado. Fijarme si el compra estado "buscarUltimoEstado" devuelve algo
+        $compraEstadoOld->modificar();
+        $compraEstadoActual = new compraEstado();
+        $objCompra = new compra();
+        $objCompra->buscar($param);
+        $objCompraEstadoTipo = new compraEstadoTipo();
+        $objCompraEstadoTipo->buscar(2);
+        $compraEstadoActual->cargar(null, $objCompra, $objCompraEstadoTipo, $fechaStamp , null);
+        $compraEstadoActual->insertar();
+        return $resp = true;
+        }
+
     /** permite buscar un objeto
      * @param array $param
      * @return array

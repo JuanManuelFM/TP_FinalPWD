@@ -2,6 +2,7 @@
 include_once("../../configuracion.php");
 $objSession= new c_session();
 $controllerCompraItem= new c_compraItem();
+$idCompra= $_GET["compra"];
 /* $compra= $controllerCompraItem->carritoIniciado($objSession->getUsuario()->getIdUsuario())[0];
 echo $compra->getObjCompra()->getIdCompra(); */
 ?>
@@ -15,6 +16,7 @@ echo $compra->getObjCompra()->getIdCompra(); */
     <script src="../alertas/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="../alertas/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/genera.css">
+    <script src="../jQuery/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 <div class="card">
@@ -24,6 +26,7 @@ echo $compra->getObjCompra()->getIdCompra(); */
     <div class="card-body">
         <br>
         <div class="row">
+            <form class="pagar">
             <div class="col-md-7">
                 <div class="left border">
                     <div class="row">
@@ -34,7 +37,6 @@ echo $compra->getObjCompra()->getIdCompra(); */
                             <img src="https://img.icons8.com/color/48/000000/maestro.png" />
                         </div>
                     </div>
-                    <form>
                         <span>Nombre titular:</span>
                         <input placeholder="Linda Williams">
                         <span>Numeros de la tarjeta:</span>
@@ -47,7 +49,6 @@ echo $compra->getObjCompra()->getIdCompra(); */
                                 <input id="cvv">
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="col-md-5">
@@ -87,12 +88,15 @@ echo $compra->getObjCompra()->getIdCompra(); */
                     <p class="text-muted text-center">Politica de reembolsos y devoluciones</p>
                 </div>
             </div>
+            <input type="hidden" name="idCompra" value="<?= $idCompra ?>">
+            </form>
         </div>
     </div>
     <div>
     </div>
 </div>
 <link rel="stylesheet" href="css/pago.css">
+<script src="js/actualizarCompraEstadoTipo.js"></script>
 <?php
 include_once("../menu/pie.php") //holahhj
 ?>

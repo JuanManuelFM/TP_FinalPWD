@@ -194,6 +194,36 @@ class CompraEstado extends baseDatos
         return $resp;
     }
 
+    //BUSCAR ULTIMO ESTADO 
+    public function buscarUltimoEstado($idCompra)
+    {
+        $base = new baseDatos();
+        $resp = false;
+        $consulta = "SELECT * FROM compraestado WHERE idCompra = $idCompra AND ceFechaFin IS NULL";
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($consulta)) {
+                if ($compraEstado = $base->Registro()) {
+                    $this->setIdCompraEstado($compraEstado['idCompraEstado']);
+                    //Creo un objeto para buscar al id y setear el objeto
+                    $objCompra = new Compra();
+                    $objCompra->buscar($compraEstado['idCompra']);
+                    $this->setObjCompra($objCompra);
+                    $objCompraEstadoTipo = new CompraEstadoTipo();
+                    $objCompraEstadoTipo->buscar($compraEstado['idCompraEstadoTipo']);
+                    $this->setObjCompraEstadoTipo($objCompraEstadoTipo);
+                    $this->setCeFechaINI($compraEstado['ceFechaIni']);
+                    $this->setCeFechaFIN($compraEstado['ceFechaFin']);
+                    $resp = true;
+                }
+            } else {
+                $this->setMensajeFuncion($base->getError());
+            }
+        } else {
+            $this->setMensajeFuncion($base->getError());
+        }
+        return $resp;
+    }
+
     //LISTAR
     public function listar($condicion = '')
     {
