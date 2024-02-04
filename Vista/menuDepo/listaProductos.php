@@ -95,8 +95,6 @@ if($objSession->getVista() != null && $objSession->getVista() == 3) {
     </div>
 </div>
 <!-- </body> -->
-<script src="js/deshabilitarUsuario.js"></script>
-<script src="js/habilitarUsuario.js"></script>
 <script src="js/actualizarProducto.js"></script>
 <!-- </html> -->
 <?php

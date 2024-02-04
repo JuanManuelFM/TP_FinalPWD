@@ -150,7 +150,7 @@ class CompraEstado extends baseDatos
         idCompra = '" . $this->getObjCompra()->getIdCompra() . "',
         idCompraEstadoTipo = '" . $this->getObjCompraEstadoTipo()->getIdCompraEstadoTipo() . "',
         ceFechaINI = '" . $this->getCeFechaINI() . "',
-        ceFechaFIN = " . $this->getCeFechaFIN() . "
+        ceFechaFIN = '" . $this->getCeFechaFIN() . "'
         WHERE idCompraEstado = " . $this->getIdCompraEstado();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {

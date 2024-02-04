@@ -114,7 +114,10 @@ if($objSession->getVista()!= null && $objSession->getVista() == 2){
     </div>
 <script src="js/md5.js"></script>
 <script src="js/actualizarPerfil.js"></script>
+
+<!-- SE USA????????? -->
 <script src="../js/validarContraseñaIguales.js"></script>
+
 <?php
 }else{
     header('Location: ../../index.php');

@@ -130,7 +130,7 @@ class c_menu
         return $arrayMenues;
     }
 
-    // Deshabilita un menu 
+    // Deshabilita un menu  (?????? se usa)
     public function deshabilitar($param){
         $resp = false;
         $arrayMenues = $this->buscar($param);
@@ -144,7 +144,7 @@ class c_menu
         return $resp;
     }
 
-    // Habilita un menu 
+    // Habilita un menu (?????? se usa)
     public function habilitar($param){
         $resp = false;
         $arrayObjMenues = $this->buscar($param);
