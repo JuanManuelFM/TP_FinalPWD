@@ -105,8 +105,11 @@ class c_compraEstadoTipo
         $compraEstadoOld->setObjCompra($compra);
         $objCompraEstadoTipo = new compraEstadoTipo();
         //Le cambia el estado a la compra por EstadoTipo = 2 "aceptada"
+        //esta linea se puede usar para cambiar el estado por el EstadoTipo 
+        //siempre teniendo referencia la compra.
         $nuevoEstado = $objCompraEstadoTipo->listar('idCompraEstadoTipo = 2')[0];
         $compraEstadoOld->setObjCompraEstadoTipo($nuevoEstado);
+
         $compraEstadoOld->modificar();
         return $resp = true;
         }
