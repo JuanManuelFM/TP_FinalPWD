@@ -5,8 +5,11 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
     $productoController = new c_producto();
     $productos = $productoController->buscar(null);
     $controlCompraItem = new c_compraItem();
-    $compra= $controlCompraItem->carritoIniciado($objSession->getUsuario()->getIdUsuario())[0];
-    /* print_r($compra); */
+    $compra_array= $controlCompraItem->carritoIniciado($objSession->getUsuario()->getIdUsuario());
+    //si no hay compra, no entra a la ternaria y no genera un error
+    if(count($compra_array) > 0){
+        $compra = $compra_array[0];
+    }
 ?>
     <div class="w-100 row px-3">
         <?php
@@ -95,7 +98,9 @@ if ($objSession->getVista() != null && $objSession->getVista() == 2) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <a href="pago.php?compra=<?= $compra->getObjCompra()->getIdCompra()?>"><button type="button" class="btn btn-primary"> COMPRAR </button></a>
+                    <!-- TERNARIA php: ((CONDICION) ? AFIRMACION : NEGACION) isset se fija si la condicion o variable existe -->
+                    <a href="pago.php?compra=<?=
+                    ((isset($compra)) ? $compra->getObjCompra()->getIdCompra():null)?>"><button type="button" class="btn btn-primary"> COMPRAR </button></a>
                 </div>
             </div>
         </div>
