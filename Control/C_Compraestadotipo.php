@@ -100,15 +100,14 @@ class c_compraEstadoTipo
         $compraEstadoOld->buscarUltimoEstado($param);
         $fechaStamp = $fecha->format('Y-m-d H:i:s');
         $compraEstadoOld->setCeFechaFIN($fechaStamp);
-        //error con fecha en modificar??? Revisar modificar de compra estado. Fijarme si el compra estado "buscarUltimoEstado" devuelve algo
-        $compraEstadoOld->modificar();
-        $compraEstadoActual = new compraEstado();
         $objCompra = new compra();
-        $objCompra->buscar($param);
+        $compra = $objCompra->listar('idCompra =' . $param)[0];
+        $compraEstadoOld->setObjCompra($compra);
         $objCompraEstadoTipo = new compraEstadoTipo();
-        $objCompraEstadoTipo->buscar(2);
-        $compraEstadoActual->cargar(null, $objCompra, $objCompraEstadoTipo, $fechaStamp , null);
-        $compraEstadoActual->insertar();
+        //Le cambia el estado a la compra por EstadoTipo = 2 "aceptada"
+        $nuevoEstado = $objCompraEstadoTipo->listar('idCompraEstadoTipo = 2')[0];
+        $compraEstadoOld->setObjCompraEstadoTipo($nuevoEstado);
+        $compraEstadoOld->modificar();
         return $resp = true;
         }
 
