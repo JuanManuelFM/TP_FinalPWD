@@ -118,6 +118,20 @@ class c_compra
     //NO SE QUE HACE LO DE ABAJO O SI SE USA
     //NO SE QUE HACE LO DE ABAJO O SI SE USA
 
+    
+    public function listar($arrayBusqueda)
+    {
+        $objCompra = new Compra();
+        $resp = $objCompra->listar($arrayBusqueda);
+        if ($resp != null) {
+            $arrayCompras = $resp;
+        } else {
+            $arrayCompras = null;
+        }
+        return $arrayCompras;
+    }
+    
+
     public function obtener_compra_borrador_de_usuario($id_usuario)
     {
         $obj_compra = new C_Compra();

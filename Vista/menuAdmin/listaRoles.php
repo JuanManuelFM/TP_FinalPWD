@@ -57,7 +57,7 @@ if ($objSession->getVista() != null && $objSession->getVista() == 1) {
                             echo '<tr class="align-middle text-center">';
                             echo '<td>' . $rol->getIdRol() . '</td>';
                             echo '<td>' . $rol->getRolDescripcion() . '</td>';
-                            echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Menu</button>';
+                            echo '<td><button type="button" class="btn btn-success editarBoton" data-bs-toggle="modal"data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar Rol</button>';
                             /* echo '<td><button type="button" class="btn btn-warning remove">Deshabilitar</button></td>';
                             echo '<td><button type="button" class="btn btn-warning unRemove">Habilitar</button></td>'; */
                             echo '</tr>';

@@ -120,6 +120,18 @@ class c_compraEstado
         return $arreglo;
     }
 
+    public function listar($arrayBusqueda)
+    {
+        $objCompraEstado = new CompraEstado();
+        $resp = $objCompraEstado->listar($arrayBusqueda);
+        if ($resp != null) {
+            $arrayComprasEstado = $resp;
+        } else {
+            $arrayComprasEstado = null;
+        }
+        return $arrayComprasEstado;
+    }
+
     /** permite buscar el objeto compra estado con fecha fin en null, este null significa que la compra sigue activa
      * devuelve el array vacio en caso de no tener ninguna compraEstado en estado 1 (iniciada) 
      * @param array $param
